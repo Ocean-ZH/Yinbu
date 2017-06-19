@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+        <!-- 忽略页面中的数字识别为电话号码,email识别 -->
+        <meta name="format-detection"content="telephone=no, email=no" />
+        <!-- 启用360浏览器的极速模式(webkit) -->
+        <meta name="renderer" content="webkit">
+        <!-- 避免IE使用兼容模式 -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+        <meta name="HandheldFriendly" content="true">
+        <!-- 微软的老式浏览器 -->
+        <meta name="MobileOptimized" content="320">
+        <!-- uc强制竖屏 -->
+        <meta name="screen-orientation" content="portrait">
+        <!-- QQ强制竖屏 -->
+        <meta name="x5-orientation" content="portrait">
+        <title>demo</title>
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/report_daqu-m.css" />
+        <style type="text/css">
+            *{
+                margin: 0;
+                padding: 0;
+                list-style:none;
+                color:#FFF; 
+                font-family: Microsoft Yahei;
+            }
+            
+            a{  text-decoration: none;}
+            
+            .clearfloat::after{
+                content:"";
+                display:block;
+                width: 0;
+                height: 0;
+                visibility: hidden;
+                clear:both;
+            }
+            .clearfloat{
+                zoom:1;
+            }
+        </style>
+        <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+        <script src="js/highcharts.js" type="text/javascript"></script>
+        <script src="js/highcharts-more.js" type="text/javascript"></script>
+        <script src="js/solid-gauge.js" type="text/javascript"></script>
+        <script src="js/pageSwitch.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            // 动态设置视口大小
+            var iScale = window.devicePixelRatio;
+            iScale = 1/iScale;
+            document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale='+ iScale +', maximum-scale='+ iScale +', minimum-scale='+ iScale +'" />');
+
+            // 设置 rem 默认大小
+            var iWidth = document.documentElement.clientWidth;
+            var iFont = iWidth/10;
+
+            document.getElementsByTagName('html')[0].style.fontSize = iFont+'px';
+        </script>
+    </head>
+    <body style="background:#133f69;">
+        <header class="clearfloat">
+            <div class="header-menu-box">
+                <ol>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ol>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </div>
+            <h3>日报展示</h3>
+            <div class="search-box">
+                <div class="search-icon-box">
+                    <div class="search-icon"></div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                jQuery(document).ready(function($) {
+                    $('.header-menu-box ol').click(function(event) {
+                        $(this).toggleClass('current');
+                        $('header').toggleClass('current');
+                        $('.header-menu-box ul').toggleClass('current');
+                    });
+                });
+            </script>
+        </header>
+        <div class="box-header power-type">
+                <div class="BH-left">
+                    <h4>火电</h4>
+                    <ul>
+                        <li>火电</li>
+                        <li>风电</li>
+                        <li>水电</li>
+                    </ul>
+                </div>
+                <div class="BH-right">
+                    <input type="date"  value="2017-04-24"/>
+                </div>
+        </div>
+        <div class="table-box">
+           <div class="classify-box">
+               <ul class="clearfloat">
+                   <li class="current">生产类</li>
+                   <li>经营类</li>
+                   <li>环保类</li>
+                   <li>库存类</li>
+               </ul>
+           </div>
+           <div class="table-header">
+               <div class="table-title">
+                    <h4>火电每日填报指标</h4>
+                    <ul>
+                        <li>火电每日填报指标</li>
+                        <li>火电累计指标</li>
+                        <li>火电辅助指标</li>
+                    </ul>
+               </div>
+           </div>
+           <div id="pw-table-box">
+               <div class="pw-table-in">
+                   <ul class="table-data-head clearfloat">
+                       <li>
+                           <h3>1200</h3>
+                           <p>日发电量 (MWh)</p>
+                       </li>
+                       <li>
+                           <h3>1120</h3>
+                           <p>日供电量 (MWh)</p>
+                       </li>
+                       <li>
+                           <h3>80%</h3>
+                           <p>日平均负荷率 (%)</p>
+                       </li>
+                   </ul>
+                   <ul class="table-data">
+                       <li>
+                            <dl>
+                                <dt>日发电量 (MWh)</dt>
+                                <dd>1200</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>日供电量 (MWh)</dt>
+                                <dd>1200</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>日平均负荷率 (%)</dt>
+                                <dd>80</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>生产厂用电率 (%)</dt>
+                                <dd>80</dd>
+                            </dl>
+                       </li>
+                   </ul>
+               </div>
+               <div class="pw-table-in">
+                   <ul class="table-data-head clearfloat">
+                       <li>
+                           <h3>1200</h3>
+                           <p>供电煤耗 (g/kWh)</p>
+                       </li>
+                       <li>
+                           <h3>80</h3>
+                           <p>日负荷率 (%)</p>
+                       </li>
+                       <li>
+                           <h3>80%</h3>
+                           <p>厂用电率 (%)</p>
+                       </li>
+                   </ul>
+                   <ul class="table-data">
+                       <li>
+                            <dl>
+                                <dt>供电煤耗</dt>
+                                <dd>1200</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>日负荷率 (%)</dt>
+                                <dd>80</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>厂用电率 (%)</dt>
+                                <dd>80</dd>
+                            </dl>
+                       </li>
+                   </ul>
+               </div>
+               <div class="pw-table-in">
+                   <ul class="table-data-head clearfloat">
+                       <li>
+                           <h3>80</h3>
+                           <p>脱硫效率 (%)</p>
+                       </li>
+                       <li>
+                           <h3>80</h3>
+                           <p>脱硝效率 (%)</p>
+                       </li>
+                       <li>
+                           <h3>80</h3>
+                           <p>电除尘投入率 (%)</p>
+                       </li>
+                   </ul>
+                   <ul class="table-data">
+                       <li>
+                            <dl>
+                                <dt>平均出口二氧化硫浓度 (mg/m3)</dt>
+                                <dd>1200</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>脱硫投入率 (%)</dt>
+                                <dd>80</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>脱硫效率 (%)</dt>
+                                <dd>80</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>平均出口氮氧化物浓度 (mg/m3)</dt>
+                                <dd>1200</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>脱硝投入率 (%)</dt>
+                                <dd>80</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>脱硝效率 (%)</dt>
+                                <dd>80</dd>
+                            </dl>
+                       </li><li>
+                            <dl>
+                                <dt>烟尘排放浓度 (mg/m3)</dt>
+                                <dd>1200</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>电除尘投入率 (%)</dt>
+                                <dd>80</dd>
+                            </dl>
+                       </li>
+                   </ul>
+               </div>
+               <div class="pw-table-in">
+                   <ul class="table-data-head clearfloat">
+                       <li>
+                           <h3>15</h3>
+                           <p>煤可用天数 (天)</p>
+                       </li>
+                       <li>
+                           <h3>14</h3>
+                           <p>液氮可用天数 (天)</p>
+                       </li>
+                       <li>
+                           <h3>12</h3>
+                           <p>石灰石可用天数 (天)</p>
+                       </li>
+                   </ul>
+                   <ul class="table-data">
+                       <li>
+                            <dl>
+                                <dt>进煤 (t)</dt>
+                                <dd>1200</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>耗煤 (t)</dt>
+                                <dd>80</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>煤库存 (t)</dt>
+                                <dd>80</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>煤可用天数 (天)</dt>
+                                <dd>15</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>进液氮 (t)</dt>
+                                <dd>1200</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>耗液氮 (t)</dt>
+                                <dd>80</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>液氮库存 (t)</dt>
+                                <dd>80</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>液氮可用天数 (天)</dt>
+                                <dd>14</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>进石灰石 (t)</dt>
+                                <dd>1200</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>耗石灰石 (t)</dt>
+                                <dd>80</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>石灰石库存 (t)</dt>
+                                <dd>80</dd>
+                            </dl>
+                       </li>
+                       <li>
+                            <dl>
+                                <dt>石灰石可用天数 (天)</dt>
+                                <dd>12</dd>
+                            </dl>
+                       </li>
+                   </ul>
+               </div>
+           </div>
+        </div>
+        <div class="capacity-box">
+          <div class="capacity-title">
+            <h4>发电总览</h4>
+          </div>
+          <div class="capacity-table-box">
+            <table class="capacity-table">
+              <thead>
+                <tr>
+                  <th>类型</th>
+                  <th>今年(kWh)</th>
+                  <th>去年同期(kWh)</th>
+                  <th>完成率(%)</th>
+                  <th>同比(%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>当日</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                </tr>
+                <tr>
+                  <td>月累</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                </tr>
+                <tr>
+                  <td>年累</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="box-header" >
+            <div class="BH-left">
+                <h4>指标对比曲线</h4>
+                <ul>
+                    <li>指标对比曲线</li>
+                    <li>指标对比曲线二</li>
+                </ul>
+            </div>
+            <div class="BH-right">
+                <input type="date"  value="2017-04-24"/>
+            </div>
+        </div>
+        <div class="chart-box">
+            <div id="chart1"></div>
+        </div>
+        <div class="box-header" >
+            <div class="BH-left">
+                <h4>指标量对比</h4>
+                <ul>
+                    <li>指标量对比</li>
+                    <li>指标量对比二</li>
+                </ul>
+            </div>
+            <div class="BH-right">
+                <input type="date"  value="2017-04-24"/>
+            </div>
+        </div>
+        <div class="chart-box">
+            <div id="chart2"></div>
+        </div>
+        <div class="generator-box">
+          <div class="generator-title">
+            <h4>机组运行情况</h4>
+          </div>
+          <div class="generator-table-box">
+            <table class="generator-table">
+              <thead>
+                <tr>
+                  <th>序号</th>
+                  <th>容量(MV)</th>
+                  <th>状态(kWh)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>#1</td>
+                  <td>0.00</td>
+                  <td class="generator-run">运行</td>
+                </tr>
+                <tr>
+                  <td>#2</td>
+                  <td>0.00</td>
+                  <td class="generator-stop">调停</td>
+                </tr>
+                <tr>
+                  <td>#3</td>
+                  <td>0.00</td>
+                  <td class="generator-repair">检修</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="box-header" >
+            <div class="BH-left">
+                <h4>机组运行情况</h4>
+                <ul>
+                    <li>机组运行情况</li>
+                    <li>机组运行情况二</li>
+                </ul>
+            </div>
+            <div class="BH-right">
+                <input type="date"  value="2017-04-24"/>
+            </div>
+        </div>
+        <div class="chart-box">
+            <div id="chart5"></div>
+        </div>
+        <div class="box-header" >
+            <div class="BH-left">
+                <h4>指标环形对比</h4>
+                <ul>
+                    <li>指标环形对比</li>
+                    <li>指标环形对比二</li>
+                </ul>
+            </div>
+            <div class="BH-right">
+                <input type="date"  value="2017-04-24"/>
+            </div>
+        </div>
+        <div class="chart-box">
+            <div id="chart3"></div>
+        </div>
+        <div class="box-header" >
+            <div class="BH-left">
+                <h4>历史异常统计</h4>
+                <ul>
+                    <li>历史异常统计一</li>
+                    <li>历史异常统计二</li>
+                </ul>
+            </div>
+            <div class="BH-right">
+                <input type="date"  value="2017-04-24"/>
+            </div>
+        </div>
+        <div class="history-box clearfloat">
+            <div class="history-left">
+                <table>
+                    <tr>
+                        <td><h5>历史平均填报时间 : </h5></td>
+                        <td><p>36分钟</p></td>
+                    </tr>
+                    <tr>
+                        <td><h5>累计误填次数 : </h5></td>
+                        <td><p>6次</p></td>
+                    </tr>
+                    <tr>
+                        <td><h5>历史最早填报日期 : </h5></td>
+                        <td><p>2017/04/26</p></td>
+                    </tr>
+                    <tr>
+                        <td><h5>历史最晚填报日期 : </h5></td>
+                        <td><p>2017/04/26</p></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="history-right">
+                <div id="chart4"></div>
+            </div>
+        </div>
+        
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+
+                //通用折叠菜单
+                $('.box-header .BH-left').click(function(event) {
+                    if($(this).hasClass('current')){
+                        $(this).find('li').slideUp(400);
+                    }else{
+                        $(this).find('li').slideDown(400);
+                    }
+                    $(this).toggleClass('current');
+                    $(this).find('li').click(function(event) {
+                    var typeText=$(this).text();
+                    $(this).closest('.BH-left').children('h4').text(typeText);
+                    });
+                });
+
+                //表格头部折叠菜单
+                $('.table-header .table-title').click(function(event) {
+                    if($(this).hasClass('current')){
+                        $(this).find('li').slideUp(400);
+                    }else{
+                        $(this).find('li').slideDown(400);
+                    }
+                    $(this).toggleClass('current');
+                    $(this).find('li').click(function(event) {
+                        var typeText=$(this).text();
+                        $('.table-header .table-title h4').text(typeText);
+                    });
+                });
+
+                //pageSwitch配置
+                var pwTable=new pageSwitch('pw-table-box',{
+                    direction:0
+                });
+
+                //盒子高度
+                $('#pw-table-box').height($('.pw-table-in').eq(0).children('.table-data-head').height()+$('.pw-table-in').eq(0).children('.table-data').height()+10);
+
+                pwTable.on('before',function(a,b){
+                    $('.classify-box ul li').eq(b).addClass('current').siblings('li').removeClass('current');
+                    /* $('#pw-table-box').height($('.pw-table-in').eq(b).children('.table-data-head').height()+$('.pw-table-in').eq(b).children('.table-data').height()+10)*/
+                })
+                pwTable.on('after',function(a,b){
+                    $('#pw-table-box').height($('.pw-table-in').eq(a).children('.table-data-head').height()+$('.pw-table-in').eq(a).children('.table-data').height()+10)
+                })
+
+                $('.classify-box ul li').click(function(event) {
+                    pwTable.slide($(this).index())
+                });
+
+            });
+        </script>
+
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+              
+                Highcharts.getOptions().plotOptions.pie.colors = (function () {
+                    var colors = [],
+                        base = Highcharts.getOptions().colors[0],
+                        i;
+                    for (i = 0; i < 10; i += 1) {
+                        // Start out with a darkened base color (negative brighten), and end
+                        // up with a much brighter color
+                        colors.push(Highcharts.Color(base).brighten((i - 3) / 7).get());
+                    }
+                    return colors;
+                }());
+
+
+                $('#chart1').highcharts({
+                    chart: {
+                        type: 'area',
+                        backgroundColor:null,
+                        backgroundColor: null,
+                        spacingBottom: 0,
+                        spacingTop: 50,
+                        spacingLeft: 0,
+                        spacingRight:10,
+
+                        // 指定外边距
+                        margin: null,
+                    },
+                    title: null,
+                    xAxis: {
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            },
+                            formatter: function () {
+                                return this.value; // clean, unformatted number for year
+                            },
+                            y:40
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: null
+                        },
+                        labels: {
+                            formatter: function () {
+                                return this.value / 1000 + 'k';
+                            },
+                            style:{
+                                color:'#35fffd'
+                            },
+                            y:20
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name} <b>{point.y:,.0f}</b>MW'
+                    },
+                    legend: {
+                        floating:true,
+                        align:'right',
+                        verticalAlign: 'top',
+                        itemStyle: {
+                            color: '#FFF',
+                            fontSize:'0.3rem'
+                        },
+                        y:-30
+                    },
+                    plotOptions: {
+                        area: {
+                            pointStart: 1950,
+                            marker: {
+                                enabled: false,
+                                symbol: 'circle',
+                                radius: 2,
+                                states: {
+                                    hover: {
+                                        enabled: true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    series: [{
+                        name: '指标一',
+                        data: [3,8,11,15,19,23,27,31,35,39,43,47,51,55,59,63,67,71,72,73,74,75,85,95,99,103,107,111,115,119,123,127],
+                        color:'#d2e87e'
+                    }, {
+                        name: '指标二',
+                        data: [4,7,8,12,14,16,19,21,24,26,29,31,34,36,39,41,44,46,49,49,49,51,52,55,59,66,69,71,74,76,79,81],
+                        color:'#14f5f5'
+                    }]
+                });
+
+                $('#chart2').highcharts({
+                    chart: {
+                        type: 'column',
+                        backgroundColor: null,
+                        spacingBottom: 0,
+                        spacingTop: 10,
+                        spacingLeft: 0,
+                        spacingRight:10,
+
+                        // 指定外边距
+                        margin: null,
+                    },
+                    title: null,
+                    xAxis: {
+                        categories: ['一月', '二月', '三月', '四月', '五月', '六月'],
+                        crosshair: true,
+                        lineColor: '#37fffe',
+                        tickLength: 0,
+                        labels: {
+                            style: {
+                                color: '#35fffd',//颜色
+                                fontSize:22/75+'rem'
+                            },
+                            y:30
+                        }
+                    },
+                    yAxis: [{
+                        min: 0,
+                        title: {
+                            text: null
+                        },
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            },
+                            y:20
+                        }
+                    }],
+                    tooltip: {
+                        backgroundColor:'rgba(0,0,0,.5)',
+                        headerFormat: '<span style="font-size:0.27rem">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f} kWh</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                        column: {
+                            pointPadding: 0.1,
+                            borderWidth: 0
+                        }
+                    },
+                    series: [{
+                        name: '2016',
+                        data: [2000,2500,2300,3100,3500,2400],
+                        color: '#37fffe'
+                    }]
+                });
+                
+                Highcharts.chart('chart3', {
+                    chart: {
+                      type: 'solidgauge',
+                      backgroundColor:null
+                    },
+                    credits: {
+                        enabled:false
+                    },
+                    title: {
+                        text: '发电量完成率',
+                        align:'left',
+                        style: {
+                            color: '#FFFFFF',
+                            fontSize:'14px'
+                        }
+                    },
+                    tooltip: {
+                        borderWidth: 0,
+                        backgroundColor: 'none',
+                        shadow: false,
+                        style: {
+                            fontSize: '16px'
+                        },
+                        pointFormat: '<span style="color: #FFF;font-size:10px;">{series.name}</span><br><span style="font-size:14px; color: #FFF; font-weight: bold">{point.y}%</span>',
+                        positioner: function () {
+                            return { x:10, y:30 };
+                        },
+                    },
+                    labels:{
+                      items: [{                       // items 数组，可以设置多个标签
+                        html: '实际发电量<br/>65.0%',
+                        style: {                    // 标签样式，会继承和重写上层全局样式
+                            left: $("#chart3").width()/2 - 10,
+                            top: $("#chart3").height()/2 - 40,
+                            color: 'yellow',
+                            fontSize: '12px',
+                            fontWeight: 'normal',
+                            fontFamily: '' ,
+                            textAnchor:'middle',//字体居中对齐
+                            lineHeight:'40px'
+                        }
+                    }]
+                    },
+                    pane: {
+                        startAngle: 0,
+                        endAngle: -360,
+                        background: [{ // Track for Move
+                            outerRadius: '112%',
+                            innerRadius: '88%',
+                            backgroundColor: Highcharts.Color("#6de7ea").setOpacity(0.3).get(),
+                            borderWidth: 0
+                        }, { // Track for Exercise
+                            outerRadius: '87%',
+                            innerRadius: '63%',
+                            backgroundColor: Highcharts.Color("#e6e92a").setOpacity(0.3).get(),
+                            borderWidth: 0
+                        }]
+                    },
+                    yAxis: {
+                        min: 0,
+                        max: 100,
+                        lineWidth: 0,
+                        tickPositions: []
+                    },
+                    plotOptions: {
+                        solidgauge: {
+                            borderWidth: '12px',
+                            dataLabels: {
+                                enabled: false
+                            },
+                            linecap: 'square',
+                            stickyTracking: false
+                        }
+                    },
+                    series: [{
+                        name: '目标发电量',
+                        borderColor: '#6de7ea',
+                        data: [{
+                            color: '#6de7ea',
+                            radius: '100%',
+                            innerRadius: '100%',
+                            y: 80
+                        }]
+                    }, {
+                        name: '实际发电量',
+                        borderColor: '#e6e92a',
+                        data: [{
+                            color: '#e6e92a',
+                            radius: '75%',
+                            innerRadius: '75%',
+                            y: 65
+                        }]
+                    }]
+                });
+
+                $('#chart4').highcharts({
+                    chart: {
+                        type: 'bar',
+                        backgroundColor:null
+                    },
+                    title: {
+                        text: '历史填报时间',
+                        align: 'left',
+                        style: {
+                            color: '#FFFFFF',
+                            fontSize:22/75+'rem'
+                        },
+                        y:20
+                    },
+                    xAxis: {
+                        categories: ['0', '10', '20', '30', '40','50'],
+                        title: {
+                            text: null
+                        },
+                        labels: {
+                            style: {
+                                color: '#35fffd',//颜色
+                                fontSize:22/75+'rem'
+                            }
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: null,
+                        labels: {
+                            overflow: 'justify'
+                        }
+                    },
+                    tooltip: {
+                        valueSuffix: ' 分钟'
+                    },
+                    plotOptions: {
+                        bar: {
+                            dataLabels: {
+                                enabled: true,
+                                allowOverlap: true
+                            }
+                        }
+                    },
+                    legend: {
+                        enabled:false
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: [{
+                        name: '04/24',
+                        data: [35, 47, 43, 42, 40],
+                        color:'#6de7ea',
+                        borderWidth:0,
+                        dataLabels:{
+                            enabled:true,
+                            color:'#35fffd'
+                        }
+                    }]
+                });
+
+                $('#chart5').highcharts({
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        backgroundColor:null
+                    },
+                    title: {
+                        text: null
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    legend: {
+                        floating:false,
+                        align:'center',
+                        verticalAlign: 'bottom',
+                        itemStyle: {
+                            color: '#FFF',
+                            fontSize:'0.5rem'
+                        },
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                style: {
+                                    color: 'white'
+                                }
+                            },
+                            /*colors:['#125f8c','#34b0d4','#2096d4']*/
+                        }
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: '机组状态',
+                        data: [
+                            ['正常运行',   75.0],
+                            ['机组调停',       15.0],
+                            ['机组检修',    10.0],
+                        ]
+                    }]
+                });
+
+            });
+        </script>
+
+
+    </body>
+</html>
