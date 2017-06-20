@@ -220,9 +220,27 @@
 .table-content>table>tbody>tr>td:first-child,.table-content>table>thead>tr>th:first-child{
     width:60px;
 }
+
 .table-content table.table-auto{
     table-layout: auto;
 }
+.table-events{
+    width: 100%;
+    height: auto;
+    box-sizing:border-box;
+    padding: 10px;
+    background-color: rgba(0,0,0,.4);
+    margin-top: 10px;
+}
+.table-events ol{
+
+}
+.table-events ol li{
+    font-size:12px;
+    color:#FFF;
+    line-height: 24px;
+}
+
 .tb-h6{
     width: 100%;
     overflow-x:scroll;
@@ -234,6 +252,10 @@
     max-height: 240px;
     overflow-y:scroll;
     overflow-x: hidden;
+}
+
+.tb-h8>table>tbody{
+    max-height: 320px;
 }
 
 .tb-h6::-webkit-scrollbar{
@@ -298,7 +320,7 @@
 .chart-box{
     width: 100%;
     text-align: center;
-    padding: 10px 20px;
+    padding: 10px 0;
     background-color: rgba(20,80,95,.5);
     box-sizing:border-box;
 }
@@ -314,6 +336,13 @@
 }
 .chart-container:nth-child(2){
     float: right;
+}
+.chart-container-one{
+    width: 90%;
+    height: 320px;
+    border: 1px solid #4ac4db;
+    background-color: rgba(15,59,70,.5);
+    box-shadow:0 0 15px 2px #48d3e9 inset;
 }
 
 
