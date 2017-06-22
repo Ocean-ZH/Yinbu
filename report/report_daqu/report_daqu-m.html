@@ -47,7 +47,6 @@
         <script src="js/highcharts.js" type="text/javascript"></script>
         <script src="js/highcharts-more.js" type="text/javascript"></script>
         <script src="js/solid-gauge.js" type="text/javascript"></script>
-        <script src="js/pageSwitch.js" type="text/javascript"></script>
         <script type="text/javascript">
             // 动态设置视口大小
             var iScale = window.devicePixelRatio;
@@ -105,131 +104,452 @@
                        <li>库存类</li>
                    </ul>
                </div>
-               <div class="table-header">
-                   <div class="table-title">
-                        <h4>火电每日填报指标</h4>
-                        <ul>
-                            <li>火电每日填报指标</li>
-                            <li>火电累计指标</li>
-                            <li>火电辅助指标</li>
-                        </ul>
-                   </div>
-               </div>
-               <div class="table-content-main">
-                  <!-- <table class="table-left-fixed">
-                    <thead>
-                      <tr>
-                        <th>项目公司</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>湖北一</td>
-                      </tr>
-                      <tr>
-                        <td>湖北二</td>
-                      </tr>
-                      <tr>
-                        <td>宜昌</td>
-                      </tr>
-                      <tr>
-                        <td>涟源</td>
-                      </tr>
-                    </tbody>
-                  </table> -->
-                  <!-- <table class="table-main-data">
-                    <thead>
-                      <tr>
-                        <th>项目公司</th>
-                        <th>日发电量 (万kWh)</th>
-                        <th>月累发电 (万kWh)</th>
-                        <th>月计划完成率 (%)</th>
-                        <th>年累发电 (万kWh)</th>
-                        <th>年计划完成率 (%)</th>
-                        <th>日负荷率 (%)</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>湖北一</td>
-                        <td>572</td>
-                        <td>7674</td>
-                        <td>40.4</td>
-                        <td>32779</td>
-                        <td>12.1</td>
-                        <td>72</td>
-                      </tr>
-                      <tr>
-                        <td>湖北二</td>
-                        <td>572</td>
-                        <td>7674</td>
-                        <td>40.4</td>
-                        <td>32779</td>
-                        <td>12.1</td>
-                        <td>72</td>
-                      </tr>
-                      <tr>
-                        <td>宜昌</td>
-                        <td>572</td>
-                        <td>7674</td>
-                        <td>40.4</td>
-                        <td>32779</td>
-                        <td>12.1</td>
-                        <td>72</td>
-                      </tr>
-                      <tr>
-                        <td>涟源</td>
-                        <td>572</td>
-                        <td>7674</td>
-                        <td>40.4</td>
-                        <td>32779</td>
-                        <td>12.1</td>
-                        <td>72</td>
-                      </tr>
-                    </tbody>
-                  </table> -->
-                  <div class="table-main-box">
-                    
-                  </div>
-                  <div class="capacity-box">
-                    <div class="capacity-table-box">
-                      <table class="capacity-table">
-                        <thead>
-                          <tr>
-                            <th>类型</th>
-                            <th>今年(kWh)</th>
-                            <th>去年同期(kWh)</th>
-                            <th>完成率(%)</th>
-                            <th>同比(%)</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>当日</td>
-                            <td>0.00</td>
-                            <td>0.00</td>
-                            <td>0.00</td>
-                            <td>0.00</td>
-                          </tr>
-                          <tr>
-                            <td>月累</td>
-                            <td>0.00</td>
-                            <td>0.00</td>
-                            <td>0.00</td>
-                            <td>0.00</td>
-                          </tr>
-                          <tr>
-                            <td>年累</td>
-                            <td>0.00</td>
-                            <td>0.00</td>
-                            <td>0.00</td>
-                            <td>0.00</td>
-                          </tr>
-                        </tbody>
-                      </table>
+               <ul class="classify-content-box">
+                  <li class="current">
+                    <div class="table-quota-container">
+                      <div class="table-header">
+                         <div class="table-title">
+                              <h4>火电每日填报指标</h4>
+                              <ul>
+                                  <li>火电每日填报指标</li>
+                                  <li>火电累计指标</li>
+                              </ul>
+                         </div>
+                      </div>
+                      <ul class="table-quota-type">
+                        <li class="current">
+                          <div class="table-content-main">
+                            <div class="table-main-box">
+                              <table class="table-main">
+                                <thead>
+                                  <tr>
+                                    <th>项目公司</th>
+                                    <th>日供电量 (万kWh)</th>
+                                    <th>日发电量 (万kWh)</th>
+                                    <th>生产厂用电率  (%)</th>
+                                    <th>日负荷率 (%)</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>湖北一</td>
+                                    <td>572</td>
+                                    <td>7674</td>
+                                    <td>40.4</td>
+                                    <td>72</td>
+                                  </tr>
+                                  <tr>
+                                    <td>湖北二</td>
+                                    <td>572</td>
+                                    <td>7674</td>
+                                    <td>40.4</td>
+                                    <td>72</td>
+                                  </tr>
+                                  <tr>
+                                    <td>宜昌</td>
+                                    <td>572</td>
+                                    <td>7674</td>
+                                    <td>40.4</td>
+                                    <td>72</td>
+                                  </tr>
+                                  <tr>
+                                    <td>涟源</td>
+                                    <td>572</td>
+                                    <td>7674</td>
+                                    <td>40.4</td>
+                                    <td>72</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="table-content-main">
+                            <div class="table-main-box">
+                              <table class="table-main">
+                                <thead>
+                                  <tr>
+                                    <th>项目公司</th>
+                                    <th>月累发电 (万kWh)</th>
+                                    <th>月计划完成率 (%)</th>
+                                    <th>年累发电 (万kWh)</th>
+                                    <th>年计划完成率 (%)</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>湖北一</td>
+                                    <td>7674</td>
+                                    <td>40.4</td>
+                                    <td>32779</td>
+                                    <td>12.1</td>
+                                  </tr>
+                                  <tr>
+                                    <td>湖北二</td>
+                                    <td>7674</td>
+                                    <td>40.4</td>
+                                    <td>32779</td>
+                                    <td>12.1</td>
+                                  </tr>
+                                  <tr>
+                                    <td>宜昌</td>
+                                    <td>7674</td>
+                                    <td>40.4</td>
+                                    <td>32779</td>
+                                    <td>12.1</td>
+                                  </tr>
+                                  <tr>
+                                    <td>涟源</td>
+                                    <td>7674</td>
+                                    <td>40.4</td>
+                                    <td>32779</td>
+                                    <td>12.1</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
                     </div>
-                  </div>
-               </div>
+                  </li>
+                  <li>
+                    <div class="table-quota-container">
+                      <div class="table-header">
+                         <div class="table-title">
+                              <h4>火电经营指标</h4>
+                              <ul>
+                                  <li>火电经营指标</li>
+                              </ul>
+                         </div>
+                      </div>
+                      <ul class="table-quota-type">
+                        <li class="current">
+                          <div class="table-content-main">
+                            <div class="table-main-box">
+                              <table class="table-main">
+                                <thead>
+                                  <tr>
+                                    <th>项目公司</th>
+                                    <th>供电煤耗 (g/kWh)</th>
+                                    <th>月累煤耗 (g/kWh)</th>
+                                    <th>年累煤耗 (g/kWh)</th>
+                                    <th>生产厂用电率 (%)</th>
+                                    <th>月累厂用电率 (%)</th>
+                                    <th>年累厂用电率 (%)</th>
+                                    <th>备注</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>湖北一</td>
+                                    <td>299.25</td>
+                                    <td>324.62</td>
+                                    <td>321.65</td>
+                                    <td>4.81</td>
+                                    <td>4.46</td>
+                                    <td>4.52</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>湖北二</td>
+                                    <td>299.25</td>
+                                    <td>324.62</td>
+                                    <td>321.65</td>
+                                    <td>4.81</td>
+                                    <td>4.46</td>
+                                    <td>4.52</td>
+                                    <td>双机停运</td>
+                                  </tr>
+                                  <tr>
+                                    <td>宜昌</td>
+                                    <td>299.25</td>
+                                    <td>324.62</td>
+                                    <td>321.65</td>
+                                    <td>4.81</td>
+                                    <td>4.46</td>
+                                    <td>4.52</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>涟源</td>
+                                    <td>299.25</td>
+                                    <td>324.62</td>
+                                    <td>321.65</td>
+                                    <td>4.81</td>
+                                    <td>4.46</td>
+                                    <td>4.52</td>
+                                    <td></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="chart-box-container">
+                      <div class="box-header" >
+                          <div class="BH-left">
+                              <h4>煤耗情况</h4>
+                              <ul>
+                                  <li>湖北一期</li>
+                                  <li>湖北二期</li>
+                                  <li>宜昌项目</li>
+                                  <li>涟源项目</li>
+                              </ul>
+                          </div>
+                      </div>
+                      <div class="chart-box">
+                          <ul>
+                            <li class="current"><div id="chart6"></div></li>
+                            <li><div id="chart6_2"></div></li>
+                            <li><div id="chart6_3"></div></li>
+                            <li><div id="chart6_4"></div></li>
+                          </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="table-quota-container">
+                      <div class="table-header">
+                         <div class="table-title">
+                              <h4>火电环保指标</h4>
+                              <ul>
+                                  <li>火电环保指标</li>
+                              </ul>
+                         </div>
+                      </div>
+                      <ul class="table-quota-type">
+                        <li class="current">
+                          <div class="table-content-main">
+                            <div class="table-main-box">
+                              <table class="table-main">
+                                <thead>
+                                  <tr>
+                                    <th>项目公司</th>
+                                    <th>机组</th>
+                                    <th>平均出口二氧化硫浓度 (mg/m3)</th>
+                                    <th>脱硫投入率 (%)</th>
+                                    <th>脱硫效率 (%)</th>
+                                    <th>平均出口氮氧化物浓度 (mg/m3)</th>
+                                    <th>脱硝投入率 (%)</th>
+                                    <th>脱硝效率 (%)</th>
+                                    <th>烟尘排放浓度 (mg/m3)</th>
+                                    <th>电除尘投入率 (%)</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>湖北一</td>
+                                    <td>#1</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                  </tr>
+                                  <tr>
+                                    <td>湖北一</td>
+                                    <td>#2</td>
+                                    <td>19.87</td>
+                                    <td>100</td>
+                                    <td>98.86</td>
+                                    <td>26.90</td>
+                                    <td>100</td>
+                                    <td>90.5</td>
+                                    <td>2.11</td>
+                                    <td>100</td>
+                                  </tr>
+                                  <tr>
+                                    <td>湖北二</td>
+                                    <td>#1</td>
+                                    <td>19.87</td>
+                                    <td>100</td>
+                                    <td>98.86</td>
+                                    <td>26.90</td>
+                                    <td>100</td>
+                                    <td>90.5</td>
+                                    <td>2.11</td>
+                                    <td>100</td>
+                                  </tr>
+                                  <tr>
+                                    <td>湖北二</td>
+                                    <td>#2</td>
+                                    <td>19.87</td>
+                                    <td>100</td>
+                                    <td>98.86</td>
+                                    <td>26.90</td>
+                                    <td>100</td>
+                                    <td>90.5</td>
+                                    <td>2.11</td>
+                                    <td>100</td>
+                                  </tr>
+                                  <tr>
+                                    <td>宜昌</td>
+                                    <td>#1</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                  </tr>
+                                  <tr>
+                                    <td>宜昌二</td>
+                                    <td>#2</td>
+                                    <td>19.87</td>
+                                    <td>100</td>
+                                    <td>98.86</td>
+                                    <td>26.90</td>
+                                    <td>100</td>
+                                    <td>90.5</td>
+                                    <td>2.11</td>
+                                    <td>100</td>
+                                  </tr>
+                                  <tr>
+                                    <td>涟源</td>
+                                    <td>#1</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                  </tr>
+                                  <tr>
+                                    <td>涟源</td>
+                                    <td>#2</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="table-quota-container">
+                      <div class="table-header">
+                         <div class="table-title">
+                              <h4>火电库存指标</h4>
+                              <ul>
+                                  <li>火电库存指标</li>
+                              </ul>
+                         </div>
+                      </div>
+                      <ul class="table-quota-type">
+                        <li class="current">
+                          <div class="table-content-main">
+                            <div class="table-main-box">
+                              <table class="table-main">
+                                <thead>
+                                  <tr>
+                                    <th>项目公司</th>
+                                    <th>进煤 (t)</th>
+                                    <th>耗煤 (t)</th>
+                                    <th>煤库存 (t)</th>
+                                    <th>煤可用天数 (天)</th>
+                                    <th>进液氮 (t)</th>
+                                    <th>耗液氮 (t)</th>
+                                    <th>液氮库存 (t)</th>
+                                    <th>液氮可用天数 (天)</th>
+                                    <th>进石灰石 (t)</th>
+                                    <th>耗石灰石 (t)</th>
+                                    <th>石灰石库存 (t)</th>
+                                    <th>石灰石可用天数 (天)</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>湖北一</td>
+                                    <td>0</td>
+                                    <td>2073</td>
+                                    <td>30059</td>
+                                    <td>13</td>
+                                    <td>0</td>
+                                    <td>2</td>
+                                    <td>14</td>
+                                    <td>5</td>
+                                    <td>0</td>
+                                    <td>32</td>
+                                    <td>564</td>
+                                    <td>14</td>
+                                  </tr>
+                                  <tr>
+                                    <td>湖北二</td>
+                                    <td>0</td>
+                                    <td>2073</td>
+                                    <td>30059</td>
+                                    <td>13</td>
+                                    <td>0</td>
+                                    <td>2</td>
+                                    <td>14</td>
+                                    <td>5</td>
+                                    <td>0</td>
+                                    <td>32</td>
+                                    <td>564</td>
+                                    <td>14</td>
+                                  </tr>
+                                  <tr>
+                                    <td>宜昌</td>
+                                    <td>0</td>
+                                    <td>2073</td>
+                                    <td>30059</td>
+                                    <td>13</td>
+                                    <td>0</td>
+                                    <td>2</td>
+                                    <td>14</td>
+                                    <td>5</td>
+                                    <td>0</td>
+                                    <td>32</td>
+                                    <td>564</td>
+                                    <td>14</td>
+                                  </tr>
+                                  <tr>
+                                    <td>涟源</td>
+                                    <td>0</td>
+                                    <td>2073</td>
+                                    <td>30059</td>
+                                    <td>13</td>
+                                    <td>0</td>
+                                    <td>2</td>
+                                    <td>14</td>
+                                    <td>5</td>
+                                    <td>0</td>
+                                    <td>32</td>
+                                    <td>564</td>
+                                    <td>14</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                      <div class="chart-box">
+                        <div id="chart2_2"></div>
+                      </div>
+                    </div>
+                  </li>
+               </ul>
             </div>
           </li>
           <li>
@@ -242,265 +562,443 @@
                        <li>库存类</li>
                    </ul>
                </div>
-               <div class="table-header">
-                   <div class="table-title">
-                        <h4>风电指标</h4>
-                        <ul>
-                            <li>风电指标</li>
-                            <li>风电指标二</li>
-                        </ul>
-                   </div>
-               </div>
-               <div id="pw-table-box">
-                   <div class="pw-table-in">
-                       <ul class="table-data-head clearfloat">
-                           <li>
-                               <h3>1200</h3>
-                               <p>日发电量 (MWh)</p>
-                           </li>
-                           <li>
-                               <h3>1120</h3>
-                               <p>日供电量 (MWh)</p>
-                           </li>
-                           <li>
-                               <h3>80%</h3>
-                               <p>日平均负荷率 (%)</p>
-                           </li>
-                       </ul>
-                       <ul class="table-data">
-                           <li>
-                                <dl>
-                                    <dt>日发电量 (MWh)</dt>
-                                    <dd>1200</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>日供电量 (MWh)</dt>
-                                    <dd>1200</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>日平均负荷率 (%)</dt>
-                                    <dd>80</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>生产厂用电率 (%)</dt>
-                                    <dd>80</dd>
-                                </dl>
-                           </li>
-                       </ul>
-                   </div>
-                   <div class="pw-table-in">
-                       <ul class="table-data-head clearfloat">
-                           <li>
-                               <h3>1200</h3>
-                               <p>供电煤耗 (g/kWh)</p>
-                           </li>
-                           <li>
-                               <h3>80</h3>
-                               <p>日负荷率 (%)</p>
-                           </li>
-                           <li>
-                               <h3>80%</h3>
-                               <p>厂用电率 (%)</p>
-                           </li>
-                       </ul>
-                       <ul class="table-data">
-                           <li>
-                                <dl>
-                                    <dt>供电煤耗</dt>
-                                    <dd>1200</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>日负荷率 (%)</dt>
-                                    <dd>80</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>厂用电率 (%)</dt>
-                                    <dd>80</dd>
-                                </dl>
-                           </li>
-                       </ul>
-                   </div>
-                   <div class="pw-table-in">
-                       <ul class="table-data-head clearfloat">
-                           <li>
-                               <h3>80</h3>
-                               <p>脱硫效率 (%)</p>
-                           </li>
-                           <li>
-                               <h3>80</h3>
-                               <p>脱硝效率 (%)</p>
-                           </li>
-                           <li>
-                               <h3>80</h3>
-                               <p>电除尘投入率 (%)</p>
-                           </li>
-                       </ul>
-                       <ul class="table-data">
-                           <li>
-                                <dl>
-                                    <dt>平均出口二氧化硫浓度 (mg/m3)</dt>
-                                    <dd>1200</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>脱硫投入率 (%)</dt>
-                                    <dd>80</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>脱硫效率 (%)</dt>
-                                    <dd>80</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>平均出口氮氧化物浓度 (mg/m3)</dt>
-                                    <dd>1200</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>脱硝投入率 (%)</dt>
-                                    <dd>80</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>脱硝效率 (%)</dt>
-                                    <dd>80</dd>
-                                </dl>
-                           </li><li>
-                                <dl>
-                                    <dt>烟尘排放浓度 (mg/m3)</dt>
-                                    <dd>1200</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>电除尘投入率 (%)</dt>
-                                    <dd>80</dd>
-                                </dl>
-                           </li>
-                       </ul>
-                   </div>
-                   <div class="pw-table-in">
-                       <ul class="table-data-head clearfloat">
-                           <li>
-                               <h3>15</h3>
-                               <p>煤可用天数 (天)</p>
-                           </li>
-                           <li>
-                               <h3>14</h3>
-                               <p>液氮可用天数 (天)</p>
-                           </li>
-                           <li>
-                               <h3>12</h3>
-                               <p>石灰石可用天数 (天)</p>
-                           </li>
-                       </ul>
-                       <ul class="table-data">
-                           <li>
-                                <dl>
-                                    <dt>进煤 (t)</dt>
-                                    <dd>1200</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>耗煤 (t)</dt>
-                                    <dd>80</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>煤库存 (t)</dt>
-                                    <dd>80</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>煤可用天数 (天)</dt>
-                                    <dd>15</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>进液氮 (t)</dt>
-                                    <dd>1200</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>耗液氮 (t)</dt>
-                                    <dd>80</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>液氮库存 (t)</dt>
-                                    <dd>80</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>液氮可用天数 (天)</dt>
-                                    <dd>14</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>进石灰石 (t)</dt>
-                                    <dd>1200</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>耗石灰石 (t)</dt>
-                                    <dd>80</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>石灰石库存 (t)</dt>
-                                    <dd>80</dd>
-                                </dl>
-                           </li>
-                           <li>
-                                <dl>
-                                    <dt>石灰石可用天数 (天)</dt>
-                                    <dd>12</dd>
-                                </dl>
-                           </li>
-                       </ul>
-                   </div>
-               </div>
+               <ul class="classify-content-box">
+                  <li class="current">
+                    <div class="table-quota-container">
+                      <div class="table-header">
+                         <div class="table-title">
+                              <h4>风电生产指标</h4>
+                              <ul>
+                                  <li>风电生产指标</li>
+                                  <li>风电累计指标</li>
+                              </ul>
+                         </div>
+                      </div>
+                      <ul class="table-quota-type">
+                        <li class="current">
+                          <div class="table-content-main">
+                            <div class="table-main-box">
+                              <table class="table-main">
+                                <thead>
+                                  <tr>
+                                    <th>项目公司</th>
+                                    <th>日供电量 (万kWh)</th>
+                                    <th>日发电量 (万kWh)</th>
+                                    <th>限电损失电量 (MWh)</th>
+                                    <th>日负荷率 (%)</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>湖北一</td>
+                                    <td>572</td>
+                                    <td>7674</td>
+                                    <td>40.4</td>
+                                    <td>72</td>
+                                  </tr>
+                                  <tr>
+                                    <td>湖北二</td>
+                                    <td>572</td>
+                                    <td>7674</td>
+                                    <td>40.4</td>
+                                    <td>72</td>
+                                  </tr>
+                                  <tr>
+                                    <td>宜昌</td>
+                                    <td>572</td>
+                                    <td>7674</td>
+                                    <td>40.4</td>
+                                    <td>72</td>
+                                  </tr>
+                                  <tr>
+                                    <td>涟源</td>
+                                    <td>572</td>
+                                    <td>7674</td>
+                                    <td>40.4</td>
+                                    <td>72</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="table-content-main">
+                            <div class="table-main-box">
+                              <table class="table-main">
+                                <thead>
+                                  <tr>
+                                    <th>项目公司</th>
+                                    <th>月累发电 (万kWh)</th>
+                                    <th>月计划完成率 (%)</th>
+                                    <th>年累发电 (万kWh)</th>
+                                    <th>年计划完成率 (%)</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>湖北一</td>
+                                    <td>7674</td>
+                                    <td>40.4</td>
+                                    <td>32779</td>
+                                    <td>12.1</td>
+                                  </tr>
+                                  <tr>
+                                    <td>湖北二</td>
+                                    <td>7674</td>
+                                    <td>40.4</td>
+                                    <td>32779</td>
+                                    <td>12.1</td>
+                                  </tr>
+                                  <tr>
+                                    <td>宜昌</td>
+                                    <td>7674</td>
+                                    <td>40.4</td>
+                                    <td>32779</td>
+                                    <td>12.1</td>
+                                  </tr>
+                                  <tr>
+                                    <td>涟源</td>
+                                    <td>7674</td>
+                                    <td>40.4</td>
+                                    <td>32779</td>
+                                    <td>12.1</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="table-quota-container">
+                      <div class="table-header">
+                         <div class="table-title">
+                              <h4>风电经营指标</h4>
+                              <ul>
+                                  <li>风电经营指标</li>
+                              </ul>
+                         </div>
+                      </div>
+                      <ul class="table-quota-type">
+                        <li class="current">
+                          <div class="table-content-main">
+                            <div class="table-main-box">
+                              <table class="table-main">
+                                <thead>
+                                  <tr>
+                                    <th>项目公司</th>
+                                    <th>供电煤耗 (g/kWh)</th>
+                                    <th>月累煤耗 (g/kWh)</th>
+                                    <th>年累煤耗 (g/kWh)</th>
+                                    <th>生产厂用电率 (%)</th>
+                                    <th>月累厂用电率 (%)</th>
+                                    <th>年累厂用电率 (%)</th>
+                                    <th>备注</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>湖北一</td>
+                                    <td>299.25</td>
+                                    <td>324.62</td>
+                                    <td>321.65</td>
+                                    <td>4.81</td>
+                                    <td>4.46</td>
+                                    <td>4.52</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>湖北二</td>
+                                    <td>299.25</td>
+                                    <td>324.62</td>
+                                    <td>321.65</td>
+                                    <td>4.81</td>
+                                    <td>4.46</td>
+                                    <td>4.52</td>
+                                    <td>双机停运</td>
+                                  </tr>
+                                  <tr>
+                                    <td>宜昌</td>
+                                    <td>299.25</td>
+                                    <td>324.62</td>
+                                    <td>321.65</td>
+                                    <td>4.81</td>
+                                    <td>4.46</td>
+                                    <td>4.52</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td>涟源</td>
+                                    <td>299.25</td>
+                                    <td>324.62</td>
+                                    <td>321.65</td>
+                                    <td>4.81</td>
+                                    <td>4.46</td>
+                                    <td>4.52</td>
+                                    <td></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="table-quota-container">
+                      <div class="table-header">
+                         <div class="table-title">
+                              <h4>风环保指标</h4>
+                              <ul>
+                                  <li>风电环保指标</li>
+                              </ul>
+                         </div>
+                      </div>
+                      <ul class="table-quota-type">
+                        <li class="current">
+                          <div class="table-content-main">
+                            <div class="table-main-box">
+                              <table class="table-main">
+                                <thead>
+                                  <tr>
+                                    <th>项目公司</th>
+                                    <th>机组</th>
+                                    <th>平均出口二氧化硫浓度 (mg/m3)</th>
+                                    <th>脱硫投入率 (%)</th>
+                                    <th>脱硫效率 (%)</th>
+                                    <th>平均出口氮氧化物浓度 (mg/m3)</th>
+                                    <th>脱硝投入率 (%)</th>
+                                    <th>脱硝效率 (%)</th>
+                                    <th>烟尘排放浓度 (mg/m3)</th>
+                                    <th>电除尘投入率 (%)</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>湖北一</td>
+                                    <td>#1</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                  </tr>
+                                  <tr>
+                                    <td>湖北一</td>
+                                    <td>#2</td>
+                                    <td>19.87</td>
+                                    <td>100</td>
+                                    <td>98.86</td>
+                                    <td>26.90</td>
+                                    <td>100</td>
+                                    <td>90.5</td>
+                                    <td>2.11</td>
+                                    <td>100</td>
+                                  </tr>
+                                  <tr>
+                                    <td>湖北二</td>
+                                    <td>#1</td>
+                                    <td>19.87</td>
+                                    <td>100</td>
+                                    <td>98.86</td>
+                                    <td>26.90</td>
+                                    <td>100</td>
+                                    <td>90.5</td>
+                                    <td>2.11</td>
+                                    <td>100</td>
+                                  </tr>
+                                  <tr>
+                                    <td>湖北二</td>
+                                    <td>#2</td>
+                                    <td>19.87</td>
+                                    <td>100</td>
+                                    <td>98.86</td>
+                                    <td>26.90</td>
+                                    <td>100</td>
+                                    <td>90.5</td>
+                                    <td>2.11</td>
+                                    <td>100</td>
+                                  </tr>
+                                  <tr>
+                                    <td>宜昌</td>
+                                    <td>#1</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                  </tr>
+                                  <tr>
+                                    <td>宜昌二</td>
+                                    <td>#2</td>
+                                    <td>19.87</td>
+                                    <td>100</td>
+                                    <td>98.86</td>
+                                    <td>26.90</td>
+                                    <td>100</td>
+                                    <td>90.5</td>
+                                    <td>2.11</td>
+                                    <td>100</td>
+                                  </tr>
+                                  <tr>
+                                    <td>涟源</td>
+                                    <td>#1</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                  </tr>
+                                  <tr>
+                                    <td>涟源</td>
+                                    <td>#2</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                    <td>/</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="table-quota-container">
+                      <div class="table-header">
+                         <div class="table-title">
+                              <h4>风电库存指标</h4>
+                              <ul>
+                                  <li>风电库存指标</li>
+                              </ul>
+                         </div>
+                      </div>
+                      <ul class="table-quota-type">
+                        <li class="current">
+                          <div class="table-content-main">
+                            <div class="table-main-box">
+                              <table class="table-main">
+                                <thead>
+                                  <tr>
+                                    <th>项目公司</th>
+                                    <th>进煤 (t)</th>
+                                    <th>耗煤 (t)</th>
+                                    <th>煤库存 (t)</th>
+                                    <th>煤可用天数 (天)</th>
+                                    <th>进液氮 (t)</th>
+                                    <th>耗液氮 (t)</th>
+                                    <th>液氮库存 (t)</th>
+                                    <th>液氮可用天数 (天)</th>
+                                    <th>进石灰石 (t)</th>
+                                    <th>耗石灰石 (t)</th>
+                                    <th>石灰石库存 (t)</th>
+                                    <th>石灰石可用天数 (天)</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>湖北一</td>
+                                    <td>0</td>
+                                    <td>2073</td>
+                                    <td>30059</td>
+                                    <td>13</td>
+                                    <td>0</td>
+                                    <td>2</td>
+                                    <td>14</td>
+                                    <td>5</td>
+                                    <td>0</td>
+                                    <td>32</td>
+                                    <td>564</td>
+                                    <td>14</td>
+                                  </tr>
+                                  <tr>
+                                    <td>湖北二</td>
+                                    <td>0</td>
+                                    <td>2073</td>
+                                    <td>30059</td>
+                                    <td>13</td>
+                                    <td>0</td>
+                                    <td>2</td>
+                                    <td>14</td>
+                                    <td>5</td>
+                                    <td>0</td>
+                                    <td>32</td>
+                                    <td>564</td>
+                                    <td>14</td>
+                                  </tr>
+                                  <tr>
+                                    <td>宜昌</td>
+                                    <td>0</td>
+                                    <td>2073</td>
+                                    <td>30059</td>
+                                    <td>13</td>
+                                    <td>0</td>
+                                    <td>2</td>
+                                    <td>14</td>
+                                    <td>5</td>
+                                    <td>0</td>
+                                    <td>32</td>
+                                    <td>564</td>
+                                    <td>14</td>
+                                  </tr>
+                                  <tr>
+                                    <td>涟源</td>
+                                    <td>0</td>
+                                    <td>2073</td>
+                                    <td>30059</td>
+                                    <td>13</td>
+                                    <td>0</td>
+                                    <td>2</td>
+                                    <td>14</td>
+                                    <td>5</td>
+                                    <td>0</td>
+                                    <td>32</td>
+                                    <td>564</td>
+                                    <td>14</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+               </ul>
             </div>
           </li>
         </ul>
         
         <div class="capacity-box">
           <div class="capacity-title">
-            <h4>发电总览</h4>
+            <h4>火电发电总览</h4>
           </div>
           <div class="capacity-table-box">
             <table class="capacity-table">
               <thead>
                 <tr>
                   <th>类型</th>
-                  <th>今年(kWh)</th>
-                  <th>去年同期(kWh)</th>
+                  <th>今年(亿kWh)</th>
+                  <th>去年同期(亿kWh)</th>
                   <th>完成率(%)</th>
                   <th>同比(%)</th>
                 </tr>
@@ -531,136 +1029,286 @@
             </table>
           </div>
         </div>
-        <div class="box-header" >
-            <div class="BH-left">
-                <h4>指标对比曲线</h4>
-                <ul>
-                    <li>指标对比曲线</li>
-                    <li>指标对比曲线二</li>
-                </ul>
-            </div>
-            <div class="BH-right">
-                <input type="date"  value="2017-04-24"/>
-            </div>
+        <div class="capacity-box">
+          <div class="capacity-title">
+            <h4>新能源发电总览</h4>
+          </div>
+          <div class="capacity-table-box">
+            <table class="capacity-table">
+              <thead>
+                <tr>
+                  <th>类型</th>
+                  <th>今年(亿kWh)</th>
+                  <th>去年同期(亿kWh)</th>
+                  <th>完成率(%)</th>
+                  <th>同比(%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>当日</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                </tr>
+                <tr>
+                  <td>月累</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                </tr>
+                <tr>
+                  <td>年累</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                  <td>0.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="chart-box">
-            <div id="chart1"></div>
+        <div class="chart-box-container">
+          <div class="box-header" >
+              <div class="BH-left">
+                  <h4>火电指标对比</h4>
+                  <ul>
+                      <li>火电指标对比</li>
+                      <li>风电指标对比</li>
+                  </ul>
+              </div>
+              <div class="BH-right">
+                  <input type="date"  value="2017-04-24"/>
+              </div>
+          </div>
+          <div class="chart-box">
+              <ul>
+                <li class="current"><div id="chart2"></div></li>
+                <li><div id="chart2_3"></div></li>
+              </ul>
+          </div>
         </div>
-        <div class="box-header" >
-            <div class="BH-left">
-                <h4>指标量对比</h4>
-                <ul>
-                    <li>指标量对比</li>
-                    <li>指标量对比二</li>
-                </ul>
-            </div>
-            <div class="BH-right">
-                <input type="date"  value="2017-04-24"/>
-            </div>
-        </div>
-        <div class="chart-box">
-            <div id="chart2"></div>
-        </div>
+        <div class="chart-box-container" style="display:none;">
+          <div class="box-header" >
+              <div class="BH-left">
+                  <h4>指标对比曲线</h4>
+                  <ul>
+                      <li>指标对比曲线</li>
+                      <li>指标对比曲线二</li>
+                  </ul>
+              </div>
+              <div class="BH-right">
+                  <input type="date"  value="2017-04-24"/>
+              </div>
+          </div>
+          <div class="chart-box">
+              <div id="chart1"></div>
+          </div>
+        </div>   
         <div class="generator-box">
           <div class="generator-title">
-            <h4>机组运行情况</h4>
+            <h4>火电机组运行情况</h4>
           </div>
           <div class="generator-table-box">
             <table class="generator-table">
               <thead>
                 <tr>
-                  <th>序号</th>
+                  <th>项目公司</th>
+                  <th>机组</th>
                   <th>容量(MV)</th>
                   <th>状态(kWh)</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
+                  <td>湖北</td>
                   <td>#1</td>
-                  <td>0.00</td>
+                  <td>2*330MW</td>
                   <td class="generator-run">运行</td>
                 </tr>
                 <tr>
+                  <td>湖北</td>
                   <td>#2</td>
-                  <td>0.00</td>
+                  <td>2*330MW</td>
                   <td class="generator-stop">调停</td>
                 </tr>
                 <tr>
+                  <td>湖北</td>
                   <td>#3</td>
-                  <td>0.00</td>
+                  <td>2*330MW</td>
+                  <td class="generator-run">运行</td>
+                </tr>
+                <tr>
+                  <td>湖北</td>
+                  <td>#4</td>
+                  <td>2*330MW</td>
+                  <td class="generator-run">运行</td>
+                </tr>
+                <tr>
+                  <td>宜昌</td>
+                  <td>#1</td>
+                  <td>2*350MW</td>
+                  <td class="generator-run">运行</td>
+                </tr>
+                <tr>
+                  <td>宜昌</td>
+                  <td>#2</td>
+                  <td>2*350MW</td>
                   <td class="generator-repair">检修</td>
+                </tr>
+                <tr>
+                  <td>涟源</td>
+                  <td>#1</td>
+                  <td>2*330MW</td>
+                  <td class="generator-run">运行</td>
+                </tr>
+                <tr>
+                  <td>宜昌</td>
+                  <td>#2</td>
+                  <td>2*330MW</td>
+                  <td class="generator-stop">调停</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-        <div class="box-header" >
-            <div class="BH-left">
-                <h4>机组运行情况</h4>
-                <ul>
-                    <li>机组运行情况</li>
-                    <li>机组运行情况二</li>
-                </ul>
-            </div>
-            <div class="BH-right">
-                <input type="date"  value="2017-04-24"/>
-            </div>
+        <div class="generator-box">
+          <div class="generator-title">
+            <h4>风电机组运行情况</h4>
+          </div>
+          <div class="generator-table-box">
+            <table class="generator-table">
+              <thead>
+                <tr>
+                  <th>风场</th>
+                  <th>容量(MV)</th>
+                  <th>状态</th>
+                  <th>备注</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>凤鸣</td>
+                  <td>24*2.0MW+1*1.8MW+51*1.5MW</td>
+                  <td class="generator-run">运行</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>天河口</td>
+                  <td>99*1.5MW+36*2.0MW</td>
+                  <td class="generator-run">运行</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>太平</td>
+                  <td>33*1.5MW</td>
+                  <td class="generator-run">运行</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>花山</td>
+                  <td>26*2.0MW+1*1.8MW</td>
+                  <td class="generator-run">运行</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>板桥</td>
+                  <td>58*2.0MW+2*1.8MW</td>
+                  <td class="generator-run">运行</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>桃源</td>
+                  <td>24*2MW</td>
+                  <td class="generator-run">运行</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="chart-box">
-            <div id="chart5"></div>
+        <div class="chart-box-container">
+          <div class="box-header" >
+              <div class="BH-left">
+                  <h4>火电机组运行情况</h4>
+                  <ul>
+                      <li>火电机组运行情况</li>
+                      <li>风电机组运行情况</li>
+                  </ul>
+              </div>
+              <div class="BH-right">
+                  <input type="date"  value="2017-04-24"/>
+              </div>
+          </div>
+          <div class="chart-box">
+            <ul>
+              <li class="current">
+                <div id="chart5"></div>
+              </li>
+              <li>
+                <div id="chart5_2"></div>
+              </li>
+            </ul>  
+          </div>
         </div>
-        <div class="box-header" >
-            <div class="BH-left">
-                <h4>指标环形对比</h4>
-                <ul>
-                    <li>指标环形对比</li>
-                    <li>指标环形对比二</li>
-                </ul>
-            </div>
-            <div class="BH-right">
-                <input type="date"  value="2017-04-24"/>
-            </div>
+        <div class="chart-box-container">
+          <div class="box-header" >
+              <div class="BH-left">
+                  <h4>指标环形对比</h4>
+                  <ul>
+                      <li>指标环形对比</li>
+                      <li>指标环形对比二</li>
+                  </ul>
+              </div>
+              <div class="BH-right">
+                  <input type="date"  value="2017-04-24"/>
+              </div>
+          </div>
+          <div class="chart-box">
+              <div id="chart3"></div>
+          </div>
         </div>
-        <div class="chart-box">
-            <div id="chart3"></div>
+        <div class="chart-box-container">
+          <div class="box-header" >
+              <div class="BH-left">
+                  <h4>历史异常统计</h4>
+                  <ul>
+                      <li>历史异常统计</li>
+                  </ul>
+              </div>
+              <div class="BH-right">
+                  <input type="date"  value="2017-04-24"/>
+              </div>
+          </div>
+          <div class="history-box clearfloat">
+              <div class="history-left">
+                  <table>
+                      <tr>
+                          <td><h5>历史平均填报时间 : </h5></td>
+                          <td><p>36分钟</p></td>
+                      </tr>
+                      <tr>
+                          <td><h5>累计误填次数 : </h5></td>
+                          <td><p>6次</p></td>
+                      </tr>
+                      <tr>
+                          <td><h5>历史最早填报日期 : </h5></td>
+                          <td><p>2017/04/26</p></td>
+                      </tr>
+                      <tr>
+                          <td><h5>历史最晚填报日期 : </h5></td>
+                          <td><p>2017/04/26</p></td>
+                      </tr>
+                  </table>
+              </div>
+              <div class="history-right">
+                  <div id="chart4"></div>
+              </div>
+          </div>
         </div>
-        <div class="box-header" >
-            <div class="BH-left">
-                <h4>历史异常统计</h4>
-                <ul>
-                    <li>历史异常统计一</li>
-                    <li>历史异常统计二</li>
-                </ul>
-            </div>
-            <div class="BH-right">
-                <input type="date"  value="2017-04-24"/>
-            </div>
-        </div>
-        <div class="history-box clearfloat">
-            <div class="history-left">
-                <table>
-                    <tr>
-                        <td><h5>历史平均填报时间 : </h5></td>
-                        <td><p>36分钟</p></td>
-                    </tr>
-                    <tr>
-                        <td><h5>累计误填次数 : </h5></td>
-                        <td><p>6次</p></td>
-                    </tr>
-                    <tr>
-                        <td><h5>历史最早填报日期 : </h5></td>
-                        <td><p>2017/04/26</p></td>
-                    </tr>
-                    <tr>
-                        <td><h5>历史最晚填报日期 : </h5></td>
-                        <td><p>2017/04/26</p></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="history-right">
-                <div id="chart4"></div>
-            </div>
-        </div>
+        
         
         <script type="text/javascript">
             jQuery(document).ready(function($) {
@@ -681,8 +1329,12 @@
                     }
                     $(this).toggleClass('current');
                     $(this).find('li').click(function(event) {
-                    var typeText=$(this).text();
-                    $(this).closest('.BH-left').children('h4').text(typeText);
+                        var typeText=$(this).text();
+                        $(this).closest('.BH-left').children('h4').text(typeText);
+
+                        //图表通用切换
+                        var chartIndex=$(this).index();
+                        $(this).closest('.chart-box-container').find('.chart-box').children('ul').children('li').eq(chartIndex).addClass('current').siblings('li').removeClass('current');
                     });
                 });
 
@@ -690,6 +1342,12 @@
                 $('.power-type-select .BH-left ul>li').click(function(event) {
                   var ptIndex=$(this).index();
                   $('ul.power-type>li').eq(ptIndex).addClass('current').siblings('li').removeClass('current');
+                });
+                //指标4类型切换
+                $('.classify-box ul li').click(function(event) {
+                  $(this).addClass('current').siblings('li').removeClass('current');
+                  var classifyIndex=$(this).index();
+                  $(this).closest('.table-box').find('.classify-content-box').children('li').eq(classifyIndex).addClass('current').siblings('li').removeClass('current')
                 });
 
                 //表格头部折叠菜单
@@ -705,25 +1363,10 @@
                         $('.table-header .table-title h4').text(typeText);
                     });
                 });
-
-                //pageSwitch配置
-                var pwTable=new pageSwitch('pw-table-box',{
-                    direction:0
-                });
-
-                //盒子高度
-                $('#pw-table-box').height($('.pw-table-in').eq(0).children('.table-data-head').height()+$('.pw-table-in').eq(0).children('.table-data').height()+10);
-
-                pwTable.on('before',function(a,b){
-                    $('.classify-box ul li').eq(b).addClass('current').siblings('li').removeClass('current');
-                    /* $('#pw-table-box').height($('.pw-table-in').eq(b).children('.table-data-head').height()+$('.pw-table-in').eq(b).children('.table-data').height()+10)*/
-                })
-                pwTable.on('after',function(a,b){
-                    $('#pw-table-box').height($('.pw-table-in').eq(a).children('.table-data-head').height()+$('.pw-table-in').eq(a).children('.table-data').height()+10)
-                })
-
-                $('.classify-box ul li').click(function(event) {
-                    pwTable.slide($(this).index())
+                //表格内指标类型切换
+                $('.table-header .table-title ul li').click(function(event) {
+                  var tbTitleIndex=$(this).index();
+                  $(this).closest('.table-quota-container').find('.table-quota-type').children('li').eq(tbTitleIndex).addClass('current').siblings('li').removeClass('current');
                 });
 
             });
@@ -745,7 +1388,7 @@
                 }());
 
 
-                $('#chart1').highcharts({
+                /*$('#chart1').highcharts({
                     chart: {
                         type: 'area',
                         backgroundColor:null,
@@ -824,30 +1467,24 @@
                         data: [4,7,8,12,14,16,19,21,24,26,29,31,34,36,39,41,44,46,49,49,49,51,52,55,59,66,69,71,74,76,79,81],
                         color:'#14f5f5'
                     }]
-                });
+                });*/
 
                 $('#chart2').highcharts({
                     chart: {
                         type: 'column',
                         backgroundColor: null,
-                        spacingBottom: 0,
-                        spacingTop: 10,
-                        spacingLeft: 0,
-                        spacingRight:10,
-
-                        // 指定外边距
-                        margin: null,
+                        spacingRight: 10,
+                        spacingTop: 50,
                     },
                     title: null,
                     xAxis: {
-                        categories: ['一月', '二月', '三月', '四月', '五月', '六月'],
+                        categories: [ '06/01','06/02','06/03','06/04'],
                         crosshair: true,
                         lineColor: '#37fffe',
                         tickLength: 0,
                         labels: {
                             style: {
-                                color: '#35fffd',//颜色
-                                fontSize:22/75+'rem'
+                                color: '#35fffd'//颜色
                             },
                             y:30
                         }
@@ -860,15 +1497,24 @@
                         labels: {
                             style: {
                                 color: '#35fffd'//颜色
-                            },
-                            y:20
+                            }
                         }
+                    }, {
+                        title: {
+                            text: null
+                        },
+                        labels: {
+                            style: {
+                                color: '#f5f1b7'//颜色
+                            }
+                        },
+                        opposite: true
                     }],
                     tooltip: {
                         backgroundColor:'rgba(0,0,0,.5)',
-                        headerFormat: '<span style="font-size:0.27rem">{point.key}</span><table>',
+                        headerFormat: '<span style="font-size:22px">{point.key}</span><table>',
                         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                        '<td style="padding:0"><b>{point.y:.1f} kWh</b></td></tr>',
+                        '<td style="padding:0"><b>{point.y:.1f} kMWh</b></td></tr>',
                         footerFormat: '</table>',
                         shared: true,
                         useHTML: true
@@ -877,7 +1523,13 @@
                         enabled: false
                     },
                     legend: {
-                        enabled: false
+                        floating:false,
+                        align:'center',
+                        verticalAlign: 'bottom',
+                        itemStyle: {
+                            color: '#FFF',
+                            fontSize:24
+                        }
                     },
                     plotOptions: {
                         column: {
@@ -886,10 +1538,208 @@
                         }
                     },
                     series: [{
-                        name: '2016',
-                        data: [2000,2500,2300,3100,3500,2400],
+                        name: '湖北一期',
+                        data: [13, 12, 15, 14],
                         color: '#37fffe'
-                    }]
+                    }, {
+                        name: '湖北二期',
+                        data: [9, 15, 14, 12],
+                        color: '#f5f1b7'
+                    },{
+                        name: '宜昌',
+                        data: [10, 9, 8, 15],
+                        color: '#28c8f0',
+                    },{
+                        name: '涟源',
+                        data: [9, 7, 10, 10],
+                        color: '#f5d986',
+                    }, ]
+                });
+
+                $('#chart2_3').highcharts({
+                    chart: {
+                        type: 'column',
+                        backgroundColor: null,
+                        spacingRight: 10,
+                        spacingTop: 50,
+                    },
+                    title: null,
+                    xAxis: {
+                        categories: [ '06/01','06/02','06/03','06/04'],
+                        crosshair: true,
+                        lineColor: '#37fffe',
+                        tickLength: 0,
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            },
+                            y:30
+                        }
+                    },
+                    yAxis: [{
+                        min: 0,
+                        title: {
+                            text: null
+                        },
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            }
+                        }
+                    }, {
+                        title: {
+                            text: null
+                        },
+                        labels: {
+                            style: {
+                                color: '#f5f1b7'//颜色
+                            }
+                        },
+                        opposite: true
+                    }],
+                    tooltip: {
+                        backgroundColor:'rgba(0,0,0,.5)',
+                        headerFormat: '<span style="font-size:22px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f} kMWh</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    legend: {
+                        floating:false,
+                        align:'center',
+                        verticalAlign: 'bottom',
+                        itemStyle: {
+                            color: '#FFF',
+                            fontSize:24
+                        }
+                    },
+                    plotOptions: {
+                        column: {
+                            pointPadding: 0.1,
+                            borderWidth: 0
+                        }
+                    },
+                    series: [{
+                        name: '凤鸣',
+                        data: [13, 12, 15, 14],
+                        color: '#37fffe'
+                    }, {
+                        name: '天河口',
+                        data: [9, 15, 14, 12],
+                        color: '#f5f1b7'
+                    },{
+                        name: '太平',
+                        data: [10, 9, 8, 15],
+                        color: '#28c8f0',
+                    },{
+                        name: '花山',
+                        data: [9, 7, 10, 10],
+                        color: '#f5d986',
+                    },{
+                        name: '板桥',
+                        data: [11,9, 8, 13],
+                        color: '#85f26f',
+                    }, ]
+                });
+                
+                $('#chart2_2').highcharts({
+                    chart: {
+                        type: 'column',
+                        backgroundColor: null,
+                        spacingRight: 40,
+                        spacingTop:20,
+                    },
+                    title: {
+                        text: '煤炭可用天数',
+                        align: 'left',
+                        style: {
+                            color: '#FFFFFF',
+                            fontSize:'20px'
+                        }
+                    },
+                    xAxis: {
+                        categories: [ '06/01','06/02','06/03','06/04'],
+                        crosshair: true,
+                        lineColor: '#37fffe',
+                        tickLength: 0,
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            },
+                            y:30
+                        }
+                    },
+                    yAxis: [{
+                        min: 0,
+                        title: {
+                            text: null
+                        },
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            }
+                        }
+                    }, {
+                        title: {
+                            text: null
+                        },
+                        labels: {
+                            style: {
+                                color: '#f5f1b7'//颜色
+                            }
+                        },
+                        opposite: true
+                    }],
+                    tooltip: {
+                        backgroundColor:'rgba(0,0,0,.5)',
+                        headerFormat: '<span style="font-size:22px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f} 天</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    legend: {
+                        floating:false,
+                        align:'center',
+                        verticalAlign: 'bottom',
+                        itemStyle: {
+                            color: '#FFF',
+                            fontSize:24
+                        }
+                    },
+                    plotOptions: {
+                        column: {
+                            pointPadding: 0.1,
+                            borderWidth: 0
+                        }
+                    },
+                    series: [{
+                        name: '湖北一期',
+                        data: [13, 12, 15, 14],
+                        color: '#37fffe'
+                    }, {
+                        name: '湖北二期',
+                        data: [9, 15, 14, 12],
+                        color: '#f5f1b7',
+                        yAxis: 1
+                    },{
+                        name: '宜昌',
+                        data: [10, 9, 8, 15],
+                        color: '#28c8f0',
+                    },{
+                        name: '涟源',
+                        data: [9, 7, 10, 10],
+                        color: '#f5d986',
+                    }, ]
                 });
                 
                 Highcharts.chart('chart3', {
@@ -1098,6 +1948,329 @@
                         ]
                     }]
                 });
+                
+                $('#chart5_2').highcharts({
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        backgroundColor:null
+                    },
+                    title: {
+                        text: null
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    legend: {
+                        floating:false,
+                        align:'center',
+                        verticalAlign: 'bottom',
+                        itemStyle: {
+                            color: '#FFF',
+                            fontSize:'0.5rem'
+                        },
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                style: {
+                                    color: 'white'
+                                }
+                            },
+                            /*colors:['#125f8c','#34b0d4','#2096d4']*/
+                        }
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: '机组状态',
+                        data: [
+                            ['正常运行',   90.0],
+                            ['机组调停',       5.0],
+                            ['机组检修',    5.0],
+                        ]
+                    }]
+                });
+
+                $('#chart6').highcharts({
+                    chart:{
+                        type:'line',
+                        backgroundColor: null,
+                        spacingRight: 50 ,
+                    },
+                    title: {
+                        text: '供电煤耗',
+                        x: 10,
+                        align: 'left',
+                        style: {
+                            color: '#FFFFFF',
+                            fontSize:'14px'
+                        }
+                    },
+                    subtitle: {
+                        text: '湖北一期',
+                        x: 10,
+                        align: 'left',
+                        style: {
+                            color: '#FFFFFF',
+                            fontSize:'14px'
+                        }
+                    },
+                    xAxis: {
+                        categories: ['06/01', '06/02', '06/03', '06/04', '06/05', '06/06'],
+                        crosshair: true,
+                        lineColor: '#37fffe',
+                        tickLength: 0,
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            }
+                        }
+                    },
+                    yAxis: {
+                        title: null,
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }],
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            }
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        valueSuffix: 't',
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0,
+                        enabled: false
+                    },
+                    series: [{
+                        name: '煤耗',
+                        data: [421.7, 299.2, 343.6, 341.7, 333.6, 299.3],
+                        color: '#35fffd',
+                    }]
+                });
+
+                $('#chart6_2').highcharts({
+                    chart:{
+                        type:'line',
+                        backgroundColor: null,
+                        spacingRight: 50 ,
+                    },
+                    title: {
+                        text: '供电煤耗',
+                        x: 10,
+                        align: 'left',
+                        style: {
+                            color: '#FFFFFF',
+                            fontSize:'14px'
+                        }
+                    },
+                    subtitle: {
+                        text: '湖北二期',
+                        x: 10,
+                        align: 'left',
+                        style: {
+                            color: '#FFFFFF',
+                            fontSize:'14px'
+                        }
+                    },
+                    xAxis: {
+                        categories: ['06/01', '06/02', '06/03', '06/04', '06/05', '06/06'],
+                        crosshair: true,
+                        lineColor: '#37fffe',
+                        tickLength: 0,
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            }
+                        }
+                    },
+                    yAxis: {
+                        title: null,
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }],
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            }
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        valueSuffix: 't',
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0,
+                        enabled: false
+                    },
+                    series: [{
+                        name: '煤耗',
+                        data: [266.2, 304.1, 282.5, 291.0, 289.5, 309.9],
+                        color: '#35fffd',
+                    }]
+                });
+
+                $('#chart6_3').highcharts({
+                    chart:{
+                        type:'line',
+                        backgroundColor: null,
+                        spacingRight: 50 ,
+                    },
+                    title: {
+                        text: '供电煤耗',
+                        x: 10,
+                        align: 'left',
+                        style: {
+                            color: '#FFFFFF',
+                            fontSize:'14px'
+                        }
+                    },
+                    subtitle: {
+                        text: '宜昌项目',
+                        x: 10,
+                        align: 'left',
+                        style: {
+                            color: '#FFFFFF',
+                            fontSize:'14px'
+                        }
+                    },
+                    xAxis: {
+                        categories: ['06/01', '06/02', '06/03', '06/04', '06/05', '06/06'],
+                        crosshair: true,
+                        lineColor: '#37fffe',
+                        tickLength: 0,
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            }
+                        }
+                    },
+                    yAxis: {
+                        title: null,
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }],
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            }
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        valueSuffix: 't',
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0,
+                        enabled: false
+                    },
+                    series: [{
+                        name: '煤耗',
+                        data: [295.5, 308.7, 294.8, 280.9, 310.1, 317.5],
+                        color: '#35fffd',
+                    }]
+                });
+
+                $('#chart6_4').highcharts({
+                    chart:{
+                        type:'line',
+                        backgroundColor: null,
+                        spacingRight: 50 ,
+                    },
+                    title: {
+                        text: '供电煤耗',
+                        x: 10,
+                        align: 'left',
+                        style: {
+                            color: '#FFFFFF',
+                            fontSize:'14px'
+                        }
+                    },
+                    subtitle: {
+                        text: '涟源项目',
+                        x: 10,
+                        align: 'left',
+                        style: {
+                            color: '#FFFFFF',
+                            fontSize:'14px'
+                        }
+                    },
+                    xAxis: {
+                        categories: ['06/01', '06/02', '06/03', '06/04', '06/05', '06/06'],
+                        crosshair: true,
+                        lineColor: '#37fffe',
+                        tickLength: 0,
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            }
+                        }
+                    },
+                    yAxis: {
+                        title: null,
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }],
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            }
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        valueSuffix: 't',
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0,
+                        enabled: false
+                    },
+                    series: [{
+                        name: '煤耗',
+                        data: [266.2, 277.9, 304.1, 282.5, 291.0, 309.9],
+                        color: '#35fffd',
+                    }]
+                });
+
 
             });
         </script>
