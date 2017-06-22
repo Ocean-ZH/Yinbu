@@ -621,13 +621,14 @@ ul.power-type > li.current {
   padding: 0.26666667rem 0.13333333rem;
   /* border-right: 1px solid rgba(55,170,230,.8); */
   min-width: 2.5rem;
+  text-align: left;
 }
 .generator-box .generator-table-box table.generator-table tr th:last-child {
   border: none;
 }
 .generator-box .generator-table-box table.generator-table tr td {
   padding: 0.26666667rem 0.13333333rem;
-  text-align: center;
+  text-align: left;
   width: 2.5rem;
 }
 .generator-box .generator-table-box table.generator-table tr td:last-child {
