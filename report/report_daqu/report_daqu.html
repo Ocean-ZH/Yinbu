@@ -80,6 +80,76 @@
                         <div class="table-classify-content current">
                             <div class="table-title"><h4>火电每日填报指标</h4></div>
                             <div class="table-content tb-h6 tb-h8" >
+                                <div class="table-fixed-column-box">
+                                    <div class="table-fixed-column-head">
+                                        <ul>
+                                            <li>
+                                                <dl>
+                                                    <dt>序号</dt>
+                                                    <dd>项目公司</dd>
+                                                </dl>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="table-fixed-column-content">
+                                        <ul>
+                                            <li>
+                                                <dl>
+                                                    <dt>1</dt>
+                                                    <dd>徐州华润</dd>
+                                                </dl>
+                                            </li>
+                                            <li>
+                                                <dl>
+                                                    <dt>2</dt>
+                                                    <dd>徐州铜山</dd>
+                                                </dl>
+                                            </li>
+                                            <li>
+                                                <dl>
+                                                    <dt>3</dt>
+                                                    <dd>常熟电厂</dd>
+                                                </dl>
+                                            </li>
+                                            <li>
+                                                <dl>
+                                                    <dt>4</dt>
+                                                    <dd>镇江电厂</dd>
+                                                </dl>
+                                            </li>
+                                            <li>
+                                                <dl>
+                                                    <dt>5</dt>
+                                                    <dd>华鑫电厂</dd>
+                                                </dl>
+                                            </li>
+                                            <li>
+                                                <dl>
+                                                    <dt>6</dt>
+                                                    <dd>宜兴电厂</dd>
+                                                </dl>
+                                            </li>
+                                            <li>
+                                                <dl>
+                                                    <dt>7</dt>
+                                                    <dd>南京热电</dd>
+                                                </dl>
+                                            </li>
+                                            <li>
+                                                <dl>
+                                                    <dt>8</dt>
+                                                    <dd>江苏南热</dd>
+                                                </dl>
+                                            </li>
+                                            <li>
+                                                <dl>
+                                                    <dt>9</dt>
+                                                    <dd>化工园热电</dd>
+                                                </dl>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                                 <table>
                                     <thead>
                                         <tr>
@@ -91,6 +161,8 @@
                                             <th>日平均负荷率 (%)</th>
                                             <th>月计划完成率 (%)</th>
                                             <th>年计划完成率 (%)</th>
+                                            <th>年计划完成率 (%)</th>
+                                            <th>年计划完成率 (%)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -99,6 +171,8 @@
                                             <td>徐州华润</td>
                                             <td>1200</td>
                                             <td>1200</td>
+                                            <td>80</td>
+                                            <td>80</td>
                                             <td>80</td>
                                             <td>80</td>
                                             <td>80</td>
@@ -113,12 +187,16 @@
                                             <td>80</td>
                                             <td>80</td>
                                             <td>80</td>
+                                            <td>80</td>
+                                            <td>80</td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
                                             <td>常熟电厂</td>
                                             <td>1200</td>
                                             <td>1200</td>
+                                            <td>80</td>
+                                            <td>80</td>
                                             <td>80</td>
                                             <td>80</td>
                                             <td>80</td>
@@ -133,12 +211,16 @@
                                             <td>80</td>
                                             <td>80</td>
                                             <td>80</td>
+                                            <td>80</td>
+                                            <td>80</td>
                                         </tr>
                                         <tr>
                                             <td>5</td>
                                             <td>华鑫电厂</td>
                                             <td>1200</td>
                                             <td>1200</td>
+                                            <td>80</td>
+                                            <td>80</td>
                                             <td>80</td>
                                             <td>80</td>
                                             <td>80</td>
@@ -153,12 +235,16 @@
                                             <td>80</td>
                                             <td>80</td>
                                             <td>80</td>
+                                            <td>80</td>
+                                            <td>80</td>
                                         </tr>
                                         <tr>
                                             <td>7</td>
                                             <td>南京热电</td>
                                             <td>1200</td>
                                             <td>1200</td>
+                                            <td>80</td>
+                                            <td>80</td>
                                             <td>80</td>
                                             <td>80</td>
                                             <td>80</td>
@@ -173,12 +259,16 @@
                                             <td>80</td>
                                             <td>80</td>
                                             <td>80</td>
+                                            <td>80</td>
+                                            <td>80</td>
                                         </tr>
                                         <tr>
                                             <td>9</td>
                                             <td>化工园热电</td>
                                             <td>1200</td>
                                             <td>1200</td>
+                                            <td>80</td>
+                                            <td>80</td>
                                             <td>80</td>
                                             <td>80</td>
                                             <td>80</td>
@@ -1870,6 +1960,15 @@
                 $(this).addClass('current').siblings('li').removeClass('current');
             });
 
+            //表格头列固定
+            $('.tb-h6').scroll(function(event) {
+                var tb_sl=$(this).scrollLeft();
+                $(this).children('.table-fixed-column-box').css({'left':tb_sl});
+            });
+            $('.tb-h6>table>tbody').scroll(function(event) {
+                var tb_st=$(this).scrollTop();
+                $(this).closest('.tb-h6').find('.table-fixed-column-content>ul').css({'top':-tb_st});
+            });
          });
         </script>
     </body>
