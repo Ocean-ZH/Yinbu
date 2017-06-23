@@ -1360,7 +1360,7 @@
                     $(this).toggleClass('current');
                     $(this).find('li').click(function(event) {
                         var typeText=$(this).text();
-                        $('.table-header .table-title h4').text(typeText);
+                        $(this).closest('.table-title').children('h4').text(typeText);
                     });
                 });
                 //表格内指标类型切换
