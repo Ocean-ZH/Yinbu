@@ -122,7 +122,7 @@ header.current{
 }
 
 .box-header{
-    width: 10rem;
+    width: 100%;
     height: 90/75rem;
     background-color: #0f2e4d;
     border-bottom: 1px solid #36e1ed;
@@ -439,12 +439,21 @@ ul.power-type>li.current{
     .table-content-main{
         width: 100%;
         position:relative;
-        overflow-x:auto;
+        overflow:hidden;
         table{
             border-collapse: collapse;
         }
         >table{
 
+        }
+        .table-fixed-box{
+            float: left;
+            width: 2.5rem;
+        }
+        .table-main-box{
+            float: left;
+            overflow-x:auto;
+            width:calc(100% - 2.5rem);
         }
         table.table-main{
             border: 1px solid rgba(255,255,255,.2);
@@ -704,7 +713,7 @@ ul.power-type>li.current{
     border-bottom: 1px solid #1970b0;
     margin-bottom: 40/75rem;
     .history-left{
-        width:50%;
+        width:100%;
         height: 300/75rem; 
         float: left;
         table{
