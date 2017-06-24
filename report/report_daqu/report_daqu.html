@@ -31,24 +31,13 @@
         <script src="js/highcharts-more.js" type="text/javascript"></script>
         <script src="js/solid-gauge.js" type="text/javascript"></script>
         <script type="text/javascript">
-            jQuery(document).ready(function($) {
-                Highcharts.setOptions({
-                    lang: {
-                        months: ['一月', '二月', '三月', '四月', '五月', '六月',  '七月', '八月', '九月', '十月', '十一月', '十二月'],
-                        shortMonths:['一月', '二月', '三月', '四月', '五月', '六月',  '七月', '八月', '九月', '十月', '十一月', '十二月'],
-                        weekdays: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
-                        shortWeekdays:['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
-                    }
-                });
-            });
-        </script>
-        <script type="text/javascript">
-            jQuery(document).ready(function($) {
+            /*jQuery(document).ready(function($) {
                  var winW=document.documentElement.clientWidth;
+                 console.log('winW='+winW)
                  if(winW<1025){
                     location.href='report_daqu-m.html'
                  }
-            });
+            });*/
         </script>
     </head>
     <body style="background:#0e363e; background:url(images/glass.jpg) no-repeat center center; background-size:cover; ">
@@ -63,7 +52,7 @@
                         <div class="select-left-box">
                             <ul class="classify-box clearfloat">
                                 <li class="current">生产类</li>
-                                <li>经营类</li>
+                                <li>能耗类</li>
                                 <li>环保类</li>
                                 <li>库存类</li>
                                 <li>机组状态</li>
@@ -79,451 +68,167 @@
                     <div class="table-box clearfloat">
                         <div class="table-classify-content current">
                             <div class="table-title"><h4>火电每日填报指标</h4></div>
-                            <div class="table-content tb-h6 tb-h8" >
-                                <div class="table-fixed-column-box">
-                                    <div class="table-fixed-column-head">
-                                        <ul>
-                                            <li>
-                                                <dl>
-                                                    <dt>序号</dt>
-                                                    <dd>项目公司</dd>
-                                                </dl>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="table-fixed-column-content">
-                                        <ul>
-                                            <li>
-                                                <dl>
-                                                    <dt>1</dt>
-                                                    <dd>徐州华润</dd>
-                                                </dl>
-                                            </li>
-                                            <li>
-                                                <dl>
-                                                    <dt>2</dt>
-                                                    <dd>徐州铜山</dd>
-                                                </dl>
-                                            </li>
-                                            <li>
-                                                <dl>
-                                                    <dt>3</dt>
-                                                    <dd>常熟电厂</dd>
-                                                </dl>
-                                            </li>
-                                            <li>
-                                                <dl>
-                                                    <dt>4</dt>
-                                                    <dd>镇江电厂</dd>
-                                                </dl>
-                                            </li>
-                                            <li>
-                                                <dl>
-                                                    <dt>5</dt>
-                                                    <dd>华鑫电厂</dd>
-                                                </dl>
-                                            </li>
-                                            <li>
-                                                <dl>
-                                                    <dt>6</dt>
-                                                    <dd>宜兴电厂</dd>
-                                                </dl>
-                                            </li>
-                                            <li>
-                                                <dl>
-                                                    <dt>7</dt>
-                                                    <dd>南京热电</dd>
-                                                </dl>
-                                            </li>
-                                            <li>
-                                                <dl>
-                                                    <dt>8</dt>
-                                                    <dd>江苏南热</dd>
-                                                </dl>
-                                            </li>
-                                            <li>
-                                                <dl>
-                                                    <dt>9</dt>
-                                                    <dd>化工园热电</dd>
-                                                </dl>
-                                            </li>
-                                        </ul>
-                                    </div>
+                            <div class="table-content-box" >
+                                <div class="table-content-fixed">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>项目公司</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>湖北一</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>湖北二</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>宜昌</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>涟源</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>序号</th>
-                                            <th>项目公司</th>
-                                            <th>日发电量 (MWh)</th>
-                                            <th>日供电量 (MWh)</th>
-                                            <th>生产厂用电率 (%)</th>
-                                            <th>日平均负荷率 (%)</th>
-                                            <th>月计划完成率 (%)</th>
-                                            <th>年计划完成率 (%)</th>
-                                            <th>年计划完成率 (%)</th>
-                                            <th>年计划完成率 (%)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>徐州华润</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>徐州铜山</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>常熟电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>镇江电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>华鑫电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>宜兴电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td>南京热电</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>江苏南热</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>9</td>
-                                            <td>化工园热电</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="table-content">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>日发电量 (MWh)</th>
+                                                <th>日供电量 (MWh)</th>
+                                                <th>日平均负荷率 (%)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1200</td>
+                                                <td>1200</td>
+                                                <td>80</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1200</td>
+                                                <td>1200</td>
+                                                <td>80</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1200</td>
+                                                <td>1200</td>
+                                                <td>80</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1200</td>
+                                                <td>1200</td>
+                                                <td>80</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <div class="table-title"><h4>火电非每日填报累计指标</h4></div>
-                            <div class="table-content tb-h6" >
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>序号</th>
-                                            <th>项目公司</th>
-                                            <th>当年发电量（kkWh）</th>
-                                            <th>当月供电量（kkWh）</th>
-                                            <th>当年供电量（kkWh）</th>
-                                            <th>燃煤期初库存（t）</th>
-                                            <th>燃煤盘点（t）</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>徐州华润</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>徐州铜山</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>常熟电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>镇江电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>华鑫电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>宜兴电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td>南京热电</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>江苏南热</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>9</td>
-                                            <td>化工园热电</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="table-title"><h4>火电辅助指标</h4></div>
-                            <div class="table-content tb-h6" >
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>序号</th>
-                                            <th>项目公司</th>
-                                            <th>进液氨（t）</th>
-                                            <th>耗液氨（t）</th>
-                                            <th>液氨期初库存（t）</th>
-                                            <th>液氨盘点（t）</th>
-                                            <th>液氨可用天数（天）</th>
-                                            <th>进石灰石（t）</th>
-                                            <th>耗石灰石（t）</th>
-                                            <th>石灰石期初库存（t）</th>
-                                            <th>石灰石盘点（t）</th>
-                                            <th>石灰石可用天数（天）</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>徐州华润</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>徐州铜山</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>常熟电厂</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>镇江电厂</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>华鑫电厂</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>宜兴电厂</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td>南京热电</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>江苏南热</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>9</td>
-                                            <td>化工园热电</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>30</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="table-content-box" >
+                                <div class="table-content-fixed">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>项目公司</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>湖北一</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>湖北二</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>宜昌</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>涟源</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="table-content">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>月累发电量 (MWh)</th>
+                                                <th>月累完成率 (%)</th>
+                                                <th>年累完成率 (%)</th>
+                                                <th>当年发电量 (kkWh)</th>
+                                                <th>当月供电量 (kkWh)</th>
+                                                <th>当年供电量 (kkWh)</th>
+                                                <th>供热量月累</th>
+                                                <th>供热量年累</th>
+                                                <th>供热量月计划完成率</th>
+                                                <th>供热量年计划完成率</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1200</td>
+                                                <td>1200</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1200</td>
+                                                <td>1200</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1200</td>
+                                                <td>1200</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1200</td>
+                                                <td>1200</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                                <td>80</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <div class="chart-box clearfloat">
                                 <div class="chart-container" id="chart1"></div>
@@ -531,314 +236,284 @@
                             </div>
                         </div>
                         <div class="table-classify-content">
-                            <div class="table-title"><h4>火电经营指标</h4></div>
-                            <div class="table-content tb-h6 tb-h8" >
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>序号</th>
-                                            <th>项目公司</th>
-                                            <th>经营指标</th>
-                                            <th>经营指标</th>
-                                            <th>经营指标</th>
-                                            <th>经营指标</th>
-                                            <th>经营指标</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>徐州华润</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>徐州铜山</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>常熟电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>镇江电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>华鑫电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>宜兴电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td>南京热电</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>江苏南热</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>9</td>
-                                            <td>化工园热电</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="table-title"><h4>火电能耗指标</h4></div>
+                            <div class="table-content-box" >
+                                <div class="table-content-fixed">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>项目公司</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>湖北一</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>湖北二</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>宜昌</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>涟源</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="table-content">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>供电煤耗 (g/kWh)</th>
+                                                <th>生产厂用电率 (%)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1200</td>
+                                                <td>80</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1200</td>
+                                                <td>80</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1200</td>
+                                                <td>80</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1200</td>
+                                                <td>80</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <div class="chart-box clearfloat">
-                                <div class="chart-container" id="chart7"></div>
-                                <div class="chart-container" id="chart8"></div>
-                            </div>
-                            <div class="chart-box clearfloat">
-                                <div class="chart-container" id="chart9"></div>
-                                <div class="chart-container" id="chart10"></div>
+                                <div class="chart-container chart-container-w100" id="chart7"></div>
                             </div>
                         </div>
                         <div class="table-classify-content">
                             <div class="table-title"><h4>火电环保指标</h4></div>
-                            <div class="table-content tb-h6 tb-h8" >
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>序号</th>
-                                            <th>项目公司</th>
-                                            <th>环保指标</th>
-                                            <th>环保指标</th>
-                                            <th>环保指标</th>
-                                            <th>环保指标</th>
-                                            <th>环保指标</th>
-                                            <th>环保指标</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>徐州华润</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>徐州铜山</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>常熟电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>镇江电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>华鑫电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>宜兴电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td>南京热电</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>江苏南热</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>9</td>
-                                            <td>化工园热电</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="table-content-box" >
+                                <div class="table-content-fixed">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>项目公司</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>湖北一</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>湖北二</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>宜昌</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>涟源</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="table-content">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>电除尘投运率 (%)</th>
+                                                <th>脱硫投运率 (%)</th>
+                                                <th>脱硫效率 (%)</th>
+                                                <th>脱硝投入率 (%)</th>
+                                                <th>脱硝效率 (%)</th>
+                                                <th>烟尘排放浓度 (mg/m3)</th>
+                                                <th>二氧化硫排放浓度 (mg/m3)</th>
+                                                <th>氮氧化物排放浓度 (mg/m3)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div class="table-classify-content">
                             <div class="table-title"><h4>火电库存指标</h4></div>
-                            <div class="table-content tb-h6 tb-h8" >
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>序号</th>
-                                            <th>项目公司</th>
-                                            <th>库存指标</th>
-                                            <th>库存指标</th>
-                                            <th>库存指标</th>
-                                            <th>库存指标</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>徐州华润</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>徐州铜山</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>常熟电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>镇江电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>华鑫电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>宜兴电厂</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td>南京热电</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>江苏南热</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>9</td>
-                                            <td>化工园热电</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>80</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="table-content-box" >
+                                <div class="table-content-fixed">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>项目公司</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>湖北一</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>湖北二</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>宜昌</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>涟源</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="table-content">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>进煤 (t)</th>
+                                                <th>耗煤 (t)</th>
+                                                <th>存煤可用天数 (天)</th>
+                                                <th>燃煤期初库存 (t)</th>
+                                                <th>燃煤盘点 (t)</th>
+                                                <th>进液氨 (t)</th>
+                                                <th>耗液氨 (t)</th>
+                                                <th>液氨期初库存 (t)</th>
+                                                <th>液氨盘点 (t)</th>
+                                                <th>液氨可用天数 (天)</th>
+                                                <th>进石灰石 (t)</th>
+                                                <th>耗石灰石 (t)</th>
+                                                <th>石灰石期初库存 (t)</th>
+                                                <th>石灰石盘点 (t)</th>
+                                                <th>石灰石可用天数 (天)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <div class="chart-box">
                                 <div class="chart-container-one" id="chart4"></div>
@@ -846,7 +521,7 @@
                         </div>
                         <div class="table-classify-content ">
                             <div class="table-title"><h4>机组状态</h4></div>
-                            <div class="table-content" >
+                            <div class="table-content-box" >
                                 <table class="table-auto">
                                     <thead>
                                         <tr>
@@ -860,17 +535,8 @@
                                         <tr>
                                             <td rowspan="3">火电</td>
                                             <td>湖北</td>
-                                            <td class="no-pd">
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>2×330MW</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2×1000MW</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                            <td>
+                                                2×330MW+2×1000MW
                                             </td>
                                             <td class="no-pd">
                                                 <table>
@@ -881,10 +547,10 @@
                                                         <td>#4</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="generator-repair"></td>
-                                                        <td class="generator-run"></td>
-                                                        <td class="generator-run"></td>
-                                                        <td class="generator-run"></td>
+                                                        <td class="generator-repair">检修</td>
+                                                        <td class="generator-run">运行</td>
+                                                        <td class="generator-run">运行</td>
+                                                        <td class="generator-run">运行</td>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -901,8 +567,8 @@
                                                         <td>#2</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="generator-stop"></td>
-                                                        <td class="generator-run"></td>
+                                                        <td class="generator-stop">调停</td>
+                                                        <td class="generator-run">运行</td>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -919,8 +585,8 @@
                                                         <td>#2</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="generator-stop"></td>
-                                                        <td class="generator-repair"></td>
+                                                        <td class="generator-stop">调停</td>
+                                                        <td class="generator-repair">检修</td>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -956,103 +622,113 @@
                     <div class="table-box clearfloat">
                         <div class="table-classify-content current">
                             <div class="table-title"><h4>风电指标</h4></div>
-                            <div class="table-content tb-h6 tb-h8" >
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>序号</th>
-                                            <th>项目公司</th>
-                                            <th>日发电量 (MWh)</th>
-                                            <th>月度电量完成率 (%)</th>
-                                            <th>限电损失电量 (MWh)</th>
-                                            <th>月累限电损失电量 （MWh)</th>
-                                            <th>年累限电损失电量 （MWh)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>徐州华润</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>徐州铜山</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>常熟电厂</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>镇江电厂</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>华鑫电厂</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>宜兴电厂</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td>南京热电</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>江苏南热</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>9</td>
-                                            <td>化工园热电</td>
-                                            <td>1200</td>
-                                            <td>80</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                            <td>1200</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="table-content-box" >
+                                <div class="table-content-fixed">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>项目公司</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>天河口</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>太平</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>花山</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>板桥</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>桃源</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="table-content">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>日发电量 (MWh)</th>
+                                                <th>月度电量完成率 (%)</th>
+                                                <th>限电损失电量 （MWh)</th>
+                                                <th>月累限电损失电量（MWh)</th>
+                                                <th>年累限电损失电量（MWh)</th>
+                                                <th>风机故障停运 (台次)</th>
+                                                <th>风机检修停运 (台次)</th>
+                                                <th>风机受累停运 (台次)</th>
+                                                <th>不可抗力停运 (台次)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <div class="chart-box clearfloat">
                                 <div class="chart-container" id="chart5"></div>
@@ -1061,7 +737,7 @@
                         </div>
                         <div class="table-classify-content ">
                             <div class="table-title"><h4>机组状态</h4></div>
-                            <div class="table-content " >
+                            <div class="table-content-box " >
                                 <table class="table-auto">
                                     <thead>
                                         <tr>
@@ -1121,78 +797,84 @@
         
         <div class="history-box clearfloat">
             <div class="table-box ">
-                <div class="table-title"><h4>历史填报数据</h4></div>
-                <div class="table-content clearfloat">
-                    <div class="chart-box clearfloat">
+                <div class="table-title"><h4>统计数据</h4></div>
+                 <div class="table-content-box">
+                    <div class="history-data-box">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>项目公司</th>
+                                    <th>填报时间</th>
+                                    <th>误填次数</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>湖北一</td>
+                                    <td>18:30</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>湖北二</td>
+                                    <td>18:30</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>宜昌</td>
+                                    <td>18:30</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>涟源</td>
+                                    <td>18:30</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>凤鸣</td>
+                                    <td>18:30</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>天河口</td>
+                                    <td>18:30</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>太平</td>
+                                    <td>18:30</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>花山</td>
+                                    <td>18:30</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>板桥</td>
+                                    <td>18:30</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>桃源</td>
+                                    <td>18:30</td>
+                                    <td>2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="chart-box history-chart-box">
                         <div class="chart-container" id="chart3"></div>
-                        <div class="history-data-box">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>序号</th>
-                                        <th>项目公司</th>
-                                        <th>填报时间</th>
-                                        <th>误填次数</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>徐州华润</td>
-                                        <td>18:30</td>
-                                        <td>2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>徐州铜山</td>
-                                        <td>18:30</td>
-                                        <td>2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>常熟电厂</td>
-                                        <td>18:30</td>
-                                        <td>2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>镇江电厂</td>
-                                        <td>18:30</td>
-                                        <td>2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>华鑫电厂</td>
-                                        <td>18:30</td>
-                                        <td>2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>宜兴电厂</td>
-                                        <td>18:30</td>
-                                        <td>2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>南京热电</td>
-                                        <td>18:30</td>
-                                        <td>2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>8</td>
-                                        <td>江苏南热</td>
-                                        <td>18:30</td>
-                                        <td>2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>9</td>
-                                        <td>化工园热电</td>
-                                        <td>18:30</td>
-                                        <td>2</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1200,7 +882,17 @@
 
 
         <script type="text/javascript">
-            jQuery(document).ready(function($){
+            jQuery(document).ready(function($){3
+
+                Highcharts.setOptions({
+                    lang: {
+                        months: ['一月', '二月', '三月', '四月', '五月', '六月',  '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                        shortMonths:['一月', '二月', '三月', '四月', '五月', '六月',  '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                        weekdays: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+                        shortWeekdays:['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+                    }
+                });
+
                 $('#chart1').highcharts({
                     chart: {
                         type: 'column',
@@ -1353,7 +1045,7 @@
                         backgroundColor:null
                     },
                     title: {
-                        text: '历史数据趋势',
+                        text: '日发电量对比',
                         align:'left',
                         style: {
                             color: '#FFFFFF',
@@ -1412,13 +1104,13 @@
                         enabled:false
                     },
                     series: [{
-                        name: '平均填报时间',
+                        name: '指标一',
                         data: [19,26,32,20,43,34,36,28,37,40],
                         color: '#35fffd',
                         pointStart: Date.UTC(2017, 04, 01),
                         pointInterval: 1 * 24 * 3600 * 1000
                     }, {
-                        name: '误填次数',
+                        name: '指标二',
                         data: [3,6,5,10,5,6,4,3,2,7],
                         color: '#fffe87',
                         yAxis: 1,
@@ -1682,17 +1374,8 @@
                             fontSize:'14px'
                         }
                     },
-                    subtitle: {
-                        text: '湖北一期',
-                        x: 10,
-                        align: 'left',
-                        style: {
-                            color: '#FFFFFF',
-                            fontSize:'14px'
-                        }
-                    },
                     xAxis: {
-                        categories: ['06/01', '06/02', '06/03', '06/04', '06/05', '06/06'],
+                        categories: ['06/01', '06/02', '06/03', '06/04', '06/05', '06/06','06/07'],
                         crosshair: true,
                         lineColor: '#37fffe',
                         tickLength: 0,
@@ -1722,220 +1405,30 @@
                         valueSuffix: 't',
                     },
                     legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle',
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom',
                         borderWidth: 0,
-                        enabled: false
+                        itemStyle:{
+                            color:"#FFF"
+                        }
                     },
                     series: [{
-                        name: '煤耗',
-                        data: [421.7, 299.2, 343.6, 341.7, 333.6, 299.3],
+                        name: '湖北一煤耗',
+                        data: [321.7, 299.2, 343.6, 341.7, 333.6, 299.3,333.6],
                         color: '#35fffd',
-                    }]
-                });
-
-                $('#chart8').highcharts({
-                    chart:{
-                        type:'line',
-                        backgroundColor: null,
-                        spacingRight: 50 ,
-                    },
-                    title: {
-                        text: '供电煤耗',
-                        x: 10,
-                        align: 'left',
-                        style: {
-                            color: '#FFFFFF',
-                            fontSize:'14px'
-                        }
-                    },
-                    subtitle: {
-                        text: '湖北二期',
-                        x: 10,
-                        align: 'left',
-                        style: {
-                            color: '#FFFFFF',
-                            fontSize:'14px'
-                        }
-                    },
-                    xAxis: {
-                        categories: ['06/01', '06/02', '06/03', '06/04', '06/05', '06/06'],
-                        crosshair: true,
-                        lineColor: '#37fffe',
-                        tickLength: 0,
-                        labels: {
-                            style: {
-                                color: '#35fffd'//颜色
-                            }
-                        }
-                    },
-                    yAxis: {
-                        title: null,
-                        plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
-                        }],
-                        labels: {
-                            style: {
-                                color: '#35fffd'//颜色
-                            }
-                        }
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    tooltip: {
-                        valueSuffix: 't',
-                    },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle',
-                        borderWidth: 0,
-                        enabled: false
-                    },
-                    series: [{
-                        name: '煤耗',
-                        data: [266.2, 304.1, 282.5, 291.0, 289.5, 309.9],
-                        color: '#35fffd',
-                    }]
-                });
-
-                $('#chart9').highcharts({
-                    chart:{
-                        type:'line',
-                        backgroundColor: null,
-                        spacingRight: 50 ,
-                    },
-                    title: {
-                        text: '供电煤耗',
-                        x: 10,
-                        align: 'left',
-                        style: {
-                            color: '#FFFFFF',
-                            fontSize:'14px'
-                        }
-                    },
-                    subtitle: {
-                        text: '宜昌项目',
-                        x: 10,
-                        align: 'left',
-                        style: {
-                            color: '#FFFFFF',
-                            fontSize:'14px'
-                        }
-                    },
-                    xAxis: {
-                        categories: ['06/01', '06/02', '06/03', '06/04', '06/05', '06/06'],
-                        crosshair: true,
-                        lineColor: '#37fffe',
-                        tickLength: 0,
-                        labels: {
-                            style: {
-                                color: '#35fffd'//颜色
-                            }
-                        }
-                    },
-                    yAxis: {
-                        title: null,
-                        plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
-                        }],
-                        labels: {
-                            style: {
-                                color: '#35fffd'//颜色
-                            }
-                        }
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    tooltip: {
-                        valueSuffix: 't',
-                    },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle',
-                        borderWidth: 0,
-                        enabled: false
-                    },
-                    series: [{
-                        name: '煤耗',
-                        data: [295.5, 308.7, 294.8, 280.9, 310.1, 317.5],
-                        color: '#35fffd',
-                    }]
-                });
-
-                $('#chart10').highcharts({
-                    chart:{
-                        type:'line',
-                        backgroundColor: null,
-                        spacingRight: 50 ,
-                    },
-                    title: {
-                        text: '供电煤耗',
-                        x: 10,
-                        align: 'left',
-                        style: {
-                            color: '#FFFFFF',
-                            fontSize:'14px'
-                        }
-                    },
-                    subtitle: {
-                        text: '涟源项目',
-                        x: 10,
-                        align: 'left',
-                        style: {
-                            color: '#FFFFFF',
-                            fontSize:'14px'
-                        }
-                    },
-                    xAxis: {
-                        categories: ['06/01', '06/02', '06/03', '06/04', '06/05', '06/06'],
-                        crosshair: true,
-                        lineColor: '#37fffe',
-                        tickLength: 0,
-                        labels: {
-                            style: {
-                                color: '#35fffd'//颜色
-                            }
-                        }
-                    },
-                    yAxis: {
-                        title: null,
-                        plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
-                        }],
-                        labels: {
-                            style: {
-                                color: '#35fffd'//颜色
-                            }
-                        }
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    tooltip: {
-                        valueSuffix: 't',
-                    },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle',
-                        borderWidth: 0,
-                        enabled: false
-                    },
-                    series: [{
-                        name: '煤耗',
-                        data: [266.2, 277.9, 304.1, 282.5, 291.0, 309.9],
-                        color: '#35fffd',
+                    }, {
+                        name: '湖北二煤耗',
+                        data: [266.2, 304.1, 282.5, 291.0, 289.5, 309.9, 270.5],
+                        color: '#fffe87',
+                    },{
+                        name: '宜昌',
+                        data: [295.5, 308.7, 294.8, 280.9, 310.1, 317.5,300.5],
+                        color: '#98f56a',
+                    },{
+                        name: '涟源',
+                        data: [266.2, 277.9, 304.1, 282.5, 291.0, 309.9, 295.0],
+                        color: '#f5a16a',
                     }]
                 });
 
@@ -1960,15 +1453,6 @@
                 $(this).addClass('current').siblings('li').removeClass('current');
             });
 
-            //表格头列固定
-            $('.tb-h6').scroll(function(event) {
-                var tb_sl=$(this).scrollLeft();
-                $(this).children('.table-fixed-column-box').css({'left':tb_sl});
-            });
-            $('.tb-h6>table>tbody').scroll(function(event) {
-                var tb_st=$(this).scrollTop();
-                $(this).closest('.tb-h6').find('.table-fixed-column-content>ul').css({'top':-tb_st});
-            });
          });
         </script>
     </body>
