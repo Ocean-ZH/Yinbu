@@ -448,12 +448,20 @@ ul.power-type>li.current{
         }
         .table-fixed-box{
             float: left;
-            width: 2.5rem;
+            width: 2.4rem;
         }
         .table-main-box{
             float: left;
             overflow-x:auto;
-            width:calc(100% - 2.5rem);
+            width:7.6rem - 20/75rem;
+            table.table-main{
+                tr{
+                    td{
+                        white-space:nowrap;
+                        text-overflow:ellipsis;
+                    }
+                }
+            }
         }
         table.table-main{
             border: 1px solid rgba(255,255,255,.2);
@@ -464,7 +472,7 @@ ul.power-type>li.current{
                 th{
                     padding:20/75rem 20/75rem;
                     min-width: 2.5rem;
-                    /* white-space:nowrap; */
+                    white-space:nowrap;
                 }
                 td{
                     padding:20/75rem 20/75rem;

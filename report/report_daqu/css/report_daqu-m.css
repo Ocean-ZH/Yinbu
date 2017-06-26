@@ -422,12 +422,16 @@ ul.power-type > li.current {
 }
 .table-box .table-content-main .table-fixed-box {
   float: left;
-  width: 2.5rem;
+  width: 2.4rem;
 }
 .table-box .table-content-main .table-main-box {
   float: left;
   overflow-x: auto;
-  width: calc(97.5%);
+  width: 7.33333333rem;
+}
+.table-box .table-content-main .table-main-box table.table-main tr td {
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .table-box .table-content-main table.table-main {
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -440,7 +444,7 @@ ul.power-type > li.current {
 .table-box .table-content-main table.table-main tr th {
   padding: 0.26666667rem 0.26666667rem;
   min-width: 2.5rem;
-  /* white-space:nowrap; */
+  white-space: nowrap;
 }
 .table-box .table-content-main table.table-main tr td {
   padding: 0.26666667rem 0.26666667rem;
