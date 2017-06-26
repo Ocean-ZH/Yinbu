@@ -422,12 +422,19 @@ ul.power-type > li.current {
 }
 .table-box .table-content-main .table-fixed-box {
   float: left;
-  width: 2.4rem;
+  width: 2.36666667rem;
+  overflow: hidden;
+}
+.table-box .table-content-main .table-fixed-box table.table-main {
+  border-right: none;
 }
 .table-box .table-content-main .table-main-box {
   float: left;
   overflow-x: auto;
-  width: 7.33333333rem;
+  width: 7.36666667rem;
+}
+.table-box .table-content-main .table-main-box table.table-main {
+  border-left: none;
 }
 .table-box .table-content-main .table-main-box table.table-main tr td {
   white-space: nowrap;
