@@ -9,20 +9,25 @@
         <style type="text/css">
             *{margin: 0;padding: 0;list-style:none;font-size:28px;}
             input[type=date]{
-                display:none;
+                background-color: transparent;
+            }
+            .container{
+                background-color: #ccc;
             }
         </style>
         <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js" type="text/javascript"></script>
     </head>
     <body>
-        <div>
+        <div class="container">
             <label for="date1" id="label1"></label>
             <input type="date" id="date1" value="2017-06-27"/>
         </div>
 
         <script type="text/javascript">
             $('#label1').text($('#date1').val());
-
+            $('#date1').change(function(event) {
+                $('#label1').text($('#date1').val());
+            });
         </script>
     </body>
 </html>
