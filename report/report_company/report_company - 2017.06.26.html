@@ -34,7 +34,9 @@
     <body style="background:#0e363e; background:url(images/glass.jpg) no-repeat center center; background-size:cover; ">
         <div class="main-container" >
             <div class="switch-box clearfloat">
-                <i class="fa fa-arrow-circle-left fa-3x" aria-hidden="true"></i>
+                <div class="switcher current">火电<span>火电</span></div>
+                <div class="switcher">风电<span>风电</span></div>
+                <div class="switcher">水电<span>水电</span></div>
             </div>
             <ul class="power-type">
                 <li class="current">
@@ -42,7 +44,7 @@
                         <div class="select-left-box">
                             <ul class="classify-box clearfloat">
                                 <li class="current">生产类</li>
-                                <li>能耗类</li>
+                                <li>经营类</li>
                                 <li>环保类</li>
                                 <li>库存类</li>
                             </ul>
@@ -68,28 +70,83 @@
                                     <tr>
                                         <td>
                                             <dl>
-                                                <dt>#1机组状态 : </dt>
+                                                <dt>机组状态 : </dt>
                                                 <dd>运行</dd>
                                             </dl>
-                                        </td>
-                                        <td>
-                                            <dl>
-                                                <dt>日发电量 (MWh) : </dt>
-                                                <dd>0</dd>
-                                            </dl>
-                                             
                                         </td>
                                         <td>
                                             <dl>
                                                 <dt>日供电量 (MWh) : </dt>
                                                 <dd>0</dd>
                                             </dl>
+                                             
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>日平均负荷率 (%) : </dt>
+                                                <dd>0</dd>
+                                            </dl>
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td>
+                                            <dl>
+                                                <dt>供电煤耗 (g/kWh) :</dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>生产用电率 (%) :</dt>
+                                                <dd>0</dd>
+                                            </dl>                        
+                                        </td>
+                                        <td  class="edited">
+                                            <dl>
+                                                <dt>电除尘投运率 (%) :</dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                            <div class="edited-data">
+                                                <table>
+                                                    <thead>
+                                                        <tr><td>原数据</td><td>修改数据</td></tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr><td>0</td><td>0</td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <dl>
+                                                <dt>脱硫投运率 (%) :</dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>脱硫效率 (%) :</dt>
+                                                <dd>0</dd>
+                                            </dl>                        
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>脱硝投入率(%) :</dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="table-content" >
+                                <div class="table-title"><h4>火电非每日填报累计指标</h4></div>
+                                <table>
+                                    <tr>
                                         <td class="edited">
                                             <dl>
-                                                <dt>日平均负荷率 (%) : </dt>
+                                                <dt>当年发电量 (kkWh) :</dt>
                                                 <dd>0</dd>
                                             </dl>
                                             <div class="edited-data">
@@ -105,213 +162,30 @@
                                         </td>
                                         <td>
                                             <dl>
-                                                <dt>供热量 :</dt>
-                                                <dd>0</dd>
-                                            </dl>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="table-content" >
-                                <div class="table-title"><h4>火电累计指标</h4></div>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <dl>
-                                                <dt>月累发电量 (kkWh) :</dt>
-                                                <dd>0</dd>
-                                            </dl>
-                                        </td>
-                                        <td>
-                                            <dl>
-                                                <dt>月累完成率 (%) :</dt>
+                                                <dt>当月发电量 (kkWh) :</dt>
                                                 <dd>0</dd>
                                             </dl>                        
-                                        </td>
-                                        <td>
-                                            <dl>
-                                                <dt>当年发电量 (kkWh) :</dt>
-                                                <dd>0</dd>
-                                            </dl>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <dl>
-                                                <dt>年累完成率 (%) :</dt>
-                                                <dd>0</dd>
-                                            </dl>
-                                        </td>
-                                        <td>
-                                            <dl>
-                                                <dt>当月供电量 (kkWh) :</dt>
-                                                <dd>0</dd>
-                                            </dl>  
                                         </td>
                                         <td>
                                             <dl>
                                                 <dt>当年供电量 (kkWh) :</dt>
                                                 <dd>0</dd>
-                                            </dl>  
+                                            </dl>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <dl>
-                                                <dt>供热量月累 :</dt>
+                                                <dt>燃煤初期库存 (t) :</dt>
                                                 <dd>0</dd>
                                             </dl>
                                         </td>
                                         <td>
                                             <dl>
-                                                <dt>供热量年累 :</dt>
-                                                <dd>0</dd>
-                                            </dl>  
-                                        </td>
-                                        <td>
-                                            <dl>
-                                                <dt>供热量月计划完成率 :</dt>
-                                                <dd>0</dd>
-                                            </dl>  
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <dl>
-                                                <dt>供热量年计划完成率 :</dt>
-                                                <dd>0</dd>
-                                            </dl>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="table-classify-content">
-                            <div class="table-content" >
-                                <div class="table-title"><h4>火电每日填报指标</h4></div>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <dl>
-                                                <dt>供电煤耗 (g/kWh) : </dt>
-                                                <dd>0</dd>
-                                            </dl>
-                                        </td>
-                                        <td>
-                                            <dl>
-                                                <dt>生产厂用电率 (%) : </dt>
-                                                <dd>0</dd>
-                                            </dl> 
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="table-classify-content">
-                            <div class="table-content" >
-                                <div class="table-title"><h4>火电每日填报指标</h4></div>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <dl>
-                                                <dt>电除尘投运率 (%) : </dt>
-                                                <dd>0</dd>
-                                            </dl>
-                                        </td>
-                                        <td>
-                                            <dl>
-                                                <dt>脱硫投运率 (%) : </dt>
+                                                <dt>燃煤盘点 (t) :</dt>
                                                 <dd>0</dd>
                                             </dl>                        
                                         </td>
-                                        <td>
-                                            <dl>
-                                                <dt>脱硫效率(%) : </dt>
-                                                <dd>0</dd>
-                                            </dl>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <dl>
-                                                <dt>脱硝投入率 (%) : </dt>
-                                                <dd>0</dd>
-                                            </dl>
-                                        </td>
-                                        <td>
-                                            <dl>
-                                                <dt>脱硝效率 (%) : </dt>
-                                                <dd>0</dd>
-                                            </dl>    
-                                        </td>
-                                        <td>
-                                            <dl>
-                                                <dt>烟尘排放浓度 (mg/m3) : </dt>
-                                                <dd>0</dd>
-                                            </dl>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <dl>
-                                                <dt>二氧化硫排放浓度 (mg/m3) : </dt>
-                                                <dd>0</dd>
-                                            </dl>
-                                        </td>
-                                        <td>
-                                            <dl>
-                                                <dt>氮氧化物排放浓度 (mg/m3) : </dt>
-                                                <dd>0</dd>
-                                            </dl>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="table-classify-content">
-                            <div class="table-content" >
-                                <div class="table-title"><h4>火电每日填报指标</h4></div>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <dl>
-                                                <dt>进煤 (t) : </dt>
-                                                <dd>0</dd>
-                                            </dl>
-                                        </td>
-                                        <td>
-                                            <dl>
-                                                <dt>耗煤 (t) : </dt>
-                                                <dd>0</dd>
-                                            </dl>                        
-                                        </td>
-                                        <td>
-                                            <dl>
-                                                <dt>存煤可用天数 (天) : </dt>
-                                                <dd>0</dd>
-                                            </dl>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="table-content" >
-                                <div class="table-title"><h4>火电累计指标</h4></div>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <dl>
-                                                <dt>燃煤期初库存 (t) : </dt>
-                                                <dd>0</dd>
-                                            </dl>
-                                        </td>
-                                        <td>
-                                            <dl>
-                                                <dt>燃煤盘点 (t) : </dt>
-                                                <dd>0</dd>
-                                            </dl>   
-                                        </td>
-                                        <td></td>
                                     </tr>
                                 </table>
                             </div>
@@ -321,67 +195,376 @@
                                     <tr>
                                         <td>
                                             <dl>
-                                                <dt>进液氨 (t) : </dt>
+                                                <dt>进液氮 (t) :</dt>
                                                 <dd>0</dd>
                                             </dl>
                                         </td>
                                         <td>
                                             <dl>
-                                                <dt>耗液氨 (t) : </dt>
+                                                <dt>耗液氮 (t) :</dt>
                                                 <dd>0</dd>
-                                            </dl>   
+                                            </dl>                        
                                         </td>
                                         <td>
                                             <dl>
-                                                <dt>液氨期初库存 (t) : </dt>
+                                                <dt>液氮初期库存 (t) :</dt>
                                                 <dd>0</dd>
-                                            </dl>   
+                                            </dl>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <dl>
-                                                <dt>液氨盘点 (t) : </dt>
+                                                <dt>液氮盘点 (t) :</dt>
                                                 <dd>0</dd>
                                             </dl>
                                         </td>
                                         <td>
                                             <dl>
-                                                <dt>液氨可用天数 (天) : </dt>
+                                                <dt>液氮可用天数 (天) :</dt>
                                                 <dd>0</dd>
-                                            </dl>   
+                                            </dl>                        
                                         </td>
                                         <td>
                                             <dl>
-                                                <dt>进石灰石 (t) : </dt>
+                                                <dt>进石灰石 (t) :</dt>
                                                 <dd>0</dd>
-                                            </dl>   
+                                            </dl>                        
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <dl>
-                                                <dt>耗石灰石 (t) : </dt>
+                                                <dt>耗石灰石 (t) :</dt>
                                                 <dd>0</dd>
                                             </dl>
                                         </td>
                                         <td>
                                             <dl>
-                                                <dt>石灰石期初库存 (t) : </dt>
+                                                <dt>石灰石初期库存 (t) :</dt>
                                                 <dd>0</dd>
-                                            </dl>   
+                                            </dl>                        
                                         </td>
                                         <td>
                                             <dl>
-                                                <dt>石灰石盘点 (t) : </dt>
+                                                <dt>石灰石盘点 (t) :</dt>
                                                 <dd>0</dd>
-                                            </dl>   
+                                            </dl>                        
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <dl>
-                                                <dt>石灰石可用天数 (天) : </dt>
+                                                <dt>石灰石可用天数 (天) :</dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="table-classify-content">
+                            <div class="table-content" >
+                                <div class="table-title"><h4>火电每日填报指标</h4></div>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <dl>
+                                                <dt>经营类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>经营类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>                        
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>经营类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <dl>
+                                                <dt>经营类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>经营类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>                        
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>经营类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="table-classify-content">
+                            <div class="table-content" >
+                                <div class="table-title"><h4>火电每日填报指标</h4></div>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <dl>
+                                                <dt>环保类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>环保类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>                        
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>环保类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <dl>
+                                                <dt>环保类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>环保类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>                        
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>环保类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="table-classify-content">
+                            <div class="table-content" >
+                                <div class="table-title"><h4>火电每日填报指标</h4></div>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <dl>
+                                                <dt>库存类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>库存类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>                        
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>库存类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <dl>
+                                                <dt>库存类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>库存类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>                        
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>库存类 : </dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="select-box clearfloat">
+                        <div class="select-left-box">
+                            <ul class="classify-box clearfloat">
+                                <li class="current">风电类别</li>
+                            </ul>
+                        </div>
+                        <div class="select-right-box">
+                            <div class="report-status">
+                                <ul>
+                                    <li class="fa fa-circle-o-notch  current">待审核</li>
+                                    <li class="fa fa-check-circle">已审核</li>
+                                </ul>
+                            </div>
+                            <div class="date-select-box">
+                                <label for="date-select1"><span class="fa fa-calendar fa-lg"></span></label>
+                                <input type="date" id="date-select1"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-box clearfloat">
+                        <div class="table-classify-content current">
+                            <div class="table-content" >
+                                <div class="table-title"><h4>风电指标</h4></div>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <dl>
+                                                <dt>风机故障停运（台次） :</dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>风机检修停运（台次） :</dt>
+                                                <dd>0</dd>
+                                            </dl>                        
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>风机受累停运（台次） :</dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <dl>
+                                                <dt>不可抗力停运（台次） :</dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>当日发电量（MWh) :</dt>
+                                                <dd>0</dd>
+                                            </dl>                        
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>月度电量完成率(%) :</dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <dl>
+                                                <dt>限电损失电量（MWh) :</dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>月累限电损失电量（MWh)  :</dt>
+                                                <dd>0</dd>
+                                            </dl>                        
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>年累限电损失电量（MWh)  :</dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="select-box clearfloat">
+                        <div class="select-left-box">
+                            <ul class="classify-box clearfloat">
+                                <li class="current">水电类别</li>
+                            </ul>
+                        </div>
+                        <div class="select-right-box">
+                            <div class="report-status">
+                                <ul>
+                                    <li class="fa fa-circle-o-notch  current">待审核</li>
+                                    <li class="fa fa-check-circle">已审核</li>
+                                </ul>
+                            </div>
+                            <div class="date-select-box">
+                                <label for="date-select1"><span class="fa fa-calendar fa-lg"></span></label>
+                                <input type="date" id="date-select1"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-box clearfloat">
+                        <div class="table-classify-content current">
+                            <div class="table-content">
+                                <div class="table-title"><h4>水电指标</h4></div>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <dl>
+                                                <dt>发电量（MWh) :</dt>
+                                                <dd>运行</dd>
+                                            </dl>
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>负荷率(%) : </dt>
+                                                <dd>0</dd>
+                                            </dl>                        
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>耗水率(%) : </dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <dl>
+                                                <dt>综合厂用电率(%) :</dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>入库流量 :</dt>
+                                                <dd>0</dd>
+                                            </dl>                        
+                                        </td>
+                                        <td>
+                                            <dl>
+                                                <dt>库水位 :</dt>
+                                                <dd>0</dd>
+                                            </dl>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <dl>
+                                                <dt>当日煤炭产量（t） :</dt>
                                                 <dd>0</dd>
                                             </dl>
                                         </td>
@@ -396,6 +579,9 @@
         <div class="chart-box clearfloat">
             <div class="chart-container" id="chart1"></div>
             <div class="chart-container" id="chart2"></div>
+            <script type="text/javascript">
+                
+            </script>
         </div>
         
         <div class="history-box clearfloat">
@@ -403,11 +589,12 @@
                 <div class="table-content clearfloat">
                     <div class="table-title"><h4>历史填报数据</h4></div>
                     <div class="chart-box clearfloat">
+                        <div class="chart-container" id="chart3"></div>
                         <div class="history-data-box">
                             <ul class="clearfloat">
                                 <li>
                                     <dl>
-                                        <dt><span>2017/04/24</span></dt>
+                                        <dt><span>36</span>分钟</dt>
                                         <dd>历史平均填报时间</dd>
                                     </dl>
                                 </li>
@@ -440,8 +627,10 @@
 
         <script type="text/javascript">
          jQuery(document).ready(function($) {
-            $('.switch-box .fa-arrow-circle-left').click(function(event) {
-                window.history.back();
+            $('.switch-box .switcher').click(function(event) {
+                $(this).addClass('current').siblings('div').removeClass('current');
+                var typeIndex=$(this).index();
+                $('.main-container ul.power-type>li').eq(typeIndex).addClass('current').siblings('li').removeClass('current');
             });
 
             $('.classify-box li').click(function(event) {
@@ -454,6 +643,7 @@
                 $(this).addClass('current').siblings('li').removeClass('current');
             });
 
+            // $('td.edited').append('<div class="edited-data"><table><thead><tr><td>原数据</td><td>修改数据</td></tr></thead><tbody><tr><td>0</td><td>0</td></tr></tbody></table></div>')
             $('td.edited').click(function(event) {
                 $(this).find('.edited-data').stop().slideToggle(300);
             });
@@ -463,7 +653,7 @@
 
         <script type="text/javascript">
             jQuery(document).ready(function($){
-
+                
                 Highcharts.setOptions({
                     lang: {
                         months: ['一月', '二月', '三月', '四月', '五月', '六月',  '七月', '八月', '九月', '十月', '十一月', '十二月'],
@@ -698,7 +888,9 @@
                         pointInterval: 1 * 24 * 3600 * 1000
                     }]
                 });
+
             })
         </script>
+
     </body>
 </html>

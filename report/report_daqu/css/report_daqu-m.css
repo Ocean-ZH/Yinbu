@@ -7,7 +7,7 @@ header {
   box-sizing: border-box;
   padding: 0 0.26666667rem;
   border-bottom: 2px solid #076c8b;
-  background-color: #143c64;
+  background-color: rgba(10, 50, 80, 0.5);
   text-align: center;
   position: relative;
   transition: all .5s;
@@ -118,7 +118,7 @@ header.current {
 .box-header {
   width: 100%;
   height: 1.2rem;
-  background-color: #0f2e4d;
+  background-color: rgba(0, 0, 0, 0.3);
   border-bottom: 1px solid #36e1ed;
   margin-top: 0.26666667rem;
 }
@@ -224,13 +224,13 @@ ul.power-type > li.current {
 .table-box {
   padding: 0 0.13333333rem;
   transition: height .4s;
-  background-color: rgba(15, 55, 90, 0.8);
+  background-color: rgba(2, 20, 40, 0.3);
   /*table-header*/
 }
 .table-box .classify-box {
   height: 1.06666667rem;
   width: 100%;
-  background-color: #0f2e4d;
+  background-color: rgba(2, 20, 10, 0.4);
 }
 .table-box .classify-box ul {
   height: 1.06666667rem;
@@ -266,7 +266,7 @@ ul.power-type > li.current {
 .table-box .table-header {
   width: 100%;
   height: 1.06666667rem;
-  background-color: #0e3254;
+  background-color: rgba(5, 20, 40, 0.35);
   border-bottom: 2px solid rgba(255, 255, 255, 0.6);
 }
 .table-box .table-header .table-title {

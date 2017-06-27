@@ -11,77 +11,14 @@
 .switch-box{
     height: 55px;
 }
-.switch-box .switcher{
-    height: 40px;
-    padding:0 40px 0 40px;
-    font-size:14px;
-    line-height: 40px;
-    float: left;
-    border-top: 1px solid #3eb4ff;
-    border-bottom: 1px solid #3eb4ff;
-    position:relative;
-    box-sizing:border-box;
+.switch-box .fa-arrow-circle-left{
+    line-height: 55px; 
+    color:rgba(90,225,250,1);
     cursor:pointer;
-    background-color: #083634;
 }
-.switch-box .switcher:hover{
-    background: rgba(80, 225, 245, 0.1);
+.switch-box .fa-arrow-circle-left:hover{
+    color:rgba(90,225,250,.6);
 }
-.switch-box .switcher::after{
-    content:"";
-    display:inline-block;
-    position:absolute;
-    width: 1px;
-    height: 38px;
-    background-color: #2c74b5;
-    right: 0;
-    top: 1px;
-}
-.switch-box .switcher:first-child{
-    border-left: 1px solid #3eb4ff;
-}
-.switch-box .switcher:last-child{
-    border-right: 1px solid #3eb4ff;
-}
-.switch-box .current{
-    font-weight:bold;
-    box-shadow: 0 0 6px 0 rgba(96,255,238,.5) inset ;
-    /* background: radial-gradient(ellipse at center top ,rgba(75,155,190,.8)5%,rgba(35,115,170,.8)50%,rgba(35,115,170,0)70% ); */
-}
-.switch-box .current::before{
-    content:"";
-    text-align: center;
-    display:block;
-    position:absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 55px;
-    background: url(../images/switcher.png) no-repeat center center;
-    background-size:cover;
-    z-index:0;
-}
-.switch-box .switcher span{
-    position:absolute;
-    z-index:2;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%,-50%);
-       -moz-transform: translate(-50%,-50%);
-        -ms-transform: translate(-50%,-50%);
-         -o-transform: translate(-50%,-50%);
-            transform: translate(-50%,-50%);
-}
-
-
-
-.main-container ul.power-type>li{
-    display:none;
-}
-.main-container ul.power-type>li.current{
-    display:block;
-}
-
 
 
 .select-box{
@@ -327,7 +264,7 @@
 
 
 .history-box{
-    width: 100%;
+    width: 50%;
     margin-top: 20px;
     padding: 0 20px;
     box-sizing:border-box;
@@ -340,14 +277,9 @@
     padding:10px 10px;
     background-color:transparent;
 }
-.history-box .chart-box .chart-container{
-    width:50%;
-    box-sizing:border-box;
-    float:left;
-}
 .history-box .history-data-box{
-    width: 50%;
-    float: right;
+    width: 100%;
+    float: left;
     box-sizing: border-box;
     padding: 10px;
     height: 280px;
