@@ -84,6 +84,7 @@ header{
         position:absolute;
         top: 0;
         right: 0;
+        display:none;
         .search-icon-box{
             position:absolute;
             right: 30/75rem;
@@ -110,12 +111,7 @@ header{
                 width: 450/75rem;
             }
         }
-        input{
-
-        }
     }
-    
-
 }
 header.current{
     background-color: rgba(0,0,0,.5);
@@ -214,6 +210,9 @@ header.current{
             right: 0;
             top: 50%;
             transform:translateY(-50%);
+        }
+        input[type=date]:focus{
+            background-color: transparent;
         }
     }
 }

@@ -84,6 +84,7 @@ header .search-box {
   position: absolute;
   top: 0;
   right: 0;
+  display: none;
 }
 header .search-box .search-icon-box {
   position: absolute;
@@ -205,6 +206,9 @@ header.current {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+}
+.box-header .BH-right input[type=date]:focus {
+  background-color: transparent;
 }
 .power-type-select {
   border-bottom: 2px solid rgba(0, 0, 0, 0.8);
