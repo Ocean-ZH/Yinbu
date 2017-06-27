@@ -8,7 +8,7 @@ header{
     box-sizing:border-box;
     padding: 0 20/75rem;
     border-bottom: 2px solid #076c8b;
-    background-color: #143c64;
+    background-color: rgba(10,50,80,.5);
     text-align: center;
     position:relative;
     transition:all .5s;
@@ -84,6 +84,7 @@ header{
         position:absolute;
         top: 0;
         right: 0;
+        display:none;
         .search-icon-box{
             position:absolute;
             right: 30/75rem;
@@ -110,21 +111,16 @@ header{
                 width: 450/75rem;
             }
         }
-        input{
-
-        }
     }
-    
-
 }
 header.current{
     background-color: rgba(0,0,0,.5);
 }
 
 .box-header{
-    width: 10rem;
+    width: 100%;
     height: 90/75rem;
-    background-color: #0f2e4d;
+    background-color: rgba(0,0,0,.3);
     border-bottom: 1px solid #36e1ed;
     margin-top:20/75rem;
     .BH-left{
@@ -205,7 +201,7 @@ header.current{
         height: 90/75rem;
         position:relative;
         input{
-            background-color: transparent;
+            background-color: rgba(0,0,0,.05);
             width:auto;
             font-size:24/75rem;
             border: none;
@@ -214,6 +210,9 @@ header.current{
             right: 0;
             top: 50%;
             transform:translateY(-50%);
+        }
+        input[type=date]:focus{
+            background-color: rgba(0,0,0,.05);
         }
     }
 }
@@ -236,12 +235,12 @@ ul.power-type>li.current{
 .table-box{
     padding:0 10/75rem;
     transition:height .4s;
-    background-color: rgba(15,55,90,.8);
+    background-color: rgba(2,20,40,.3);
 
     .classify-box{
         height: 80/75rem;
         width: 100%;
-        background-color: #0f2e4d;
+        background-color: rgba(2,20,10,.4);
         ul{
             height: 80/75rem;
             li{
@@ -280,7 +279,7 @@ ul.power-type>li.current{
     .table-header{
         width: 100%;
         height: 80/75rem;
-        background-color: #0e3254;
+        background-color: rgba(5,20,40,.35);
         border-bottom: 2px solid rgba(255,255,255,.6);
         .table-title{
             float: left;
@@ -439,12 +438,34 @@ ul.power-type>li.current{
     .table-content-main{
         width: 100%;
         position:relative;
-        overflow-x:auto;
+        overflow:hidden;
         table{
             border-collapse: collapse;
         }
         >table{
 
+        }
+        .table-fixed-box{
+            float: left;
+            width: 2.5rem-10/75rem;
+            overflow:hidden;
+            table.table-main{
+                border-right: none;
+            }
+        }
+        .table-main-box{
+            float: left;
+            overflow-x:auto;
+            width:7.5rem - 10/75rem;
+            table.table-main{
+                border-left: none;
+                tr{
+                    td{
+                        white-space:nowrap;
+                        text-overflow:ellipsis;
+                    }
+                }
+            }
         }
         table.table-main{
             border: 1px solid rgba(255,255,255,.2);
@@ -453,14 +474,16 @@ ul.power-type>li.current{
             tr{
                 border-bottom: 1px solid rgba(55,170,230,.8);
                 th{
-                    padding:20/75rem 20/75rem;
+                    padding:0 20/75rem;
                     min-width: 2.5rem;
-                    /* white-space:nowrap; */
+                    white-space:nowrap;
+                    line-height: 80/75rem;
                 }
                 td{
-                    padding:20/75rem 20/75rem;
+                    padding:0 20/75rem;
                     text-align: left;
                     min-width:2.5rem;
+                    line-height: 80/75rem;
                 } 
             }
             tr:nth-child(even){
@@ -704,7 +727,7 @@ ul.power-type>li.current{
     border-bottom: 1px solid #1970b0;
     margin-bottom: 40/75rem;
     .history-left{
-        width:50%;
+        width:100%;
         height: 300/75rem; 
         float: left;
         table{
@@ -722,19 +745,10 @@ ul.power-type>li.current{
                     p{
                         font-size:24/75rem;
                         color:#f9f726;
-                        text-align: right;
+                        text-align: left;
                     }
                 }
             }
-        }
-    }
-    .history-right{
-        width: 50%;
-        height:300/75rem;
-        float: right;
-        #chart4{
-            widows: 100%;
-            height:300/75rem;
         }
     }
 }

@@ -135,7 +135,7 @@
 .date-select-box input{
     background-color: #FFF;
     border-color: #155387;
-    color:#155387;
+    color:#000;
     margin-left: 10px;
     padding: 2px 15px;
     font-size:12px;
@@ -155,13 +155,11 @@
     display:none;
     transform:scale(.75);
     transition:all .3s;
+    width: 100%;
 }
 .table-box .table-classify-content.current{
     display:block;
     transform:scale(1);
-}
-.table-box .table-content{
-    margin-bottom: 20px;
 }
 .table-title{
     height: 50px;
@@ -193,34 +191,87 @@
     left: 20px;
 }
 
-.table-box table{
-    width: auto;
-    min-width:100%;
-    table-layout: fixed;
+.table-content-box{
+    width: 100%;
+    height: auto;
+    padding-bottom: 20px;
+}
+.table-content-box::after{
+    content:"";
+    display:block;
+    width: 0;
+    height: 0;
+    visibility:hidden;
+    clear:both;
+    background: transparent;
+}
+.table-content-box table{
     border-collapse: collapse;
+    min-width: 100%;
+    width: auto;
 }
-.table-box table tbody{
-    background-color: rgba(0,0,0,0.2);
+.table-content-box table>tbody{
+    background-color: rgba(0,0,0,0.1);
 }
-.table-box table tr{
-    height: 40px;
+.table-content-box table tr{
     border-bottom: 1px solid #829baf;
     line-height: 40px;
     background-color: rgba(0,0,0,.1);
 }
-.table-box table tr:nth-child(even){
+.table-content-box table tr:nth-child(even){
     background-color: rgba(0,0,0,.3);
 }
-.table-box table tr td,.table-box table tr th{
+.table-content-box table tr td,.table-box table tr th{
     box-sizing:border-box;
-    padding-left: 20px;
+    padding:0 20px;
     border-right: 1px solid #829baf;
-    width:12.5vw;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
-.table-content>table>tbody>tr>td:first-child,.table-content>table>thead>tr>th:first-child{
+.table-content-box .table-content-fixed,.table-content-box .table-content{
+    float: left;
+}
+.table-content-box .table-content-fixed{
+    width: 220px;
+    position:relative;
+}
+.table-content-box .table-content-fixed::after{
+    content:"";
+    display:block;
+    width: 100%;
+    height: 16px;
+    background-color: rgba(0,0,0,.3);
+    position:absolute;
+    left: 0;
+    bottom: -16px;
+    border-right: 1px solid #829baf;
+    box-sizing:border-box;
+}
+.table-content-box .table-content-fixed th:nth-of-type(1),.table-content-box .table-content-fixed td:nth-of-type(1){
     width:60px;
 }
-
+.table-content-box .table-content-fixed th:nth-of-type(2),.table-content-box .table-content-fixed td:nth-of-type(2){
+    width:140px;
+}
+.table-content-box .table-content{
+    width: calc(100% - 220px);
+    overflow-x:auto;
+    position:relative;
+}
+.table-content::-webkit-scrollbar{
+    width: 16px;
+    height: 16px;
+    background-color: rgba(0,0,0,.3);
+}
+.table-content::-webkit-scrollbar-thumb {
+    background-color: rgba(45,140,190,.6);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.5);
+}
+.table-content-box .table-content>table{
+    min-width:100%;
+    width: auto;
+}
 .table-content table.table-auto{
     table-layout: auto;
 }
@@ -233,63 +284,19 @@
     margin-top: 10px;
 }
 .table-events ol{
-
+    
 }
 .table-events ol li{
     font-size:12px;
     color:#FFF;
     line-height: 24px;
 }
-
-.tb-h6{
-    width: 100%;
-    overflow-x:scroll;
-    overflow-y:hidden;
-}
-.tb-h6>table>tbody{
-    display:block;
-    min-width:100%;
-    max-height: 240px;
-    overflow-y:scroll;
-    overflow-x: hidden;
-}
-
-.tb-h8>table>tbody{
-    max-height: 320px;
-}
-
-.tb-h6::-webkit-scrollbar{
-    width:15px;
-    height: 15px;
-    background-color: rgba(0,0,0,.3);
-}
-.tb-h6::-webkit-scrollbar-thumb {
-    background-color: rgba(45,140,190,.6);
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,.5);
-}
-.tb-h6>table>tbody::-webkit-scrollbar{
-    width:15px;
-    height: 15px;
-    background-color: rgba(0,0,0,.3);
-}
-.tb-h6>table>tbody::-webkit-scrollbar-thumb {
-    background-color: rgba(45,140,190,.6);
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,.5);
-}
-
-.tb-h6>table>thead,.tb-h6>table>tbody>tr{
-    display:table;
-    width: 100%;
-    table-layout: fixed;
-}
-.tb-h6>table>thead{
-    width:calc(100% - 1.5em);
-}
 .no-pd{
     padding: 0 !important;
 }
+
+
+
 .generator-run::before{
     content:"";
     display:inline-block;
@@ -297,6 +304,7 @@
     height: 10px;
     border-radius: 10px;
     background-color: #00b050;
+    margin-right: 10px;
 }
 .generator-stop::before{
     content:"";
@@ -305,6 +313,7 @@
     height: 10px;
     border-radius: 10px;
     background-color: #ffff00;
+    margin-right: 10px;
 }
 .generator-repair::before{
     content:"";
@@ -313,6 +322,7 @@
     height: 10px;
     border-radius: 10px;
     background-color: #ff0000;
+    margin-right: 10px;
 }
 
 
@@ -343,48 +353,67 @@
     border: 1px solid #4ac4db;
     background-color: rgba(15,59,70,.5);
     box-shadow:0 0 15px 2px #48d3e9 inset;
+    margin:  0 auto;
+}
+.chart-container-w100{
+    width: 100%;
 }
 
 
 .history-box{
     width: 100%;
     margin-top: 20px;
-    padding: 0 20px;
+    padding: 0; /*20px;*/
     box-sizing:border-box;
     padding-bottom: 40px;
 }
-.history-box .table-content{
+.history-box .table-content-box{
     background-color: rgba(20,70,80,.3);
 }
 .history-box .chart-box{
     padding:10px 10px;
     background-color:transparent;
+    width: 50%;
+    float: right;
 }
-.history-box .chart-box .chart-container{
-    width:50%;
+.history-box .history-chart-box .chart-container{
+    width: 98%;
     box-sizing:border-box;
     float:left;
 }
 .history-box .history-data-box{
     width: 50%;
-    float: right;
+    float: left;
     box-sizing: border-box;
-    padding: 10px;
-    height: 280px;
+    padding:10px;
+    height: 300px;
 }
 .history-box .history-data-box>table{
     min-width:100%;
-    table-layout: auto;
-    text-align:left;
+    border-collapse: collapse;
+    border: 1px solid #829baf;
+    text-align: left;
 }
 .history-box .history-data-box>table>tbody{
     display:block;
-    height:240px;
+    max-height:240px;
     overflow-y:scroll;
+    width: 100%;
+    overflow-x:hidden;
 }
 .history-box .history-data-box>table>thead{
     display:table;
     width:calc(100% - 1.5em);
+    table-layout: fixed;
+}
+.history-box .history-data-box>table>tbody>tr{
+    display:table;
+    table-layout: fixed;
+    width: 100%;
+}
+.history-box .history-data-box th,.history-box .history-data-box td{
+    width: auto;
+    min-width:initial;
 }
 .history-box .history-data-box>table>tbody::-webkit-scrollbar{
     width:15px;
