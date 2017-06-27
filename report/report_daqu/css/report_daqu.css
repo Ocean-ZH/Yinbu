@@ -232,7 +232,7 @@
     float: left;
 }
 .table-content-box .table-content-fixed{
-    width: 200px;
+    width: 220px;
     position:relative;
 }
 .table-content-box .table-content-fixed::after{
@@ -254,7 +254,7 @@
     width:140px;
 }
 .table-content-box .table-content{
-    width: calc(100% - 200px);
+    width: calc(100% - 220px);
     overflow-x:auto;
     position:relative;
 }
@@ -363,7 +363,7 @@
 .history-box{
     width: 100%;
     margin-top: 20px;
-    padding: 0 20px;
+    padding: 0; /*20px;*/
     box-sizing:border-box;
     padding-bottom: 40px;
 }

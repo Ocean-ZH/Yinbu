@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -39,8 +39,647 @@
                  }
             });*/
         </script>
+
+            <!--取数-->
+    <script type="text/javascript">
+
+        //getJSON 取数据地址
+        var UrlAddress = "http://10.59.3.161:7778/GetDateVals?dateTime=";
+        //数据日期
+        var DataDate = "";
+
+        $(document).ready(function () {
+
+            //获取 当天时间 
+            var mydate = new Date();
+            //DataDate = mydate.getFullYear() + "-" + ("0" + (mydate.getMonth() + 1)).slice(-2) + "-" + ("0" + mydate.getDate()).slice(-2);
+            DataDate = "2017-06-25";
+
+            $("#date-select1,#date-select2").val(DataDate);//为input框赋值
+
+            //重写表格
+            GetDate();
+
+            //选取时间
+            $("#date-select1,#date-select2").change(function () {
+                DataDate = $(this).val();
+
+                //重写表格
+                GetDate();
+            })
+
+        })
+
+
+
+        //获取实时值
+        function GetVal(points, description) {
+            for (var i = 0 ; i < points.length ; i++) {
+                if (points[i].Description == description)
+                    return points[i].Val;
+            }
+            return "/";
+        }
+
+        //填报时间判断
+        function GetTR(strTypeTime) {
+            if (strTypeTime.length > 0) {
+                return strTypeTime.toString().split(' ')[1];
+            }
+            return "/";
+        }
+
+
+        //重写表格
+        function GetDate() {
+
+            $.getJSON(UrlAddress + DataDate, function (result) {
+
+                //火电每日填报指标
+                projectCompanyDailyGetData(result);
+
+                //火电非每日填报累计指标
+                projectCompanyNonDailyGetData(result);
+                
+                //火电能耗指标
+                projectCompanyEnergyGetData(result);
+
+                //火电库存指标
+                projectCompanyReserveGetData(result);
+
+                //火电环保指标
+                projectCompanyEnvGetData(result);
+
+                //火电机组状态
+                projectCompanyStateGetData(result);
+
+                //填报时间与误填次数
+                commTimeAndReviseCountGetData(result);
+
+                //风电指标
+                windCompanyDailyGetData(result);
+
+                //风电机组状态
+                windCompanyStateGetData(result);
+            });
+            
+        }
+
+
+
+
+        //获取[火电每日填报指标]数据
+        function projectCompanyDailyGetData(result) {
+            $("#projectCompanyDaily-fixed").html("");
+            $("#projectCompanyDaily").html("");
+
+            //重新jq构建表格
+            var table_1 = $("<table></table>").appendTo($("#projectCompanyDaily-fixed"));
+            //加入表头行
+            $("<thead>" +
+                "<tr style='height:81px;'>" +
+                    "<th>序号</th>" +
+                    "<th>项目公司</th>" +
+                "</tr>" +
+                "</thead>").appendTo(table_1);
+            //加入<tbody>
+            $("<tbody></tbody>").appendTo(table_1);
+
+            var table_2 = $("<table></table>").appendTo($("#projectCompanyDaily"));
+            //加入表2头行
+            $("<thead>" +
+                "<tr style='text-align:center;'>" +
+                    "<td colspan='6'>非供热</td>" +
+                    "<td>供热</td>"+
+                "</tr>" +
+                "<tr>" +
+                    "<th>日发电量 (MWh)</th>" +
+                    "<th>日供电量 (MWh)</th>" +
+                    "<th>生产厂用电率 (%)</th>" +
+                    "<th>日平均负荷率 (%)</th>" +
+                    "<th>月计划完成率 (%)</th>" +
+                    "<th>年计划完成率 (%)</th>" +
+                    "<th>日供热量（万GJ）</th>" +
+                "</tr>" +
+                "</thead>").appendTo(table_2);
+            //加入<tbody>
+            $("<tbody><tbody>").appendTo(table_2);
+
+            //循环将行写进tbody中
+            $.each(result.Data, function (i, DataItem) {
+                //判断是否火电
+                if (DataItem.Type == "projectCompany") {
+                    var tr = $("<tr></tr>");
+                    tr.appendTo(table_1);
+                    //添加列
+                    $("<td>" + (i + 1).toString() + "</td>" +
+                      "<td><a href='report_company.html'>" + DataItem.Name + "</a></td>").appendTo(tr);
+
+
+                    //添加表2内容行
+                    var detailTr = $("<tr></tr>").appendTo(table_2);
+                    //添加表2内容列
+                    $("<td>" + GetVal(DataItem.Points, "日发电量") + " </td>" +
+                      "<td>" + GetVal(DataItem.Points, "日供电量") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "生产厂用电率") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "日平均负荷率") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "月计划完成率") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "年计划完成率") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "日供热量") + "</td>").appendTo(detailTr);
+                }
+            });
+
+        }
+
+        //获取[火电非每日填报累计指标]数据
+        function projectCompanyNonDailyGetData(result) {
+            $("#projectCompanyNonDaily-fixed").html("");
+            $("#projectCompanyNonDaily").html("");
+
+            //重新jq构建表格
+            var table_1 = $("<table></table>").appendTo($("#projectCompanyNonDaily-fixed"));
+            //加入表头行
+            $("<thead>" +
+                "<tr style='height:81px;'>" +
+                    "<th>序号</th>" +
+                    "<th>项目公司</th>" +
+                "</tr>" +
+                "</thead>").appendTo(table_1);
+            //加入<tbody>
+            $("<tbody></tbody>").appendTo(table_1);
+
+            var table_2 = $("<table></table>").appendTo($("#projectCompanyNonDaily"));
+            //加入表2头行
+            $("<thead>" +
+                "<tr style='text-align:center;'>" +
+                    "<td colspan='5'>非供热</td>" +
+                    "<td colspan='5'>供热</td>"+
+                "</tr>" +
+                "<tr>" +
+                    "<th>当年发电量（kkWh）</th>" +
+                    "<th>当月供电量（kkWh）</th>" +
+                    "<th>当年供电量（kkWh）</th>" +
+                    "<th>燃煤期库存（t）</th>" +
+                    "<th>燃煤盘点（t）</th>" +
+                    "<th>供热量月累（万GJ）</th>" +
+                    "<th>供热量年累（万GJ）</th>" +
+                    "<th>月供热计划（万GJ）</th>" +
+                    "<th>供热量月计划完成率（%）</th>" +
+                    "<th>供热量年计划完成率（%）</th>" +
+                "</tr>" +
+                "</thead>").appendTo(table_2);
+            //加入<tbody>
+            $("<tbody><tbody>").appendTo(table_2);
+
+            //循环将行写进tbody中
+            $.each(result.Data, function (i, DataItem) {
+                //判断是否火电
+                if (DataItem.Type == "projectCompany") {
+                    var tr = $("<tr></tr>");
+                    tr.appendTo(table_1);
+                    //添加列
+                    $("<td>" + (i + 1).toString() + "</td>" +
+                        "<td>" + DataItem.Name + "</td>").appendTo(tr);
+
+
+                    //添加表2内容行
+                    var detailTr = $("<tr></tr>").appendTo(table_2);
+                    //添加表2内容列
+                    $("<td>" + GetVal(DataItem.Points, "当年发电量") + " </td>" +
+                      "<td>" + GetVal(DataItem.Points, "当月供电量") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "当年供电量") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "燃煤期库存") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "燃煤盘点") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "供热量月累") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "供热量年累") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "月供热计划") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "供热量月计划完成率") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "供热量年计划完成率") + "</td>").appendTo(detailTr);
+                }
+            });
+
+        }
+
+        //获取[火电能耗指标]数据
+        function projectCompanyEnergyGetData(result) {
+
+            $("#projectCompanyEnergy-fixed").html("");
+            $("#projectCompanyEnergy").html("");
+
+            //重新jq构建表格
+            var table_1 = $("<table></table>").appendTo($("#projectCompanyEnergy-fixed"));
+            //加入表头行
+            $("<thead>" +
+                "<tr>" +
+                    "<th>序号</th>" +
+                    "<th>项目公司</th>" +
+                "</tr>" +
+                "</thead>").appendTo(table_1);
+            //加入<tbody>
+            $("<tbody></tbody>").appendTo(table_1);
+
+            var table_2 = $("<table></table>").appendTo($("#projectCompanyEnergy"));
+            //加入表2头行
+            $("<thead>" +
+                "<tr>" +
+                     "<th>供电煤耗</th>" +
+                     "<th>生产厂用电率</th>" +                      
+                "</tr>" +
+                "</thead>").appendTo(table_2);
+            //加入<tbody>
+            $("<tbody><tbody>").appendTo(table_2);
+
+            //循环将行写进tbody中
+            $.each(result.Data, function (i, DataItem) {
+                //判断是否火电
+                if (DataItem.Type == "projectCompany") {
+                    var tr = $("<tr></tr>");
+                    tr.appendTo(table_1);
+                    //添加列
+                    $("<td>" + (i + 1).toString() + "</td>" +
+                        "<td>" + DataItem.Name + "</td>").appendTo(tr);
+
+
+                    //添加表2内容行
+                    var detailTr = $("<tr></tr>").appendTo(table_2);
+                    //添加表2内容列
+                    $("<td>" + GetVal(DataItem.Points, "供电煤耗") + " </td>" +
+                      "<td>" + GetVal(DataItem.Points, "生产厂用电率") + "</td>").appendTo(detailTr);
+                }
+            });
+
+        }
+
+        //获取[火电库存指标]数据
+        function projectCompanyReserveGetData(result) {
+            $("#projectCompanyReserve-fixed").html("");
+            $("#projectCompanyReserve").html("");
+
+            //重新jq构建表格
+            var table_1 = $("<table></table>").appendTo($("#projectCompanyReserve-fixed"));
+            //加入表头行
+            $("<thead>" +
+                "<tr style='height:81px;'>" +
+                    "<th>序号</th>" +
+                    "<th>项目公司</th>" +
+                "</tr>" +
+                "</thead>").appendTo(table_1);
+            //加入<tbody>
+            $("<tbody></tbody>").appendTo(table_1);
+
+            var table_2 = $("<table></table>").appendTo($("#projectCompanyReserve"));
+            //加入表2头行
+            $("<thead>" +
+                "<tr style='text-align:center;'>" +
+                    "<td colspan='5'>煤炭</td>" +
+                    "<td colspan='5'>液氨</td>" +
+                    "<td colspan='5'>石灰石</td>"+
+                "</tr>" +
+                "<tr>" +
+                    "<th>进煤</th>" +
+                    "<th>耗煤</th>" +
+                    "<th>燃煤盘点</th>" +
+                    "<th>存煤可用天数</th>" +
+                    "<th>燃煤期库存</th>" +
+                    "<th>进液氨</th>" +
+                    "<th>耗液氨</th>" +
+                    "<th>液氨期初库存</th>" +
+                    "<th>液氨盘点</th>" +
+                    "<th>液氨可用天数</th>" +
+                    "<th>进石灰石</th>" +
+                    "<th>耗石灰石</th>" +
+                    "<th>石灰石期初库存</th>" +
+                    "<th>石灰石盘点</th>" +
+                    "<th>石灰石可用天数</th>" +                        
+                "</tr>" +
+                "</thead>").appendTo(table_2);
+            //加入<tbody>
+            $("<tbody><tbody>").appendTo(table_2);
+
+            //循环将行写进tbody中
+            $.each(result.Data, function (i, DataItem) {
+                //判断是否火电
+                if (DataItem.Type == "projectCompany") {
+                    var tr = $("<tr></tr>");
+                    tr.appendTo(table_1);
+                    //添加列
+                    $("<td>" + (i + 1).toString() + "</td>" +
+                        "<td>" + DataItem.Name + "</td>").appendTo(tr);
+
+
+                    //添加表2内容行
+                    var detailTr = $("<tr></tr>").appendTo(table_2);
+                    //添加表2内容列
+                    $("<td>" + GetVal(DataItem.Points, "进煤") + " </td>" +
+                        "<td>" + GetVal(DataItem.Points, "耗煤") + " </td>" +
+                        "<td>" + GetVal(DataItem.Points, "燃煤盘点") + " </td>" +
+                        "<td>" + GetVal(DataItem.Points, "存煤可用天数") + " </td>" +
+                        "<td>" + GetVal(DataItem.Points, "燃煤期库存") + " </td>" +
+                        "<td>" + GetVal(DataItem.Points, "进液氨") + " </td>" +
+                        "<td>" + GetVal(DataItem.Points, "耗液氨") + " </td>" +
+                        "<td>" + GetVal(DataItem.Points, "液氨期初库存") + " </td>" +
+                        "<td>" + GetVal(DataItem.Points, "液氨盘点") + " </td>" +
+                        "<td>" + GetVal(DataItem.Points, "液氨可用天数") + " </td>" +
+                        "<td>" + GetVal(DataItem.Points, "进石灰石") + " </td>" +
+                        "<td>" + GetVal(DataItem.Points, "耗石灰石") + " </td>" +
+                        "<td>" + GetVal(DataItem.Points, "石灰石期初库存") + " </td>" +
+                        "<td>" + GetVal(DataItem.Points, "石灰石盘点") + " </td>" +
+                        "<td>" + GetVal(DataItem.Points, "石灰石可用天数") + "</td>").appendTo(detailTr);
+                }
+            });
+        }
+
+        //火电环保指标
+        function projectCompanyEnvGetData(result) {
+            $("#projectCompanyEnv-fixed").html("");
+            $("#projectCompanyEnv").html("");
+
+            var table_1 = $("<table></table>").appendTo($("#projectCompanyEnv-fixed"));
+            //加入表1头行
+            $("<thead>" +
+                "<tr style='height:81px;'>" +
+                    "<th>序号</th>" +
+                    "<th>项目公司</th>" +
+                    "<th>机组</th>" +
+                "</tr>" +
+                "</thead>").appendTo(table_1);
+
+            //加入<tbody>
+            $("<tbody></tbody>").appendTo(table_1);
+
+            var table_2 = $("<table></table>").appendTo($("#projectCompanyEnv"));
+            //加入表2头行
+            $("<thead>" +
+                "<tr style='text-align:center;'>" +
+                    "<th colspan='3'>脱硫项</th>" +
+                    "<th colspan='3'>脱硝项</th>" +
+                    "<th colspan='2'>除尘项</th>" +
+                "</tr>" +
+                "<tr>" +
+                    "<th>二氧化硫排放浓度 (mg/m3)</th>" +
+                    "<th>脱硫投运率 (%)</th>" +
+                    "<th>脱硫效率 (%)</th>" +
+                    "<th>氮氧化物排放浓度 (mg/m3)</th>" +
+                    "<th>脱硝投入率 (%)</th>" +
+                    "<th>脱硝效率 (%)</th>" +
+                    "<th>烟尘排放浓度 (mg/m3)</th>" +
+                    "<th>电除尘投运率 (%)</th>" +
+                        
+                "</tr>" +
+                "</thead>").appendTo(table_2);
+            //加入<tbody>
+            $("<tbody><tbody>").appendTo(table_2);
+
+            //循环将行写进tbody中
+            $.each(result.Data, function (i, DataItem) {
+                //判断是否火电
+                if (DataItem.Type == "projectCompany") {
+                    //添加表1内容行
+                    var tr = $("<tr></tr>").appendTo(table_1);
+                    //添加表1内容列
+                    var rowSpan = DataItem.UnitConut == 0 ? DataItem.UnitConut + 1 : DataItem.UnitConut;
+
+                    $("<td rowSpan='" + rowSpan + "'>" + (i + 1).toString() + "</td>" +
+                        "<td rowSpan='" + rowSpan + "'>" + DataItem.Name + "</td>" +
+                        "<td>#1</td>").appendTo(tr);
+                        
+                    //添加表2内容行
+                    var detailTr = $("<tr></tr>").appendTo(table_2);
+                    //添加表2内容列
+                    $("<td>" + GetVal(DataItem.Points, "1号机组二氧化硫排放浓度") + "</td>" +
+                        "<td>" + GetVal(DataItem.Points,"1号机组脱硫投运率") + "</td>"+
+                        "<td>" + GetVal(DataItem.Points,"1号机组脱硫效率") + "</td>"+
+                        "<td>" + GetVal(DataItem.Points, "1号机组氮氧化物排放浓度") + "</td>" +
+                        "<td>" + GetVal(DataItem.Points,"1号机组脱硝投入率") + "</td>"+
+                        "<td>" + GetVal(DataItem.Points,"1号机组脱硝效率") + "</td>"+
+                        "<td>" + GetVal(DataItem.Points,"1号机组烟尘排放浓度") + "</td>"+
+                        "<td>" + GetVal(DataItem.Points,"1号机组电除尘投运率") + "</td>").appendTo(detailTr);
+
+                    for(var t = 2; t <= rowSpan ; t++)
+                    {
+                        var unitTr = $("<tr></tr>").appendTo(table_1);
+                        $("<td>#" + (t).toString() + "</td>").appendTo(unitTr);
+
+                        detailTr = $("<tr></tr>");
+                        detailTr.appendTo(table_2);
+                        $("<td>" + GetVal(DataItem.Points, t + "号机组二氧化硫排放浓度") + "</td>" +
+                            "<td>" + GetVal(DataItem.Points,t + "号机组脱硫投运率") + "</td>"+
+                            "<td>" + GetVal(DataItem.Points,t + "号机组脱硫效率") + "</td>"+
+                            "<td>" + GetVal(DataItem.Points, t + "号机组氮氧化物排放浓度") + "</td>" +
+                            "<td>" + GetVal(DataItem.Points,t + "号机组脱硝投入率") + "</td>"+
+                            "<td>" + GetVal(DataItem.Points,t + "号机组脱硝效率") + "</td>"+
+                            "<td>" + GetVal(DataItem.Points,t + "号机组烟尘排放浓度") + "</td>"+
+                            "<td>" + GetVal(DataItem.Points,t + "号机组电除尘投运率") + "</td>").appendTo(detailTr);
+                    }
+                }
+
+            });
+
+        }
+
+        //火电机组状态
+        function projectCompanyStateGetData(result) {
+            $("#projectCompanyState").html("");
+
+            var table_1 = $("<table></table>").appendTo($("#projectCompanyState"));
+            //加入表1头行
+            $("<thead>" +
+                "<tr style='height:81px;'>" +
+                    "<th>序号</th>" +
+                    "<th>项目公司</th>" +
+                    "<th>容量</th>" +
+                    "<th>机组</th>" +
+                "</tr>" +
+                "</thead>").appendTo(table_1);
+
+            //加入<tbody>
+            $("<tbody></tbody>").appendTo(table_1);
+
+            //循环将行写进tbody中
+            $.each(result.Data, function (i, DataItem) {
+                //判断是否火电
+                if (DataItem.Type == "projectCompany") {
+                    //添加表1内容行
+                    var tr = $("<tr></tr>").appendTo(table_1);
+
+                    $("<td style='width:65px;'>" + (i + 1).toString() + "</td>" +
+                      "<td>" + DataItem.Name + "</td>" +
+                      "<td>" + "容量点" + "</td>").appendTo(tr);
+
+                    var no3td = $("<td class='no-pd'></td>").appendTo(tr);
+                    var nrtable = $("<table></table>").appendTo(no3td);
+                    var nrtabletr1 = $("<tr></tr>").appendTo(nrtable);
+                    var nrtabletr2 = $("<tr></tr>").appendTo(nrtable);
+
+
+                    //添加表1内容列
+                    var colSpan = DataItem.UnitConut == 0 ? DataItem.UnitConut + 1 : DataItem.UnitConut;
+                    //alert(colSpan);
+                        
+                    for (var t = 1; t <= colSpan ; t++) {
+                        $("<td>#" + (t).toString() + "</td>").appendTo(nrtabletr1);
+                        var dfdf = GetVal(DataItem.Points, t + "号机组状态");
+                        if (dfdf=="运行") {
+                            $("<td class='generator-run'>运行</td>").appendTo(nrtabletr2);
+                        } else if (dfdf=="检修") {
+                            $("<td class='generator-repair'>运行</td>").appendTo(nrtabletr2);
+                        } else if (dfdf=="调停") {
+                            $("<td class='generator-stop'>运行</td>").appendTo(nrtabletr2);
+                        }
+                        else {
+                            $("<td>" + dfdf + "</td>").appendTo(nrtabletr2);
+                        }
+                        
+                    }
+
+                }
+
+            });
+
+        }
+
+        //填报时间与误填次数
+        function commTimeAndReviseCountGetData(result) {
+            $("#TimeAndReviseCount").html("");
+
+            //重新jq构建表格
+            var table = $("<table></table>");
+            table.appendTo($("#TimeAndReviseCount"));
+            //加入表头行
+            $("<thead>" +
+                "<tr>" +
+                    "<th>序号</th>" +
+                    "<th>项目公司</th>" +
+                    "<th>填报时间</th>" +
+                    "<th>误填次数</th>" +
+                "</tr>" +
+                "</thead>").appendTo(table);
+            //加入<tbody>
+            $("<tbody></tbody>").appendTo(table);
+
+            //循环将行写进tbody中
+            $.each(result.Data, function (i, DataItem) {
+                //判断是否火电
+                if (DataItem.Type == "projectCompany") {
+                    var tr = $("<tr></tr>");
+                    tr.appendTo(table);
+                    //添加列
+                    $("<td>" + (i + 1).toString() + "</td>" +
+                        "<td>" + DataItem.Name + "</td>" +
+                        "<td>" + GetTR(DataItem.TypeTime) + " </td>" +
+                        "<td>" + DataItem.ReviseCount + "</td>").appendTo(tr);
+                }
+
+            });
+
+        }
+
+
+
+        //获取[风电指标]数据
+        function windCompanyDailyGetData(result) {
+            $("#windCompanyTarget-fixed").html("");
+            $("#windCompanyTarget").html("");
+
+            //重新jq构建表格
+            var table_1 = $("<table></table>").appendTo($("#windCompanyTarget-fixed"));
+            //加入表头行
+            $("<thead>" +
+                "<tr>" +
+                    "<th>序号</th>" +
+                    "<th>项目公司</th>" +
+                "</tr>" +
+                "</thead>").appendTo(table_1);
+            //加入<tbody>
+            $("<tbody></tbody>").appendTo(table_1);
+
+            var table_2 = $("<table></table>").appendTo($("#windCompanyTarget"));
+            //加入表2头行
+            $("<thead>" +
+                "<tr>" +
+                    "<th>日发电量 (MWh)</th>" +
+                    "<th>月度电量完成率 (%)</th>" +
+                    "<th>限电损失电量 （MWh)</th>" +
+                    "<th>月累限电损失电量（MWh)</th>" +
+                    "<th>年累限电损失电量（MWh)</th>" +
+                    "<th>风机故障停运 (台次)</th>" +
+                    "<th>风机检修停运 (台次)</th>" +
+                    "<th>风机受累停运 (台次)</th>" +
+                    "<th>不可抗力停运 (台次)</th>" +
+                "</tr>" +
+                "</thead>").appendTo(table_2);
+            //加入<tbody>
+            $("<tbody><tbody>").appendTo(table_2);
+
+            //循环将行写进tbody中
+            $.each(result.Data, function (i, DataItem) {
+                //判断是否火电
+                if (DataItem.Type == "windCompany") {
+                    var tr = $("<tr></tr>");
+                    tr.appendTo(table_1);
+                    //添加列
+                    $("<td>" + (i + 1).toString() + "</td>" +
+                      "<td>" + DataItem.Name + "</td>").appendTo(tr);
+
+
+                    //添加表2内容行
+                    var detailTr = $("<tr></tr>").appendTo(table_2);
+                    //添加表2内容列
+                    $("<td>" + GetVal(DataItem.Points, "日发电量") + " </td>" +
+                      "<td>" + GetVal(DataItem.Points, "月度电量完成率") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "限电损失电量") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "月累限电损失电量") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "年累限电损失电量") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "风机故障停运") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "风机检修停运") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "风机受累停运") + "</td>" +
+                      "<td>" + GetVal(DataItem.Points, "不可抗力停运") + "</td>").appendTo(detailTr);
+                }
+            });
+
+        }
+
+        //风电机组状态
+        function windCompanyStateGetData(result) {
+            $("#windCompanyState").html("");
+
+            //重新jq构建表格
+            var table = $("<table></table>");
+            table.appendTo($("#windCompanyState"));
+            //加入表头行
+            $("<thead>" +
+                "<tr>" +
+                    "<th>序号</th>" +
+                    "<th>风场</th>" +
+                    "<th>容量</th>" +
+                    "<th>状态</th>" +
+                "</tr>" +
+                "</thead>").appendTo(table);
+            //加入<tbody>
+            $("<tbody></tbody>").appendTo(table);
+
+            //循环将行写进tbody中
+            $.each(result.Data, function (i, DataItem) {
+                //判断是否火电
+                if (DataItem.Type == "windCompany") {
+                    var tr = $("<tr></tr>");
+                    tr.appendTo(table);
+                    //添加列
+                    $("<td>" + (i + 1).toString() + "</td>" +
+                        "<td>" + DataItem.Name + "</td>" +
+                        "<td>" + "容量点" + " </td>" +
+                        "<td>" + "状态点" + "</td>").appendTo(tr);
+                }
+
+            });
+
+        }
+
+
+
+    </script>
     </head>
-    <body style="background:#0e363e; background:url(images/glass.jpg) no-repeat center center; background-size:cover; ">
+    <body style="min-height:1000px; background:url(images/glass.jpg) center center no-repeat; background-size:cover; ">
         <div class="main-container" >
             <div class="switch-box clearfloat">
                 <div class="switcher current">火电<span>火电</span></div>
@@ -69,7 +708,7 @@
                         <div class="table-classify-content current">
                             <div class="table-title"><h4>火电每日填报指标</h4></div>
                             <div class="table-content-box" >
-                                <div class="table-content-fixed">
+                                <div id="projectCompanyDaily-fixed" class="table-content-fixed">
                                     <table>
                                         <thead>
                                             <tr>
@@ -97,7 +736,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="table-content">
+                                <div id="projectCompanyDaily" class="table-content">
                                     <table>
                                         <thead>
                                             <tr>
@@ -133,7 +772,7 @@
                             </div>
                             <div class="table-title"><h4>火电非每日填报累计指标</h4></div>
                             <div class="table-content-box" >
-                                <div class="table-content-fixed">
+                                <div id="projectCompanyNonDaily-fixed" class="table-content-fixed">
                                     <table>
                                         <thead>
                                             <tr>
@@ -161,7 +800,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="table-content">
+                                <div id="projectCompanyNonDaily" class="table-content">
                                     <table>
                                         <thead>
                                             <tr>
@@ -238,7 +877,7 @@
                         <div class="table-classify-content">
                             <div class="table-title"><h4>火电能耗指标</h4></div>
                             <div class="table-content-box" >
-                                <div class="table-content-fixed">
+                                <div id="projectCompanyEnergy-fixed" class="table-content-fixed">
                                     <table>
                                         <thead>
                                             <tr>
@@ -266,7 +905,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="table-content">
+                                <div id="projectCompanyEnergy" class="table-content">
                                     <table>
                                         <thead>
                                             <tr>
@@ -302,7 +941,7 @@
                         <div class="table-classify-content">
                             <div class="table-title"><h4>火电环保指标</h4></div>
                             <div class="table-content-box" >
-                                <div class="table-content-fixed">
+                                <div id="projectCompanyEnv-fixed" class="table-content-fixed">
                                     <table>
                                         <thead>
                                             <tr>
@@ -330,7 +969,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="table-content">
+                                <div id="projectCompanyEnv" class="table-content">
                                     <table>
                                         <thead>
                                             <tr>
@@ -393,7 +1032,7 @@
                         <div class="table-classify-content">
                             <div class="table-title"><h4>火电库存指标</h4></div>
                             <div class="table-content-box" >
-                                <div class="table-content-fixed">
+                                <div id="projectCompanyReserve-fixed" class="table-content-fixed">
                                     <table>
                                         <thead>
                                             <tr>
@@ -421,7 +1060,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="table-content">
+                                <div id="projectCompanyReserve" class="table-content">
                                     <table>
                                         <thead>
                                             <tr>
@@ -520,12 +1159,11 @@
                             </div>
                         </div>
                         <div class="table-classify-content ">
-                            <div class="table-title"><h4>机组状态</h4></div>
-                            <div class="table-content-box" >
+                            <div class="table-title"><h4>火电机组状态</h4></div>
+                            <div id="projectCompanyState" class="table-content-box" >
                                 <table class="table-auto">
                                     <thead>
                                         <tr>
-                                            <th>业态</th>
                                             <th>项目</th>
                                             <th>容量</th>
                                             <th>机组</th>
@@ -533,7 +1171,6 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td rowspan="3">火电</td>
                                             <td>湖北</td>
                                             <td>
                                                 2×330MW+2×1000MW
@@ -603,6 +1240,43 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="history-box clearfloat">
+            <div class="table-box ">
+                <div class="table-title"><h4>统计数据</h4></div>
+                 <div class="table-content-box">
+                    <div id="TimeAndReviseCount" class="history-data-box">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>项目公司</th>
+                                    <th>填报时间</th>
+                                    <th>误填次数</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>湖北一</td>
+                                    <td>18:30</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>湖北二</td>
+                                    <td>18:30</td>
+                                    <td>2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="chart-box history-chart-box">
+                        <div class="chart-container" id="chart3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
                 </li>
                 <li>
                     <div class="select-box clearfloat">
@@ -615,7 +1289,7 @@
                         <div class="select-right-box">
                             <div class="date-select-box">
                                 <label for="date-select1"><span class="fa fa-calendar fa-lg"></span></label>
-                                <input type="date" id="date-select1"/>
+                                <input type="date" id="date-select2"/>
                             </div>
                         </div>
                     </div>
@@ -623,7 +1297,7 @@
                         <div class="table-classify-content current">
                             <div class="table-title"><h4>风电指标</h4></div>
                             <div class="table-content-box" >
-                                <div class="table-content-fixed">
+                                <div id="windCompanyTarget-fixed" class="table-content-fixed">
                                     <table>
                                         <thead>
                                             <tr>
@@ -655,7 +1329,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="table-content">
+                                <div id="windCompanyTarget" class="table-content">
                                     <table>
                                         <thead>
                                             <tr>
@@ -736,12 +1410,11 @@
                             </div>
                         </div>
                         <div class="table-classify-content ">
-                            <div class="table-title"><h4>机组状态</h4></div>
-                            <div class="table-content-box " >
+                            <div class="table-title"><h4>风电机组状态</h4></div>
+                            <div id="windCompanyState" class="table-content-box " >
                                 <table class="table-auto">
                                     <thead>
                                         <tr>
-                                            <th>业态</th>
                                             <th>风场</th>
                                             <th>容量</th>
                                             <th>状态</th>
@@ -749,7 +1422,6 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td rowspan="6">风电</td>
                                             <td>凤鸣</td>
                                             <td>24*2.0MW+1*1.8MW+51*1.5MW</td>
                                             <td class="generator-run"></td>
@@ -795,90 +1467,7 @@
             </ul>  
         </div>
         
-        <div class="history-box clearfloat">
-            <div class="table-box ">
-                <div class="table-title"><h4>统计数据</h4></div>
-                 <div class="table-content-box">
-                    <div class="history-data-box">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>序号</th>
-                                    <th>项目公司</th>
-                                    <th>填报时间</th>
-                                    <th>误填次数</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>湖北一</td>
-                                    <td>18:30</td>
-                                    <td>2</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>湖北二</td>
-                                    <td>18:30</td>
-                                    <td>2</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>宜昌</td>
-                                    <td>18:30</td>
-                                    <td>2</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>涟源</td>
-                                    <td>18:30</td>
-                                    <td>2</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>凤鸣</td>
-                                    <td>18:30</td>
-                                    <td>2</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>天河口</td>
-                                    <td>18:30</td>
-                                    <td>2</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>太平</td>
-                                    <td>18:30</td>
-                                    <td>2</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>花山</td>
-                                    <td>18:30</td>
-                                    <td>2</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>板桥</td>
-                                    <td>18:30</td>
-                                    <td>2</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>桃源</td>
-                                    <td>18:30</td>
-                                    <td>2</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="chart-box history-chart-box">
-                        <div class="chart-container" id="chart3"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
 
         <script type="text/javascript">
@@ -1452,8 +2041,6 @@
             $('.autoManual-box ul li').click(function(event) {
                 $(this).addClass('current').siblings('li').removeClass('current');
             });
-
-            
 
          });
         </script>
