@@ -47,7 +47,6 @@
         <script src="js/highcharts.js" type="text/javascript"></script>
         <script src="js/highcharts-more.js" type="text/javascript"></script>
         <script src="js/solid-gauge.js" type="text/javascript"></script>
-        <script src="js/pageSwitch.js" type="text/javascript"></script>
         <script type="text/javascript">
             // 动态设置视口大小
             var iScale = window.devicePixelRatio;
@@ -60,6 +59,7 @@
 
             document.getElementsByTagName('html')[0].style.fontSize = iFont+'px';
         </script>
+
     </head>
     <body style="background:#133f69;">
         <header class="clearfloat">
@@ -81,295 +81,399 @@
                     <div class="search-icon"></div>
                 </div>
             </div>
-            <script type="text/javascript">
-                jQuery(document).ready(function($) {
-                    $('.header-menu-box ol').click(function(event) {
-                        $(this).toggleClass('current');
-                        $('header').toggleClass('current');
-                        $('.header-menu-box ul').toggleClass('current');
-                    });
-                });
-            </script>
         </header>
-        <div class="box-header power-type">
+        <div class="box-header power-type-select">
                 <div class="BH-left">
                     <h4>火电</h4>
                     <ul>
                         <li>火电</li>
-                        <li>风电</li>
-                        <li>水电</li>
                     </ul>
                 </div>
                 <div class="BH-right">
                     <input type="date"  value="2017-04-24"/>
                 </div>
         </div>
-        <div class="table-box">
-           <div class="classify-box">
-               <ul class="clearfloat">
-                   <li class="current">生产类</li>
-                   <li>经营类</li>
-                   <li>环保类</li>
-                   <li>库存类</li>
+        <ul class="power-type">
+          <li class="current">
+            <div class="table-box">
+               <div class="classify-box">
+                   <ul class="clearfloat">
+                       <li class="current">生产类</li>
+                       <li>能耗类</li>
+                       <li>环保类</li>
+                       <li>库存类</li>
+                   </ul>
+               </div>
+               <ul class="classify-content-box">
+                  <li class="current">
+                    <div class="table-quota-container">
+                      <div class="table-header">
+                         <div class="table-title">
+                              <h4>火电每日填报指标</h4>
+                              <ul>
+                                  <li>火电每日填报指标</li>
+                                  <li>火电累计指标</li>
+                              </ul>
+                         </div>
+                      </div>
+                      <ul class="table-quota-type">
+                        <li class="current">
+                          <div class="table-content-main">
+                            <ol>
+                              <li>
+                                <dl>
+                                  <dt>日发电量 (MWh) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>日供电量 (MWh) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>日平均负荷率 (%) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>供热量 :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                            </ol>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="table-content-main">
+                            <ol>
+                              <li>
+                                <dl>
+                                  <dt>月累发电量 (kkWh) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>月累完成率 (%) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>当年发电量 (kkWh) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>年累完成率 (%) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>当月供电量 (kkWh) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>当年供电量 (kkWh) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>供热量月累 :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>供热量年累 :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>供热量月计划完成率 :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>供热量年计划完成率 :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                            </ol>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="table-quota-container">
+                      <div class="table-header">
+                         <div class="table-title">
+                              <h4>火电能耗指标</h4>
+                              <ul>
+                                  <li>火电能耗指标</li>
+                              </ul>
+                         </div>
+                      </div>
+                      <ul class="table-quota-type">
+                        <li class="current">
+                          <div class="table-content-main">
+                            <ol>
+                              <li>
+                                <dl>
+                                  <dt>供电煤耗 (g/kWh) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>生产厂用电率 (%) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                            </ol>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="chart-box-container">
+                      <div class="box-header" >
+                          <div class="BH-left">
+                              <h4>煤耗情况</h4>
+                              <ul>
+                                  <li>湖北</li>
+                              </ul>
+                          </div>
+                      </div>
+                      <div class="chart-box">
+                          <ul>
+                            <li class="current"><div id="chart6"></div></li>
+                          </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="table-quota-container">
+                      <div class="table-header">
+                         <div class="table-title">
+                              <h4>火电环保指标</h4>
+                              <ul>
+                                  <li>火电环保指标</li>
+                              </ul>
+                         </div>
+                      </div>
+                      <ul class="table-quota-type">
+                        <li class="current">
+                          <div class="table-content-main">
+                            <ol>
+                              <li>
+                                <dl>
+                                  <dt>电除尘投运率 (%) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>脱硫投运率 (%) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>脱硫效率(%) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>脱硝投入率 (%) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>脱硝效率 (%) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>烟尘排放浓度 (mg/m3) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>二氧化硫排放浓度 (mg/m3) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>氮氧化物排放浓度 (mg/m3) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                            </ol>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="table-quota-container">
+                      <div class="table-header">
+                         <div class="table-title">
+                              <h4>火电库存每日指标</h4>
+                              <ul>
+                                  <li>火电库存每日指标</li>
+                                  <li>火电库存累计指标</li>
+                                  <li>火电库存辅助指标</li>
+                              </ul>
+                         </div>
+                      </div>
+                      <ul class="table-quota-type">
+                        <li class="current">
+                          <div class="table-content-main">
+                            <ol>
+                              <li>
+                                <dl>
+                                  <dt>进煤 (t) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>耗煤 (t) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>存煤可用天数 (天) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                            </ol>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="table-content-main">
+                            <ol>
+                              <li>
+                                <dl>
+                                  <dt>燃煤期初库存 (t) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>燃煤盘点 (t) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                            </ol>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="table-content-main">
+                            <ol>
+                              <li>
+                                <dl>
+                                  <dt>进液氨 (t) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>耗液氨 (t) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>液氨期初库存 (t) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>液氨盘点 (t) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>液氨可用天数 (天) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>进石灰石 (t) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>耗石灰石 (t) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>石灰石期初库存 (t) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>石灰石盘点 (t) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                              <li>
+                                <dl>
+                                  <dt>石灰石可用天数 (天) :</dt>
+                                  <dd>0.0</dd>
+                                </dl>
+                              </li>
+                            </ol>
+                          </div>
+                        </li>
+                      </ul>
+                      <div class="chart-box">
+                        <div id="chart2_2"></div>
+                      </div>
+                    </div>
+                  </li>
                </ul>
-           </div>
-           <div class="table-header">
-               <div class="table-title">
-                    <h4>火电每日填报指标</h4>
-                    <ul>
-                        <li>火电每日填报指标</li>
-                        <li>火电累计指标</li>
-                        <li>火电辅助指标</li>
-                    </ul>
-               </div>
-           </div>
-           <div id="pw-table-box">
-               <div class="pw-table-in">
-                   <ul class="table-data-head clearfloat">
-                       <li>
-                           <h3>1200</h3>
-                           <p>日发电量 (MWh)</p>
-                       </li>
-                       <li>
-                           <h3>1120</h3>
-                           <p>日供电量 (MWh)</p>
-                       </li>
-                       <li>
-                           <h3>80%</h3>
-                           <p>日平均负荷率 (%)</p>
-                       </li>
-                   </ul>
-                   <ul class="table-data">
-                       <li>
-                            <dl>
-                                <dt>日发电量 (MWh)</dt>
-                                <dd>1200</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>日供电量 (MWh)</dt>
-                                <dd>1200</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>日平均负荷率 (%)</dt>
-                                <dd>80</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>生产厂用电率 (%)</dt>
-                                <dd>80</dd>
-                            </dl>
-                       </li>
-                   </ul>
-               </div>
-               <div class="pw-table-in">
-                   <ul class="table-data-head clearfloat">
-                       <li>
-                           <h3>1200</h3>
-                           <p>供电煤耗 (g/kWh)</p>
-                       </li>
-                       <li>
-                           <h3>80</h3>
-                           <p>日负荷率 (%)</p>
-                       </li>
-                       <li>
-                           <h3>80%</h3>
-                           <p>厂用电率 (%)</p>
-                       </li>
-                   </ul>
-                   <ul class="table-data">
-                       <li>
-                            <dl>
-                                <dt>供电煤耗</dt>
-                                <dd>1200</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>日负荷率 (%)</dt>
-                                <dd>80</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>厂用电率 (%)</dt>
-                                <dd>80</dd>
-                            </dl>
-                       </li>
-                   </ul>
-               </div>
-               <div class="pw-table-in">
-                   <ul class="table-data-head clearfloat">
-                       <li>
-                           <h3>80</h3>
-                           <p>脱硫效率 (%)</p>
-                       </li>
-                       <li>
-                           <h3>80</h3>
-                           <p>脱硝效率 (%)</p>
-                       </li>
-                       <li>
-                           <h3>80</h3>
-                           <p>电除尘投入率 (%)</p>
-                       </li>
-                   </ul>
-                   <ul class="table-data">
-                       <li>
-                            <dl>
-                                <dt>平均出口二氧化硫浓度 (mg/m3)</dt>
-                                <dd>1200</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>脱硫投入率 (%)</dt>
-                                <dd>80</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>脱硫效率 (%)</dt>
-                                <dd>80</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>平均出口氮氧化物浓度 (mg/m3)</dt>
-                                <dd>1200</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>脱硝投入率 (%)</dt>
-                                <dd>80</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>脱硝效率 (%)</dt>
-                                <dd>80</dd>
-                            </dl>
-                       </li><li>
-                            <dl>
-                                <dt>烟尘排放浓度 (mg/m3)</dt>
-                                <dd>1200</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>电除尘投入率 (%)</dt>
-                                <dd>80</dd>
-                            </dl>
-                       </li>
-                   </ul>
-               </div>
-               <div class="pw-table-in">
-                   <ul class="table-data-head clearfloat">
-                       <li>
-                           <h3>15</h3>
-                           <p>煤可用天数 (天)</p>
-                       </li>
-                       <li>
-                           <h3>14</h3>
-                           <p>液氮可用天数 (天)</p>
-                       </li>
-                       <li>
-                           <h3>12</h3>
-                           <p>石灰石可用天数 (天)</p>
-                       </li>
-                   </ul>
-                   <ul class="table-data">
-                       <li>
-                            <dl>
-                                <dt>进煤 (t)</dt>
-                                <dd>1200</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>耗煤 (t)</dt>
-                                <dd>80</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>煤库存 (t)</dt>
-                                <dd>80</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>煤可用天数 (天)</dt>
-                                <dd>15</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>进液氮 (t)</dt>
-                                <dd>1200</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>耗液氮 (t)</dt>
-                                <dd>80</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>液氮库存 (t)</dt>
-                                <dd>80</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>液氮可用天数 (天)</dt>
-                                <dd>14</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>进石灰石 (t)</dt>
-                                <dd>1200</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>耗石灰石 (t)</dt>
-                                <dd>80</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>石灰石库存 (t)</dt>
-                                <dd>80</dd>
-                            </dl>
-                       </li>
-                       <li>
-                            <dl>
-                                <dt>石灰石可用天数 (天)</dt>
-                                <dd>12</dd>
-                            </dl>
-                       </li>
-                   </ul>
-               </div>
-           </div>
-        </div>
+            </div>
+          </li>
+        </ul>
+        
         <div class="capacity-box">
           <div class="capacity-title">
-            <h4>发电总览</h4>
+            <h4>火电发电总览</h4>
           </div>
           <div class="capacity-table-box">
             <table class="capacity-table">
               <thead>
                 <tr>
                   <th>类型</th>
-                  <th>今年(kWh)</th>
-                  <th>去年同期(kWh)</th>
+                  <th>今年(亿kWh)</th>
+                  <th>去年同期(亿kWh)</th>
                   <th>完成率(%)</th>
                   <th>同比(%)</th>
                 </tr>
@@ -400,139 +504,169 @@
             </table>
           </div>
         </div>
-        <div class="box-header" >
-            <div class="BH-left">
-                <h4>指标对比曲线</h4>
-                <ul>
-                    <li>指标对比曲线</li>
-                    <li>指标对比曲线二</li>
-                </ul>
-            </div>
-            <div class="BH-right">
-                <input type="date"  value="2017-04-24"/>
-            </div>
+        <div class="chart-box-container">
+          <div class="box-header" >
+              <div class="BH-left">
+                  <h4>火电指标对比</h4>
+                  <ul>
+                      <li>火电指标对比</li>
+                  </ul>
+              </div>
+              <div class="BH-right">
+                  <input type="date"  value="2017-04-24"/>
+              </div>
+          </div>
+          <div class="chart-box">
+              <ul>
+                <li class="current"><div id="chart2"></div></li>
+              </ul>
+          </div>
         </div>
-        <div class="chart-box">
-            <div id="chart1"></div>
-        </div>
-        <div class="box-header" >
-            <div class="BH-left">
-                <h4>指标量对比</h4>
-                <ul>
-                    <li>指标量对比</li>
-                    <li>指标量对比二</li>
-                </ul>
-            </div>
-            <div class="BH-right">
-                <input type="date"  value="2017-04-24"/>
-            </div>
-        </div>
-        <div class="chart-box">
-            <div id="chart2"></div>
-        </div>
+        <div class="chart-box-container" style="display:none;">
+          <div class="box-header" >
+              <div class="BH-left">
+                  <h4>指标对比曲线</h4>
+                  <ul>
+                      <li>指标对比曲线</li>
+                      <li>指标对比曲线二</li>
+                  </ul>
+              </div>
+              <div class="BH-right">
+                  <input type="date"  value="2017-04-24"/>
+              </div>
+          </div>
+          <div class="chart-box">
+              <div id="chart1"></div>
+          </div>
+        </div>   
         <div class="generator-box">
           <div class="generator-title">
-            <h4>机组运行情况</h4>
+            <h4>火电机组状态</h4>
           </div>
-          <div class="generator-table-box">
+          <div id="projectCompanyState" class="generator-table-box">
             <table class="generator-table">
               <thead>
                 <tr>
-                  <th>序号</th>
+                  <th>项目公司</th>
+                  <th>机组</th>
                   <th>容量(MV)</th>
                   <th>状态(kWh)</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
+                  <td>湖北</td>
                   <td>#1</td>
-                  <td>0.00</td>
+                  <td>2*330MW</td>
                   <td class="generator-run">运行</td>
                 </tr>
                 <tr>
+                  <td>湖北</td>
                   <td>#2</td>
-                  <td>0.00</td>
+                  <td>2*330MW</td>
                   <td class="generator-stop">调停</td>
                 </tr>
                 <tr>
+                  <td>湖北</td>
                   <td>#3</td>
-                  <td>0.00</td>
+                  <td>2*330MW</td>
+                  <td class="generator-run">运行</td>
+                </tr>
+                <tr>
+                  <td>湖北</td>
+                  <td>#4</td>
+                  <td>2*330MW</td>
                   <td class="generator-repair">检修</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-        <div class="box-header" >
-            <div class="BH-left">
-                <h4>机组运行情况</h4>
-                <ul>
-                    <li>机组运行情况</li>
-                    <li>机组运行情况二</li>
-                </ul>
-            </div>
-            <div class="BH-right">
-                <input type="date"  value="2017-04-24"/>
-            </div>
+        <div class="chart-box-container">
+          <div class="box-header" >
+              <div class="BH-left">
+                  <h4>火电机组状态</h4>
+                  <ul>
+                      <li>火电机组运行情况</li>
+                  </ul>
+              </div>
+              <div class="BH-right">
+                  <input type="date"  value="2017-04-24"/>
+              </div>
+          </div>
+          <div class="chart-box">
+            <ul>
+              <li class="current">
+                <div id="chart5"></div>
+              </li>
+            </ul>  
+          </div>
         </div>
-        <div class="chart-box">
-            <div id="chart5"></div>
+        <div class="chart-box-container">
+          <div class="box-header" >
+              <div class="BH-left">
+                  <h4>指标环形对比</h4>
+                  <ul>
+                      <li>指标环形对比</li>
+                  </ul>
+              </div>
+              <div class="BH-right">
+                  <input type="date"  value="2017-04-24"/>
+              </div>
+          </div>
+          <div class="chart-box">
+              <div id="chart3"></div>
+          </div>
         </div>
-        <div class="box-header" >
-            <div class="BH-left">
-                <h4>指标环形对比</h4>
-                <ul>
-                    <li>指标环形对比</li>
-                    <li>指标环形对比二</li>
-                </ul>
-            </div>
-            <div class="BH-right">
-                <input type="date"  value="2017-04-24"/>
-            </div>
+        <div class="chart-box-container">
+          <div class="box-header" >
+              <div class="BH-left">
+                  <h4>历史统计</h4>
+                  <ul>
+                      <li>历史统计</li>
+                  </ul>
+              </div>
+              <div class="BH-right">
+                  <input type="date"  value="2017-04-24"/>
+              </div>
+          </div>
+          <div class="history-box clearfloat">
+              <div class="history-left">
+                  <table>
+                      <tr>
+                          <td><h5>历史平均填报时间 : </h5></td>
+                          <td><p>18:30</p></td>
+                      </tr>
+                      <tr>
+                          <td><h5>累计误填次数 : </h5></td>
+                          <td><p>6次</p></td>
+                      </tr>
+                      <tr>
+                          <td><h5>历史最早填报日期 : </h5></td>
+                          <td><p>2017/04/26</p></td>
+                      </tr>
+                      <tr>
+                          <td><h5>历史最晚填报日期 : </h5></td>
+                          <td><p>2017/04/26</p></td>
+                      </tr>
+                  </table>
+              </div>
+              <!-- <div class="history-right">
+                  <div id="chart4"></div>
+              </div> -->
+          </div>
         </div>
-        <div class="chart-box">
-            <div id="chart3"></div>
-        </div>
-        <div class="box-header" >
-            <div class="BH-left">
-                <h4>历史异常统计</h4>
-                <ul>
-                    <li>历史异常统计一</li>
-                    <li>历史异常统计二</li>
-                </ul>
-            </div>
-            <div class="BH-right">
-                <input type="date"  value="2017-04-24"/>
-            </div>
-        </div>
-        <div class="history-box clearfloat">
-            <div class="history-left">
-                <table>
-                    <tr>
-                        <td><h5>历史平均填报时间 : </h5></td>
-                        <td><p>36分钟</p></td>
-                    </tr>
-                    <tr>
-                        <td><h5>累计误填次数 : </h5></td>
-                        <td><p>6次</p></td>
-                    </tr>
-                    <tr>
-                        <td><h5>历史最早填报日期 : </h5></td>
-                        <td><p>2017/04/26</p></td>
-                    </tr>
-                    <tr>
-                        <td><h5>历史最晚填报日期 : </h5></td>
-                        <td><p>2017/04/26</p></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="history-right">
-                <div id="chart4"></div>
-            </div>
-        </div>
+        
         
         <script type="text/javascript">
             jQuery(document).ready(function($) {
+
+                //顶部栏折叠菜单
+                $('.header-menu-box ol').click(function(event) {
+                    $(this).toggleClass('current');
+                    $('header').toggleClass('current');
+                    $('.header-menu-box ul').toggleClass('current');
+                });
 
                 //通用折叠菜单
                 $('.box-header .BH-left').click(function(event) {
@@ -543,9 +677,25 @@
                     }
                     $(this).toggleClass('current');
                     $(this).find('li').click(function(event) {
-                    var typeText=$(this).text();
-                    $(this).closest('.BH-left').children('h4').text(typeText);
+                        var typeText=$(this).text();
+                        $(this).closest('.BH-left').children('h4').text(typeText);
+
+                        //图表通用切换
+                        var chartIndex=$(this).index();
+                        $(this).closest('.chart-box-container').find('.chart-box').children('ul').children('li').eq(chartIndex).addClass('current').siblings('li').removeClass('current');
                     });
+                });
+
+                //火电风电类型切换
+                $('.power-type-select .BH-left ul>li').click(function(event) {
+                  var ptIndex=$(this).index();
+                  $('ul.power-type>li').eq(ptIndex).addClass('current').siblings('li').removeClass('current');
+                });
+                //指标4类型切换
+                $('.classify-box ul li').click(function(event) {
+                  $(this).addClass('current').siblings('li').removeClass('current');
+                  var classifyIndex=$(this).index();
+                  $(this).closest('.table-box').find('.classify-content-box').children('li').eq(classifyIndex).addClass('current').siblings('li').removeClass('current')
                 });
 
                 //表格头部折叠菜单
@@ -558,28 +708,13 @@
                     $(this).toggleClass('current');
                     $(this).find('li').click(function(event) {
                         var typeText=$(this).text();
-                        $('.table-header .table-title h4').text(typeText);
+                        $(this).closest('.table-title').children('h4').text(typeText);
                     });
                 });
-
-                //pageSwitch配置
-                var pwTable=new pageSwitch('pw-table-box',{
-                    direction:0
-                });
-
-                //盒子高度
-                $('#pw-table-box').height($('.pw-table-in').eq(0).children('.table-data-head').height()+$('.pw-table-in').eq(0).children('.table-data').height()+10);
-
-                pwTable.on('before',function(a,b){
-                    $('.classify-box ul li').eq(b).addClass('current').siblings('li').removeClass('current');
-                    /* $('#pw-table-box').height($('.pw-table-in').eq(b).children('.table-data-head').height()+$('.pw-table-in').eq(b).children('.table-data').height()+10)*/
-                })
-                pwTable.on('after',function(a,b){
-                    $('#pw-table-box').height($('.pw-table-in').eq(a).children('.table-data-head').height()+$('.pw-table-in').eq(a).children('.table-data').height()+10)
-                })
-
-                $('.classify-box ul li').click(function(event) {
-                    pwTable.slide($(this).index())
+                //表格内指标类型切换
+                $('.table-header .table-title ul li').click(function(event) {
+                  var tbTitleIndex=$(this).index();
+                  $(this).closest('.table-quota-container').find('.table-quota-type').children('li').eq(tbTitleIndex).addClass('current').siblings('li').removeClass('current');
                 });
 
             });
@@ -601,7 +736,7 @@
                 }());
 
 
-                $('#chart1').highcharts({
+                /*$('#chart1').highcharts({
                     chart: {
                         type: 'area',
                         backgroundColor:null,
@@ -680,30 +815,24 @@
                         data: [4,7,8,12,14,16,19,21,24,26,29,31,34,36,39,41,44,46,49,49,49,51,52,55,59,66,69,71,74,76,79,81],
                         color:'#14f5f5'
                     }]
-                });
+                });*/
 
                 $('#chart2').highcharts({
                     chart: {
                         type: 'column',
                         backgroundColor: null,
-                        spacingBottom: 0,
-                        spacingTop: 10,
-                        spacingLeft: 0,
-                        spacingRight:10,
-
-                        // 指定外边距
-                        margin: null,
+                        spacingRight: 10,
+                        spacingTop: 50,
                     },
                     title: null,
                     xAxis: {
-                        categories: ['一月', '二月', '三月', '四月', '五月', '六月'],
+                        categories: [ '06/01','06/02','06/03','06/04'],
                         crosshair: true,
                         lineColor: '#37fffe',
                         tickLength: 0,
                         labels: {
                             style: {
-                                color: '#35fffd',//颜色
-                                fontSize:22/75+'rem'
+                                color: '#35fffd'//颜色
                             },
                             y:30
                         }
@@ -716,15 +845,24 @@
                         labels: {
                             style: {
                                 color: '#35fffd'//颜色
-                            },
-                            y:20
+                            }
                         }
+                    }, {
+                        title: {
+                            text: null
+                        },
+                        labels: {
+                            style: {
+                                color: '#f5f1b7'//颜色
+                            }
+                        },
+                        opposite: true
                     }],
                     tooltip: {
                         backgroundColor:'rgba(0,0,0,.5)',
-                        headerFormat: '<span style="font-size:0.27rem">{point.key}</span><table>',
+                        headerFormat: '<span style="font-size:22px">{point.key}</span><table>',
                         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                        '<td style="padding:0"><b>{point.y:.1f} kWh</b></td></tr>',
+                        '<td style="padding:0"><b>{point.y:.1f} kMWh</b></td></tr>',
                         footerFormat: '</table>',
                         shared: true,
                         useHTML: true
@@ -733,7 +871,13 @@
                         enabled: false
                     },
                     legend: {
-                        enabled: false
+                        floating:false,
+                        align:'center',
+                        verticalAlign: 'bottom',
+                        itemStyle: {
+                            color: '#FFF',
+                            fontSize:24
+                        }
                     },
                     plotOptions: {
                         column: {
@@ -742,10 +886,92 @@
                         }
                     },
                     series: [{
-                        name: '2016',
-                        data: [2000,2500,2300,3100,3500,2400],
+                        name: '湖北',
+                        data: [13, 12, 15, 14],
                         color: '#37fffe'
-                    }]
+                    }, ]
+                });
+                
+                $('#chart2_2').highcharts({
+                    chart: {
+                        type: 'column',
+                        backgroundColor: null,
+                        spacingRight: 40,
+                        spacingTop:20,
+                    },
+                    title: {
+                        text: '煤炭可用天数',
+                        align: 'left',
+                        style: {
+                            color: '#FFFFFF',
+                            fontSize:'20px'
+                        }
+                    },
+                    xAxis: {
+                        categories: [ '06/01','06/02','06/03','06/04'],
+                        crosshair: true,
+                        lineColor: '#37fffe',
+                        tickLength: 0,
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            },
+                            y:30
+                        }
+                    },
+                    yAxis: [{
+                        min: 0,
+                        title: {
+                            text: null
+                        },
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            }
+                        }
+                    }, {
+                        title: {
+                            text: null
+                        },
+                        labels: {
+                            style: {
+                                color: '#f5f1b7'//颜色
+                            }
+                        },
+                        opposite: true
+                    }],
+                    tooltip: {
+                        backgroundColor:'rgba(0,0,0,.5)',
+                        headerFormat: '<span style="font-size:22px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f} 天</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    legend: {
+                        floating:false,
+                        align:'center',
+                        verticalAlign: 'bottom',
+                        itemStyle: {
+                            color: '#FFF',
+                            fontSize:24
+                        }
+                    },
+                    plotOptions: {
+                        column: {
+                            pointPadding: 0.1,
+                            borderWidth: 0
+                        }
+                    },
+                    series: [{
+                        name: '湖北',
+                        data: [13, 12, 15, 14],
+                        color: '#37fffe'
+                    }, ]
                 });
                 
                 Highcharts.chart('chart3', {
@@ -952,6 +1178,74 @@
                             ['机组调停',       15.0],
                             ['机组检修',    10.0],
                         ]
+                    }]
+                });
+
+                $('#chart6').highcharts({
+                    chart:{
+                        type:'line',
+                        backgroundColor: null,
+                        spacingRight: 50 ,
+                    },
+                    title: {
+                        text: '供电煤耗',
+                        x: 10,
+                        align: 'left',
+                        style: {
+                            color: '#FFFFFF',
+                            fontSize:'14px'
+                        }
+                    },
+                    subtitle: {
+                        text: '湖北',
+                        x: 10,
+                        align: 'left',
+                        style: {
+                            color: '#FFFFFF',
+                            fontSize:'14px'
+                        }
+                    },
+                    xAxis: {
+                        categories: ['06/01', '06/02', '06/03', '06/04', '06/05', '06/06'],
+                        crosshair: true,
+                        lineColor: '#37fffe',
+                        tickLength: 0,
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            }
+                        }
+                    },
+                    yAxis: {
+                        title: null,
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }],
+                        labels: {
+                            style: {
+                                color: '#35fffd'//颜色
+                            }
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        valueSuffix: 't',
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0,
+                        enabled: false
+                    },
+                    series: [{
+                        name: '煤耗',
+                        data: [266.2, 304.1, 282.5, 291.0, 289.5, 309.9],
+                        color: '#35fffd',
                     }]
                 });
 
