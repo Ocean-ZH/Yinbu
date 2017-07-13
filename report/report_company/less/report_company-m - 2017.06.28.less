@@ -8,7 +8,7 @@ header{
     box-sizing:border-box;
     padding: 0 20/75rem;
     border-bottom: 2px solid #076c8b;
-    background-color: rgba(10,50,80,.5);
+    background-color: #143c64;
     text-align: center;
     position:relative;
     transition:all .5s;
@@ -84,7 +84,6 @@ header{
         position:absolute;
         top: 0;
         right: 0;
-        display:none;
         .search-icon-box{
             position:absolute;
             right: 30/75rem;
@@ -111,16 +110,21 @@ header{
                 width: 450/75rem;
             }
         }
+        input{
+
+        }
     }
+    
+
 }
 header.current{
     background-color: rgba(0,0,0,.5);
 }
 
 .box-header{
-    width: 100%;
+    width: 10rem;
     height: 90/75rem;
-    background-color: rgba(0,0,0,.3);
+    background-color: #0f2e4d;
     border-bottom: 1px solid #36e1ed;
     margin-top:20/75rem;
     .BH-left{
@@ -201,7 +205,7 @@ header.current{
         height: 90/75rem;
         position:relative;
         input{
-            background-color: rgba(0,0,0,.05);
+            background-color: transparent;
             width:auto;
             font-size:24/75rem;
             border: none;
@@ -211,44 +215,32 @@ header.current{
             top: 50%;
             transform:translateY(-50%);
         }
-        input[type=date]:focus{
-            background-color: rgba(0,0,0,.05);
-        }
     }
 }
-.power-type-select{
+.power-type{
     border-bottom: 2px solid rgba(0,0,0,.8);
     box-shadow:0 1px 4px 2px rgba(0,0,0,.9);
     margin-top:0;
 }
-ul.power-type{
-
-}
-ul.power-type>li{
-    display:none;
-}
-ul.power-type>li.current{
-    display:block;
-}
 
 
 .table-box{
-    padding:0 10/75rem;
+    padding:0 20/75rem;
     transition:height .4s;
-    background-color: rgba(2,20,40,.3);
+    background-color: rgba(15,55,90,.8);
 
     .classify-box{
-        height: 80/75rem;
+        height: 60/75rem;
         width: 100%;
-        background-color: rgba(2,20,10,.4);
+        background-color: #0f2e4d;
         ul{
-            height: 80/75rem;
+            height: 60/75rem;
             li{
                 float: left;
                 width: 25%;
                 text-align: center;
-                line-height: 80/75rem;
-                font-size:28/75rem;
+                line-height: 60/75rem;
+                font-size:24/75rem;
                 color:#aaa;
             }
             li.current{
@@ -257,7 +249,7 @@ ul.power-type>li.current{
             }
             li.current::after{
                 content:"";
-                width:100/75rem;
+                width:80/75rem;
                 height:3px;
                 background-color: #fff;
                 position:absolute;
@@ -267,21 +259,11 @@ ul.power-type>li.current{
             }
         }
     }
-    .classify-content-box{
-        >li{
-            display:none;
-        }
-        >li.current{
-            display:block;
-        }
-    }
-
     .table-header{
         width: 100%;
-        height: 120/75rem;
-        background-color: rgba(5,20,40,.35);
+        height: 80/75rem;
+        background-color: #0e3254;
         border-bottom: 2px solid rgba(255,255,255,.6);
-        border-top: 2px solid rgba(255,255,255,.6);
         .table-title{
             float: left;
             height: 100%;
@@ -291,15 +273,15 @@ ul.power-type>li.current{
             z-index:7;
             h4{
                 width:auto;
-                height: 120/75rem;
-                padding-top: 45/75rem;
+                height: 80/75rem;
+                padding-top: 25/75rem;
                 padding-right: 30/75rem;
                 float: left;
                 position:relative;
                 font-weight:normal;
                 font-size:26/75rem;
             }
-            /* h4::after{
+            h4::after{
                 content:"";
                 dispplay:block;
                 float: right;
@@ -313,7 +295,7 @@ ul.power-type>li.current{
                 right: 0;
                 top: 30/75rem;
                 transition:all .5s ;
-            } */
+            }
             ul{
                 min-width: 100%;
                 height:auto;
@@ -347,7 +329,7 @@ ul.power-type>li.current{
             width: 4px;
             height: 36px;
             background-color: #fffd58;
-            margin-top: 43/75rem;
+            margin-top: 23/75rem;
             margin-right: 20/75rem;
         }
         .table-title.current{
@@ -356,103 +338,74 @@ ul.power-type>li.current{
             }
         }
     }/*table-header*/
-    ul.table-quota-type{
-        padding-bottom: 20/75rem;
-        background-color: rgba(0,0,0,.1);
-        border-bottom: 2px solid #37fffe;
-        >li{
-            display:none;
-        }
-        >li.current{
-            display:block;
+    #pw-table-box{
+        width:100%;
+        position:relative;
+        transition:height .1s;
+        .pw-table-in{
+            position:absolute;   
         }
     }
-
-    .table-content-main{
+    .table-data-head{
         width: 100%;
-        position:relative;
-        overflow:hidden;
-        >ol{
+        li{
+            float: left;
+            width:33.333%;
+            height: 140/75rem;
+            background-color: #174574;
+            text-align: center;
+            position:relative;
+            h3{
+                font-size:32/75rem;
+                color:#fffd58;
+                font-weight:normal;
+                line-height: 80/75rem;
+            }
+            p{
+                font-size:22/75rem;
+                color:#FFF;
+            }
+        }
+        li::after{
+            content:"";
+            height: 120/75rem;
+            width: 2px;
+            background-color: #2368ae;
+            position:absolute;
+            right: 0;
+            top: 10/75rem;
+        }
+    }
+    .table-data{
+        width: 100%;
+        border-collapse: collapse;
+        li{
+            background-color: #2274ab;
             width: 100%;
-            >li{
-                width: 100%;
-                border-bottom: 1px solid #37fffe;
-                >dl{
-                    line-height: 75/75rem;
-                    overflow:hidden;
-                    width: 100%;
-                    >dt{
-                        float: left;
-                        width: 70%;
-                        padding-left: 60/75rem;
-                    }
-                    >dd{
-                        width: 30%;
-                        float: left;
-                    }
+            dl{
+                padding: 20/75rem 0;
+                border-bottom: 1px solid #36afe7;
+                dt{
+                    width: 70%;
+                    float: left;
+                    padding-left: 60/75rem;
+                }
+                dd{
+                    width: 30%;
+                    float: left;
                 }
             }
-            >li:nth-of-type(even){
-                background-color: rgba(35,110,170,.5);
+            dl::after{
+                content:"";
+                display:block;
+                width: 0;
+                height: 0;
+                visibility: hidden;
+                clear:both;
             }
         }
-        table{
-            border-collapse: collapse;
-        }
-        >table{
-
-        }
-        .table-fixed-box{
-            float: left;
-            width: 2.5rem-10/75rem;
-            overflow:hidden;
-            border-bottom: 2px solid rgba(55,170,230,.8);
-            table.table-main{
-                border-right: none;
-            }
-        }
-        .table-main-box{
-            float: left;
-            overflow-x:auto;
-            width:7.5rem - 10/75rem;
-            border-bottom: 2px solid rgba(55,170,230,.8);
-            table.table-main{
-                border-left: none;
-                tr{
-                    td{
-                        white-space:nowrap;
-                        text-overflow:ellipsis;
-                    }
-                }
-            }
-        }
-        table.table-main{
-            border: 1px solid rgba(255,255,255,.2);
-            min-width:100%;
-            table-layout: fixed;
-            tr{
-                border-bottom: 1px solid rgba(55,170,230,.8);
-                th{
-                    padding:0 20/75rem;
-                    min-width: 2.5rem;
-                    white-space:nowrap;
-                    line-height: 80/75rem;
-                }
-                td{
-                    padding:0 20/75rem;
-                    text-align: left;
-                    min-width:2.5rem;
-                    line-height: 80/75rem;
-                } 
-            }
-            tr:nth-child(even){
-                background-color: rgba(0,0,0,.2);
-            }
-            thead{
-                tr{
-                    background-color: rgba(0,0,0,.1);
-                }
-            }
+        li:nth-child(even){
+            background-color: #144b78;
         }
     }
 }/*table-box*/
@@ -468,32 +421,11 @@ ul.power-type>li.current{
 }
 #chart2{
     width: 100%;
-    height:400/75rem;
-}
-#chart2_2,#chart2_3{
-    width: calc(10rem - 40/75rem);
-    height:400/75rem;
+    height:360/75rem;
 }
 #chart3{
     width: 100%;
     height:360/75rem;
-}
-#chart5_2,#chart6,#chart6_2,#chart6_3,#chart6_4{
-    width: calc(10rem - 40/75rem);
-    height: 400/75rem;
-}
-
-.chart-box-container{
-    .chart-box{
-        >ul{
-            >li{
-                display:none;
-            }
-            >li.current{
-                display:block;
-            }
-        }
-    }
 }
 
 .capacity-box,{
@@ -637,14 +569,13 @@ ul.power-type>li.current{
                     padding:20/75rem 10/75rem;
                     /* border-right: 1px solid rgba(55,170,230,.8); */
                     min-width: 2.5rem;
-                    text-align: left;
                 }
                 th:last-child{
                     border:none;
                 }
                 td{
                     padding:20/75rem 10/75rem;
-                    text-align: left;
+                    text-align: center;
                     width:2.5rem;
                 }
                 td:last-child{
@@ -686,7 +617,7 @@ ul.power-type>li.current{
     border-bottom: 1px solid #1970b0;
     margin-bottom: 40/75rem;
     .history-left{
-        width:100%;
+        width:50%;
         height: 300/75rem; 
         float: left;
         table{
@@ -704,10 +635,19 @@ ul.power-type>li.current{
                     p{
                         font-size:24/75rem;
                         color:#f9f726;
-                        text-align: left;
+                        text-align: right;
                     }
                 }
             }
+        }
+    }
+    .history-right{
+        width: 50%;
+        height:300/75rem;
+        float: right;
+        #chart4{
+            widows: 100%;
+            height:300/75rem;
         }
     }
 }
