@@ -1,0 +1,1533 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" />
+    <!-- ie7以ie8识别 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>华润</title>
+    <!-- css加载 -->
+    <link rel="stylesheet" href="css/base.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/caozuoKaoping.css" type="text/css">
+    <link href="css/video-js.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <script src="js/huarun.js"></script>
+    <script type="text/javascript">
+        //读取用户配置，调用不同样式
+        window.onload = function ReadStyle() {
+            var user_name = parent.$("#currentusername").html();
+            $.get("http://10.60.141.145:18094/ReadStyle.ashx?user_name="+user_name,function(result){
+                if (result != "style") {
+                	//调用不同的style文件
+                    $("<link>")
+                    .attr({
+                        rel: "stylesheet",
+                        type: "text/css",
+                        href: "css/"+result+".css"
+                    })
+                    .appendTo("head");
+                    //修改大框架背景
+                    parent.$(".smart-style-5").css("background","url(../../content/img/glass_"+result+".jpg) no-repeat center top fixed");
+                }
+            });
+
+        }
+
+     function syzoom(z1,z2){
+	 console.log("click了");
+	     //alert($(window).width() );
+         $('.menubox').css({ width: ("auto") });
+         var zoom1=$(window).width() / z1;
+         var zoom2=$(window).height() / z2;
+         $("body").css("zoom", zoom1);
+         if (zoom2<zoom1) {$("body").css("zoom", zoom2);}
+     }
+     $(function() {
+        syzoom(1100,920);
+     });
+	 $(document).ready(function () {
+		$("#parentReuse").click(function () {
+			syzoom(1100,920);
+		})
+	})
+    </script>
+    <!-- 取数js Start -->
+    <script src="js/CA_getData.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            //获取数据
+            getData();
+
+            pageTimer = setInterval(function(){
+                getData()
+            }, 3000);
+        });
+    </script>
+    <script type="text/javascript">
+        /*一些全局变量Star*/
+        //数据刷新计时器
+        var pageTimer2 = null;
+        /*一些全局变量End*/
+
+        /*一些方法*/
+        function arrNumtoFixed2(arr,fixNum){
+            var fixNum = fixNum || 2;
+            var resultArr = [];
+            for(var i = 0; i < arr.length; i++){
+                resultArr.push(parseFloat(arr[i].toFixed(2)));
+            }
+             return resultArr;
+        }
+        /*一些方法*/
+
+        jQuery(document).ready(function($) {
+            //获取数据
+            getOtherData();
+
+            pageTimer2 = setInterval(function(){
+                getOtherData();
+            }, 3000);
+        });
+
+        //获取其他的数据
+        function getOtherData(){
+            jQuery.ajax({//获取[column-id]数据
+                async : true,
+                url : "http://10.60.141.145:8092/ChartDataHandler.ashx?",
+                type : "Post",
+                data : "mode=1&points=" + columnGetData() + "&temp=" + Math.random().toFixed(8),
+                error : function(result,status,xhr){
+                    console.log(status);
+                    console.log(xhr);
+                },
+                success : function(result,status,xhr){
+                    var result = JSON.parse(result);
+                    //console.log(result);
+                    columnWrite(result);
+                },
+            });
+
+            jQuery.ajax({//获取[chart-id]数据
+                async : true,
+                url : "http://10.60.141.145:8092/ChartDataHandler.ashx?",
+                type : "Post",
+                data : "mode=1&points=" + chartGetData() + "&temp=" + Math.random().toFixed(8),
+                error : function(result,status,xhr){
+                    console.log(status);
+                    console.log(xhr);
+                },
+                success : function(result,status,xhr){
+                    var result = JSON.parse(result);
+                    //console.log(result);
+                    chartWrite(result);
+                },
+            });
+
+            jQuery.ajax({//获取[chart-period]数据
+                async : true,
+                url : "http://10.60.141.145:8092/ChartDataHandler.ashx?",
+                type : "Post",
+                data : {
+                    mode : 2,
+                    points : chartPeriodGetData(),
+                    temp : Math.random().toFixed(8),
+                    period : 86400,
+                    startTime : GetDateTimeStr(-6),
+                    endTime : GetDateTimeStr(0),
+                },
+                error : function(result,status,xhr){
+                    console.log(status);
+                    console.log(xhr);
+                },
+                success : function(result,status,xhr){
+                    var result = JSON.parse(result);
+                    //console.log(result);
+                    chartPeriodWrite(result);
+                },
+            });
+        }
+        //获取[column-id]画面点名
+        function columnGetData(){
+            var dataArr = $("[column-id]");
+            var dataIdArr = "";
+            for(var i=0; i<dataArr.length; i++){
+                dataIdArr += dataArr.eq(i).attr("column-id") + "|";
+            }
+            //console.log(dataIdArr);
+
+            return dataIdArr;
+        }
+
+        //[column-id]画面写入数据
+        function columnWrite(result){
+            var dataArr = $("[column-id]");
+            var heightVal = 0;
+            for(var i=0; i<dataArr.length; i++){
+                if(i == 0 || i==2){
+                    heightVal = result.Data[i].Data[0];
+                    heightVal = heightVal/1200;
+                }else if(i == 1 || i==3){
+                    heightVal = result.Data[i].Data[0];
+                    heightVal = heightVal/10;
+                }
+                dataArr.eq(i).css({"height":heightVal*100+"%",});
+            }
+        }
+
+        //获取[chart-id]画面点名
+        function chartGetData(){
+            var dataArr = $("[chart-id]");
+            var dataIdArr = "";
+            for(var i=0; i<dataArr.length; i++){
+                if(i==dataArr.length - 1){
+                    dataIdArr += dataArr.eq(i).attr("chart-id");
+                }else{
+                    dataIdArr += dataArr.eq(i).attr("chart-id") + "|";
+                }
+            }
+            //console.log(dataIdArr);
+
+            return dataIdArr;
+        }
+
+        //[chart-id]画面写入数据
+        function chartWrite(result){
+            var dataArr = [ydmyChart,yddlmyChart,ndmyChart,nddlmyChart];
+            var chartData = 0;
+            for(var i=0; i<dataArr.length; i++){
+                chartData = result.Data[i].Data[0];
+
+                dataArr[i].setOption({
+                    series: [{
+                        data: [chartData,(100-chartData)],
+                    }]
+                });
+            }
+        }
+
+        //获取[chart-period]画面点名
+        function chartPeriodGetData(){
+            var dataArr = $("[chart-period-id]");
+            var dataIdArr = "";
+            for(var i=0; i<dataArr.length; i++){
+                if(i==dataArr.length - 1){
+                    dataIdArr += dataArr.eq(i).attr("chart-period-id");
+                }else{
+                    dataIdArr += dataArr.eq(i).attr("chart-period-id") + "|";
+                }
+            }
+            //console.log(dataIdArr);
+
+            return dataIdArr;
+        }
+
+        //[chart-period]画面写入数据
+        function chartPeriodWrite(result){
+            console.log(result);
+
+            myChart4.setOption({
+                xAxis: [{
+                    data: [{
+                        value: GetDateTimeStr(-6).slice(0,10),
+                        // 突出周一
+                        textStyle: {
+                            color: '#46aaac'
+                        }
+                    }, {
+                        value: GetDateTimeStr(-5).slice(0,10),
+                        // 突出周一
+                        textStyle: {
+                            color: '#46aaac'
+                        }
+                    }, {
+                        value: GetDateTimeStr(-4).slice(0,10),
+                        // 突出周一
+                        textStyle: {
+                            color: '#46aaac'
+                        }
+                    }, {
+                        value: GetDateTimeStr(-3).slice(0,10),
+                        // 突出周一
+                        textStyle: {
+                            color: '#46aaac'
+                        }
+                    }, {
+                        value: GetDateTimeStr(-2).slice(0,10),
+                        // 突出周一
+                        textStyle: {
+                            color: '#46aaac'
+                        }
+                    }, {
+                        value: GetDateTimeStr(-1).slice(0,10),
+                        // 突出周一
+                        textStyle: {
+                            color: '#46aaac'
+                        }
+                    }, {
+                        value: GetDateTimeStr(0).slice(0,10),
+                        // 突出周一
+                        textStyle: {
+                            color: '#46aaac'
+                        }
+                    }]
+                }],
+                series: [
+                {
+                   name:'3#发电煤耗',
+                   data: arrNumtoFixed2(result.Data[0].Data),
+               },
+               {
+                 name:'4#发电煤耗',
+                 data: arrNumtoFixed2(result.Data[1].Data),
+             }]
+            });
+                
+            myChart.setOption({
+                xAxis: [{
+                    data: [{
+                        value: GetDateTimeStr(-6).slice(0,10),
+                        // 突出周一
+                        textStyle: {
+                            color: '#46aaac'
+                        }
+                    }, {
+                        value: GetDateTimeStr(-5).slice(0,10),
+                        // 突出周一
+                        textStyle: {
+                            color: '#46aaac'
+                        }
+                    }, {
+                        value: GetDateTimeStr(-4).slice(0,10),
+                        // 突出周一
+                        textStyle: {
+                            color: '#46aaac'
+                        }
+                    }, {
+                        value: GetDateTimeStr(-3).slice(0,10),
+                        // 突出周一
+                        textStyle: {
+                            color: '#46aaac'
+                        }
+                    }, {
+                        value: GetDateTimeStr(-2).slice(0,10),
+                        // 突出周一
+                        textStyle: {
+                            color: '#46aaac'
+                        }
+                    }, {
+                        value: GetDateTimeStr(-1).slice(0,10),
+                        // 突出周一
+                        textStyle: {
+                            color: '#46aaac'
+                        }
+                    }, {
+                        value: GetDateTimeStr(0).slice(0,10),
+                        // 突出周一
+                        textStyle: {
+                            color: '#46aaac'
+                        }
+                    }]
+                }],
+                series: [
+                    {
+                        name:'3#发电煤耗当日均值',
+                        type:'bar',
+                        data:arrNumtoFixed2(result.Data[0].Data),
+                    },
+                    {
+                        name:'4#发电煤耗当日均值',
+                        type:'bar',
+                        data:arrNumtoFixed2(result.Data[1].Data),
+                    },
+                    {
+                        name:'3#发电煤耗7日均值',
+                        type:'line',
+                        yAxisIndex: 1,
+                        data:arrNumtoFixed2(result.Data[2].Data),
+                    },
+                    {
+                        name:'4#发电煤耗7日均值',
+                        type:'line',
+                        yAxisIndex: 1,
+                        data:arrNumtoFixed2(result.Data[3].Data),
+                }]
+            });
+        
+        }
+    </script>
+    <!-- 取数js End -->
+</head>
+<style>
+    /*页面高度大于可视区时*/
+    body
+    {
+        padding-bottom: 45px;
+        overflow-y: scroll;
+    }
+</style>
+<body class="loadbg">
+<a id="parentReuse"></a>
+    <!-- <div class="responsewarp headbox" id="headbox">
+        <div class="logobox">
+            <a href="#">
+                <img src="images/logo.png" class="logo" /></a>
+        </div>
+        <div class="menubox">
+            <ul class="ul0">
+                <li class="li0 hover"><a href="xitongShouye.html"><span class="micon micon01"></span>
+                    系统首页</a></li>
+                <li class="li1"><a href="xingnengFenxi.html"><span class="micon micon02"></span>性能分析</a></li>
+                <li class="li2"><a href="caozuoZhinan.html"><span class="micon micon03"></span>操作指导</a></li>
+                <li class="li3"><a href="caozuoKaoping.html"><span class="micon micon07"></span>操作考评</a></li>
+                <li class="li4"><a href="KPIkaoping.html"><span class="micon micon08"></span>KPI考评</a></li>
+                <li class="li5"><a href="chaoxianTongji.html"><span class="micon micon04"></span>超限统计</a></li>
+                <li class="li6"><a href="qushiFenxi.html"><span class="micon micon05"></span>趋势分析</a></li>
+                <li class="li7"><a href="jisuanPeizhi.html"><span class="micon micon06"></span>计算配置</a></li>
+                <li class="li8"><a href="shujuLuru.html"><span class="micon micon09"></span>数据录入</a></li>
+                <li class="li9"><a href="gerenPeizhi.html"><span class="micon micon10"></span>个人设置</a></li>
+            </ul>
+            <ul class="ulbg">
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+            </ul>
+            <ul class="ul1">
+                <li><a href="index.html"><span class="micon micon11"></span>安全退出</a></li>
+                <li><a href="javascript:;" id="quanping"><span class="micon micon12"></span>全屏管理</a></li>
+            </ul>
+        </div>
+        <div class="sy-show">            
+            <div class="sy-showfl"></div>       
+            <div class="sy-showfr"></div>
+        </div>
+    </div>
+    <div class="togbtn" id="togshouqi">
+        收起</div> -->
+    <div class="" id="sy1">
+        <!--responsewarp jizucontent-->
+        <div class="sy_jizucanshu">
+            <div class="sy_jizucs" id="sycsnhu1">
+                <h3 class="ac sy-new-tittle">华润湖北 <b>#3机组</b></h3>               
+                <div class="jizucs">
+                    <div class="cs">
+                    	<div class="fl-zb"><img src="images/sy_xiushibg.png"/><span class="sp1" id="gd1" data-id="HRHB_PUBSYS03_AO030025_AC">0.00</span>
+                    		<span class="sp2"><b>[ 供电煤耗 ]</b><br/>(g/kWh)</span>
+                    	</div>
+                          <script type="text/javascript" src="js/countUp.min.js"></script>
+                            <script type="text/javascript">
+                                var gd1=[307.08,308.85,305.75,305.33];
+                                var gd2=[292.42,295.42,297.42,297.42];
+                                var fd1=[290.41,292.85,294.75,298.33];
+                                var fd2=[276.29,278.29,272.75,274.33];
+                                var index= 0;
+                                function getgd(){
+                                    if(index>=3){index=0;}else{index++;}
+                                    var options = {
+                                        useEasing: true,
+                                        useGrouping: true,
+                                        separator: ',',
+                                        decimal: '.',
+                                        prefix: '',
+                                        suffix: ''
+                                };
+                                var demo = new CountUp("gd1", 0,gd1[index], 2, 1.5, options);
+                                demo.start();
+                                var demo1 = new CountUp("gd2", 0,gd2[index], 2, 1.5, options);
+                                demo1.start();
+                                var demo2 = new CountUp("fd1", 0,fd1[index], 2, 1.5, options);
+                                demo2.start();
+                                var demo3 = new CountUp("fd2", 0,fd2[index], 2, 1.5, options);
+                                demo3.start();
+                              };
+                            $(window).ready(function () {
+                                //getgd();
+                                //setInterval("getgd()", 5000);
+                            })
+                            </script>
+                    	<div class="fl-kedu">
+                    	    <div class="kedu kedu1">
+                    	    	<span class="kd1">1200</span>
+                    	    	<span class="kd2">600</span>
+                    	    	<span class="kd3">0</span>
+                    	    	<span class="kd4">
+                    	    		<div class="num" style="height: 50%;" column-id="HRHB_ELCSYS03_AI030001_AC"></div>
+                    	    	</span>
+                    	    </div>
+                    	    <div class="kedu kedu2">
+                    	    	<span class="kd1">10</span>
+                    	    	<span class="kd2">5</span>
+                    	    	<span class="kd3">0</span>
+                    	    	<span class="kd4" style="overflow-y:hidden;">
+                    	    		<div class="num" style="height: 50%;" column-id="HRHB_PUBSYS03_AO030002_AC"></div>
+                    	    	</span>  
+                    	    	<img src="images/tableline.png" class="gexian"/>
+                    	    </div>
+                    	    <div class="keduname">
+                                <span class="sp"><b><span style="color: #fff;font-size: 25px;line-height: 20px;" data-id="HRHB_ELCSYS03_AI030001_AC">0.00</span>(MW)</b><br/><b>[ 负荷 ]</b><br/><b></b></span>
+                                <span class="sp"><b><span style="color: #fff;font-size: 25px;line-height: 20px;" data-id="HRHB_PUBSYS03_AO030002_AC">0.00</span>(%)</b><br/><b>[ 厂用电率 ]</b><br/><b></b></span>
+
+	                    	</div>
+                    	</div>
+                    	<div class="fl-zb"><img src="images/sy_xiushibg.png"/><span class="sp1" id="fd1" data-id="HRHB_PUBSYS03_AO030023_AC">0.00</span>
+                    		<span class="sp2"><b>[ 发电煤耗 ]</b><br/>(g/kWh)</span>
+                    	</div>
+                    </div>
+                    <div class="zb">
+                        <i>[ 机 组 经 济 指 标 ]</i> 
+                    </div>
+                    <table width="98%" class="sytable fl">
+                        <tr>
+                            <th class="blackbg" width="20%">
+                                <img src="images/xiegang.png" />
+                            </th>
+                            <th  width="20%">
+                                发电功率<br/>
+                                <small>（MW）</small>
+                            </th>
+                            <th class="blackbg"  width="20%">
+                                发电煤耗<br/>
+                                <small>（g/kWh）</small>
+                            </th>
+                            <th  width="20%">
+                                供电煤耗<br/>
+                                <small>（g/kWh）</small>
+                            </th>
+                            <th class="blackbg"  width="20%">
+                                厂用电率<br/>
+                                <small>(%)</small>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                小时平均
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS03_AO030052">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS03_AO030048">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS03_AO030050">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS03_AO030051">0.00</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;昨日平均
+                            </td>
+                            <td>
+                                <b data-id="HRHB_PUBSYS03_AI030096">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_PUBSYS03_AI030093">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_PUBSYS03_AI030094">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_PUBSYS03_AI030095">0.00</b>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="sy_jizucs" id="sycsnhu2">
+                <h3 class="ac sy-new-tittle">
+                    华润湖北 <b>#4机组</b></h3>
+               
+                <div class="jizucs">
+                    <div class="cs">
+                    	<div class="fl-zb"><img src="images/sy_xiushibg.png"/><span class="sp1" id="gd2" data-id="HRHB_PUBSYS04_AO040025_AC">0.00</span>
+                    		<span class="sp2"><b>[ 供电煤耗 ]</b><br/>(g/kWh)</span>
+                    	</div>
+                    	<div class="fl-kedu">
+                    	    <div class="kedu kedu1">
+                    	    	<span class="kd1">1200</span>
+                    	    	<span class="kd2">600</span>
+                    	    	<span class="kd3">0</span>
+                    	    	<span class="kd4" style="overflow-y:hidden;">
+                    	    		<div class="num" style="height:50%;" column-id="HRHB_ELA_PUBSYS04_AO040052"></div>
+                    	    	</span>
+                    	    </div>
+                    	    <div class="kedu kedu2">
+                    	    	<span class="kd1">10</span>
+                    	    	<span class="kd2">5</span>
+                    	    	<span class="kd3">0</span>
+                    	    	<span class="kd4">
+                    	    		<div class="num" style="height: 50%;" column-id="HRHB_ELA_PUBSYS04_AO040051"></div>
+                    	    	</span>         
+                    	    	<img src="images/tableline.png" class="gexian"/>           	    	
+                    	    </div>
+                    	    <div class="keduname">
+	                        <span class="sp"><b><span style="color: #fff;font-size: 25px;line-height: 20px;" data-id="HRHB_ELCSYS04_AI040001_AC">0.00</span>(MW)</b><br/><b>[ 负荷 ]</b><br/><b></b></span>
+                            <span class="sp"><b><span style="color: #fff;font-size: 25px;line-height: 20px;" data-id="HRHB_PUBSYS04_AO040002_AC">0.00</span>(%)</b><br/><b>[ 厂用电率 ]</b><br/><b></b></span>
+	                    	</div>
+                    	</div>
+                    	<div class="fl-zb"><img src="images/sy_xiushibg.png"/><span class="sp1" id="fd2" data-id="HRHB_PUBSYS04_AO040023_AC">0.00</span>
+                    		<span class="sp2"><b>[ 发电煤耗 ]</b><br/>(g/kWh)</span>
+                    	</div>
+                    </div>
+                    <div class="zb">
+                        <i>[ 机 组 经 济 指 标 ]</i> 
+                    </div>
+                    <table width="98%" class="sytable fl">
+                        <tr>
+                            <th class="blackbg"  width="20%">
+                                <img src="images/xiegang.png" />
+                            </th>
+                            <th width="20%">
+                                发电功率<br/>
+                                <small>( MW )</small>
+                            </th>
+                            <th class="blackbg" width="20%">
+                                发电煤耗<br/>
+                                <small>(g/kWh)</small>
+                            </th>
+                            <th width="20%">
+                                供电煤耗<br/>
+                                <small>(g/kWh)</small>
+                            </th>
+                            <th class="blackbg" width="20%">
+                                厂用电率<br/>
+                                <small>(%)</small>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                小时平均
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS04_AO040052">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS04_AO040048">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS04_AO040050">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS04_AO040051">0.00</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                昨日平均
+                            </td>
+                            <td>
+                                <b data-id="HRHB_PUBSYS04_AI040096">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_PUBSYS04_AI040093">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_PUBSYS04_AI040094">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_PUBSYS04_AI040095">0.00</b>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="sy_jizucs2">
+            	<div class="sy-twocol twocolbg">
+		                <h2 class="top_tt">
+		                    <img src="images/kpicon2.png"/><span class="sp1" style="color: #0C1244">月度电量完成情况
+		                    </span></h2>
+		                <div class="sy-twocolcon">
+		                	<div class="sp1" id="ydsjtubiao" style=" height: 115px; width: 135px;   position: relative;z-index: 1;" chart-id="HRHB_ELCSYS12_AO120025">
+                            </div>
+                             <div class="sp1" id="yddltubiao" style=" height: 115px; width: 135px; left:-135px;   position: relative;z-index: 2;" chart-id="HRHB_ELCSYS12_AO120026">
+                            </div>
+                            <script type="text/javascript">
+                                var yddom = document.getElementById("ydsjtubiao");
+                                var ydmyChart = echarts.init(yddom);
+                                var app = {};
+                                option = null;
+                                app.title = '主要指标月度值';
+                                option = {
+                                    tooltip: {
+                                        trigger: 'item',
+                                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                                    },
+                                    grid: {
+                                        left: '5%',
+                                        right: '1%',
+                                        bottom: '5%',
+                                        top: '5%',
+                                        containLabel: true
+                                    },
+                                      color: ['#3695bb',  '#77e8d5'],
+                                    series: [
+                                    {
+                                        name:'主要指标月度值',
+                                        type:'pie',
+                                        radius: ['70%', '95%'],
+                                        avoidLabelOverlap: false,
+                                        labelLine: {
+                                            normal: {
+                                                show: false
+                                            }
+                                        },
+                                        data:[0,0]
+                                    }
+                                    ]
+                                };
+                                ;
+                                if (option && typeof option === "object") {
+                                    ydmyChart.setOption(option, true);
+                                }
+                         </script>
+                         <script type="text/javascript">
+                                var yddldom = document.getElementById("yddltubiao");
+                                var yddlmyChart = echarts.init(yddldom);
+                                var app = {};
+                                option = null;
+                                app.title = '主要指标月度值';
+                                option = {
+                                   
+                                    grid: {
+                                        left: '5%',
+                                        right: '1%',
+                                        bottom: '5%',
+                                        top: '5%',
+                                        containLabel: true
+                                    },
+                               color: ['#f29600', '#f5ce6c'],
+                                    series: [
+                                    {
+                                        name:'主要指标月度值',
+                                        type:'pie',
+                                        hoverAnimation:false,
+                                        radius: ['30%', '60%'],
+                                        labelLine: {
+                                            normal: {
+                                                show: false
+                                            }
+                                        },
+                                        data:[0,0
+                                        ]
+                                    }
+                                    ]
+                                };
+                                ;
+                                if (option && typeof option === "object") {
+                                    yddlmyChart.setOption(option, true);
+                                    $("#yddltubiao").css("width","0px");
+                                }
+                         </script>
+		                	<div class="sp2" style=" width: 22%;">
+                                <b data-id="HRHB_ELCSYS12_AO120023">0.00</b>
+                                <span style=" color: #fff">亿kWh</span><small>月度累计电量值</small></div>
+		                	<div class="sp2" style=" width: 23%;">
+                                <b data-id="HRHB_ELCSYS12_AO120025">0.00</b><b> %</b>
+                                <small class="sjjdblue">月度时间进度</small></div>
+		                	<div class="sp2" style=" width: 28%;">
+                                <b data-id="HRHB_ELCSYS12_AO120026">0.00</b><b> %</b>
+                                <small class="sjjdyel">月度电量完成率</small></div>
+		                </div>
+		        </div>
+            </div>
+            <div class="sy_jizucs2">
+            	<div class="sy-twocol twocolbg">
+		                <h2 class="top_tt">
+		                    <img src="images/kpicon2.png"/><span class="sp1" style="color: #0C1244">年度电量完成情况
+		                    </span></h2>
+		                <div class="sy-twocolcon">
+		                	<div class="sp1" id="ndsjtubiao" style=" height: 115px; width: 135px;   position: relative;z-index: 1;" chart-id="HRHB_ELCSYS12_AO120027">
+                            </div>
+                             <div class="sp1" id="nddltubiao" style=" height: 115px; width: 135px; left:-135px;   position: relative;z-index: 2;" chart-id="HRHB_ELCSYS12_AO120028">
+                            </div>
+                            <script type="text/javascript">
+                                var nddom = document.getElementById("ndsjtubiao");
+                                var ndmyChart = echarts.init(nddom);
+                                var app = {};
+                                option = null;
+                                app.title = '主要指标年度值';
+                                option = {
+                                    tooltip: {
+                                        trigger: 'item',
+                                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                                    },
+                                    grid: {
+                                        left: '5%',
+                                        right: '1%',
+                                        bottom: '5%',
+                                        top: '5%',
+                                        containLabel: true
+                                    },
+                                      color: ['#3695bb',  '#77e8d5'],
+                                    series: [
+                                    {
+                                        name:'主要指标年度值',
+                                        type:'pie',
+                                        radius: ['70%', '95%'],
+                                        avoidLabelOverlap: false,
+                                        labelLine: {
+                                            normal: {
+                                                show: false
+                                            }
+                                        },
+                                        data:[0,0]
+                                    }
+                                    ]
+                                };
+                                ;
+                                if (option && typeof option === "object") {
+                                    ndmyChart.setOption(option, true);
+                                }
+                         </script>
+                         <script type="text/javascript">
+                                var nddldom = document.getElementById("nddltubiao");
+                                var nddlmyChart = echarts.init(nddldom);
+                                var app = {};
+                                option = null;
+                                app.title = '主要指标年度值';
+                                option = {
+                                   
+                                    grid: {
+                                        left: '5%',
+                                        right: '1%',
+                                        bottom: '5%',
+                                        top: '5%',
+                                        containLabel: true
+                                    },
+                           color: ['#f29600', '#f5ce6c'],
+                                    series: [
+                                    {
+                                        name:'主要指标年度值',
+                                        type:'pie',
+                                        radius: ['30%', '60%'],
+                                        hoverAnimation:false,
+                                        labelLine: {
+                                            normal: {
+                                                show: false
+                                            }
+                                        },
+                                        data:[0,0
+                                        ]
+                                    }
+                                    ]
+                                };
+                                ;
+                                if (option && typeof option === "object") {
+                                    nddlmyChart.setOption(option, true);
+                                    $("#nddltubiao").css("width","0px");
+                                }
+                         </script>
+                         </script>
+		                	<div class="sp2" style=" width: 22%;">
+                                <b data-id="HRHB_ELCSYS12_AO120024">0.00</b>
+                                <span style=" color: #fff">亿kWh</span><small>年度累计电量值</small></div>
+		                	<div class="sp2" style=" width: 23%;">
+                                <b data-id="HRHB_ELCSYS12_AO120027">0.00</b><b> %</b>
+                                <small class="sjjdblue">年度时间进度</small></div>
+		                	<div class="sp2" style=" width: 28%;">
+                                <b data-id="HRHB_ELCSYS12_AO120028">0.00</b><b> %</b>
+                                <small class="sjjdyel">年度电量完成率</small></div>
+		                </div>
+		        </div>
+            </div>
+        </div>
+        <div class="sy_jizucanshu">      		
+    		<div class="sy-bot-table gl_tab1bg3">
+				<h2 class="top_tt" style="margin-bottom: 5px;"><img src="images/kpicon2.png"/><span class="sp1" style="color: #0C1244">主要指标日度值<br></span></h2>
+				
+                    <table width="95%" class="sytable">
+                        <tr>
+                            <th class="blackbg"  width="20%">
+                                <img src="images/xiegang.png" />
+                            </th>
+                            <th>
+                                平均负荷<br/>
+                                <small>( MW )</small>
+                            </th>
+                            <th class="blackbg">
+                                发电煤耗<br/>
+                                <small>(g/kWh)</small>
+                            </th>
+                            <th>
+                                供电煤耗<br/>
+                                <small>(g/kWh)</small>
+                            </th>
+                            <th class="blackbg">
+                                厂用电率<br/>
+                                <small>(%)</small>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                #3机组
+                            </td>
+                            <td>
+                                <b data-id="HRHB_PUBSYS03_AI030080">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_PUBSYS03_AI030048">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_PUBSYS03_AI030078">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_PUBSYS03_AI030079">0.00</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                #4机组
+                            </td>
+                            <td>
+                                <b data-id="HRHB_PUBSYS04_AI040080">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_PUBSYS04_AI040048">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_PUBSYS04_AI040078">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_PUBSYS04_AI040079">0.00</b>
+                            </td>
+                        </tr>
+                    </table>
+			</div>	
+			<!--2-->
+			<div class="sy-bot-table gl_tab1bg3">
+				<h2 class="top_tt" style="margin-bottom: 5px;"><img src="images/kpicon2.png"/><span class="sp1" style="color: #0C1244">主要指标月度值<br></span></h2>
+				
+                    <table width="95%" class="sytable">
+                        <tr>
+                            <th class="blackbg"  width="20%">
+                                <img src="images/xiegang.png" />
+                            </th>
+                            <th>
+                                平均负荷<br/>
+                                <small>( MW )</small>
+                            </th>
+                            <th class="blackbg">
+                                发电煤耗<br/>
+                                <small>(g/kWh)</small>
+                            </th>
+                            <th>
+                                供电煤耗<br/>
+                                <small>(g/kWh)</small>
+                            </th>
+                            <th class="blackbg">
+                                厂用电率<br/>
+                                <small>(%)</small>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                #3机组
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS03_AO030053">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS03_AO030042">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS03_AO030044">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS03_AO030046">0.00</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                #4机组
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS04_AO040053">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS04_AO040042">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS04_AO040044">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS04_AO040046">0.00</b>
+                            </td>
+                        </tr>
+                    </table>
+			</div>		
+    		<!--3--> 		
+    		<div class="sy-bot-table gl_tab1bg3">
+				<h2 class="top_tt" style="margin-bottom: 5px;"><img src="images/kpicon2.png"/><span class="sp1" style="color: #0C1244">主要指标年度值<br></span></h2>
+				
+                    <table width="95%" class="sytable">
+                        <tr>
+                            <th class="blackbg"  width="20%">
+                                <img src="images/xiegang.png" />
+                            </th>
+                            <th  class="blackbg">
+                                平均负荷<br/>
+                                <small>( MW )</small>
+                            </th>
+                            <th class="blackbg">
+                                发电煤耗<br/>
+                                <small>(g/kWh)</small>
+                            </th>
+                            <th>
+                                供电煤耗<br/>
+                                <small>(g/kWh)</small>
+                            </th>
+                            <th class="blackbg">
+                                厂用电率<br/>
+                                <small>(%)</small>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                #3机组
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS03_AO030054">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS03_AO030043">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS03_AO030045">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS03_AO030047">0.00</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                #4机组
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS04_AO040054">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS04_AO040043">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS04_AO040045">0.00</b>
+                            </td>
+                            <td>
+                                <b data-id="HRHB_ELA_PUBSYS04_AO040047">0.00</b>
+                            </td>
+                        </tr>
+                    </table>
+			</div>	
+        	
+        </div>
+       
+    </div>
+    <div class="responsewarp jizucontent" id="sy2" style="display: none; min-width: auto;">
+        <!--22-->
+        <div class="jizujiancebox">
+            <div class="onecol syerjibg" style="display: block!important; width:  1200px!important;
+                height: 360px!important; margin: 0 auto; float: none!important; top:5px;">
+                <img src="images/guang.png" class="guang" />
+                <h2 class="top_tt sy_top_tt">
+                    <img src="images/sy_kpicon1.png" /><span class="sp1">机组日发电煤耗柱状图对比<br />
+                    </span></h2>
+                <div style="display: inline-block; width: 1200px; height: 360px; position: relative;
+                    z-index: 99999" id="zhuzhuangtu" chart-period-id="HRHB_PUBSYS03_AI030048|HRHB_PUBSYS04_AI040048" chart-period-start="-6" >
+                </div>
+                <script type="text/javascript">
+                    var dom4 = document.getElementById("zhuzhuangtu");
+                    var myChart4 = echarts.init(dom4);
+                    var app = {};
+                    option4 = null;
+                    option4 = {
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'cross',
+                                crossStyle: {
+                                    color: '#999'
+                                }
+                            }
+                        },
+                        legend: {
+                            data:['3#发电煤耗','4#发电煤耗']
+                            ,
+                            textStyle: {
+                                color: '#fff'
+                            }
+                        },
+                        textStyle: {
+                            color: '#45A9AC'
+                        },
+                        backgroundColor: '#1e1f3b',
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: [
+                        {
+                            type: 'category',
+                            data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+                            axisPointer: {
+                                type: 'shadow'
+                            }
+                        }
+                        ],
+                        yAxis: [
+                        {
+                            type: 'value',
+                            min: 260,
+                            splitLine: {
+                                show: true, 
+                                //  改变轴线颜色
+                                lineStyle: {
+                                    // 使用深浅的间隔色
+                                    color: ['#1e1f3b']
+                                }                            
+                            }
+                        }
+                        ],
+                        series: [
+                        {
+                            name:'3#发电煤耗',
+                            type:'bar',
+                            data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                        { offset: 0, color: '#D3DC00' },
+                                        { offset: 0.5, color: '#A7CD47' },
+                                        { offset: 1, color: '#7AA817' }
+                                        ]
+                                        )
+                                }
+                            }
+
+                        },
+                        {
+                            name:'4#发电煤耗',
+                            type:'bar',
+                            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                        { offset: 0, color: '#FFE349' },
+                                        { offset: 0.5, color: '#F7B52C' },
+                                        { offset: 1, color: '#F29600' }
+                                        ]
+                                        )
+                                }
+                            }
+                        }
+                        ]
+                    };
+                    ;
+                    if (option4 && typeof option4 === "object") {
+                        myChart4.setOption(option4, true);
+                    }
+                </script>
+            </div>
+            <div class="onecol syerjibg" style="display: block!important; width: 1200px!important;
+                height: 360px!important; margin: 0 auto; float: none!important; margin-top: 35px;">
+                <img src="images/guang.png" class="guang" />
+                <h2 class="top_tt sy_top_tt">
+                    <img src="images/sy_kpicon2.png" /><span class="sp1">机组日周发电煤耗走势分析<br />
+                    </span></h2>
+                <div style="display: inline-block; width: 1200px; height: 360px; position: relative;
+                    z-index: 99999" id="quxiantu" chart-period-id="HRHB_PUBSYS03_AI030047|HRHB_PUBSYS04_AI040047" chart-period-start="0">
+                </div>
+                <script type="text/javascript">
+                 var dom = document.getElementById("quxiantu");
+                 var myChart = echarts.init(dom);
+                 var app = {};
+                 option = null;
+                 app.title = '折柱混合';
+
+                 option = {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'cross',
+                            crossStyle: {
+                                color: '#999'
+                            }
+                        }
+                    },
+                    color:['#abc01d','#ee721c'],
+                    legend: {
+                        data:['3#发电煤耗当日均值','4#发电煤耗当日均值','3#发电煤耗7日均值','4#发电煤耗7日均值']
+                        ,
+                        textStyle: {
+                            color: '#fff'
+                        },
+                    },
+                    textStyle: {
+                        color: '#45A9AC'
+                    },
+                    backgroundColor: '#1e1f3b',
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: [
+                    {
+                        type: 'category',
+                        data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+                        axisPointer: {
+                            type: 'shadow'
+                        }
+                    }
+                    ],
+                    yAxis: [
+                    {
+                        type: 'value',
+                        min: 260,
+                          splitLine: {
+                                show: true, 
+                                //  改变轴线颜色
+                                lineStyle: {
+                                    // 使用深浅的间隔色
+                                    color: ['#1e1f3b']
+                                }                            
+                        }
+                    },
+                    {
+                        type: 'value',
+                        min: 260,
+                          splitLine: {
+                                show: true, 
+                                //  改变轴线颜色
+                                lineStyle: {
+                                    // 使用深浅的间隔色
+                                    color: ['#1e1f3b']
+                                }                            
+                        }
+                    }
+                    ],
+                    series: [
+                    {
+                        name:'3#发电煤耗当日均值',
+                        type:'bar',
+                        data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                        itemStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(
+                                    0, 0, 0, 1,
+                                    [
+                                    { offset: 0, color: '#D3DC00' },
+                                    { offset: 0.5, color: '#A7CD47' },
+                                    { offset: 1, color: '#7AA817' }
+                                    ]
+                                    )
+                            }
+                        }
+
+                    },
+                    {
+                        name:'4#发电煤耗当日均值',
+                        type:'bar',
+                        data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                        itemStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(
+                                    0, 0, 0, 1,
+                                    [
+                                    { offset: 0, color: '#FFE349' },
+                                    { offset: 0.5, color: '#F7B52C' },
+                                    { offset: 1, color: '#F29600' }
+                                    ]
+                                    )
+                            }
+                        }
+                    },
+                    {
+                        name:'3#发电煤耗7日均值',
+                        type:'line',
+                        symbol: 'none',
+                        yAxisIndex: 1,
+                        data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+                        ,
+                        itemStyle: {
+                            normal: {
+                                lineStyle: {
+                                    color: '#abc01d'
+                                }
+                            }
+                        }
+                        
+                    }
+                    ,
+                    {
+                        name:'4#发电煤耗7日均值',
+                        type:'line',
+                         symbol: 'none',
+                        yAxisIndex: 1,
+                        data:[3.0, 4.2, 5.3, 6.5, 7.3, 8.2, 9.3, 13.4, 16.0, 19.5, 21.0, 16.2],
+                        itemStyle: {
+                            normal: {
+                                lineStyle: {
+                                    color: '#ee721c'
+                                }
+                            }
+                        }
+                    }
+                    ]
+                };
+                ;
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+            </script>
+            </div>
+        </div>
+    
+    </div>
+    <div class="responsewarp jizucontent" id="sy3" style="display: none;">
+        <!--关于六枝-->
+        <div class="abt_liuzhi">
+            <h3 class="title al">
+                ABOUT CR Power<span>[ 关于华润 ]</span></h3>
+            <ul>
+                <li class="hover"><a href="#" class="a1" onclick="$('.abt_lzvideo').hide();$('.abt_liuzhi').hide();$('#hd').show()">
+                    <p>
+                        <b>火电</b></p>
+                    <p>
+                        THERMAL POWER</p>
+                    <p>
+                        <img src="images/sy_lz_huo.png" /></p>
+                </a>
+                    <img src="images/sy_liuzhi_line.png" class="line1" />
+                </li>
+                <li><a href="#" class="a2" onclick="$('.abt_lzvideo').hide();$('.abt_liuzhi').hide();$('#mt').show()">
+                    <p>
+                        <b>煤炭</b></p>
+                    <p>
+                        COAL</p>
+                    <p>
+                        <img src="images/sy_lz_shezhi.png" /></p>
+                </a>
+                    <img src="images/sy_liuzhi_line.png" class="line1" />
+                </li>
+                <li><a href="#" class="a3" onclick="$('.abt_lzvideo').hide();$('.abt_liuzhi').hide();$('#xny').show()">
+                    <p>
+                        <b>新能源</b></p>
+                    <p>
+                        NEW ENERGY</p>
+                    <p>
+                        <img src="images/sy_lz_yezi.png" /></p>
+                </a>
+                    <img src="images/sy_liuzhi_line.png" class="line2" />
+                </li>
+            </ul>
+        </div>
+        <!--关于六枝 点开-->
+        <div class="abt_lzvideo" id="hd" style="display: none;">
+            <a href="javascript:;" class="back fr" onclick="$('.abt_liuzhi').show();$('.abt_lzvideo').hide();">
+                <img src="images/fanhui.png" /></a>
+            <div class="title_video fl">
+                <div class="title_fl fl">
+                    <span><b>ABOUT CR Power</b> [ 关于华润 ]</span>
+                </div>
+                <div class="title_fr fr">
+                    <ul>
+                        <li class="li1"><span class="fl"><b>火电</b>THERMAL POWER </span>
+                            <img src="images/sy_lz_huo.png" class="fr" />
+                        </li>
+                    </ul>
+                    <a href="javascript:;" class="aclk leftclk" onclick="$('.abt_lzvideo').hide();$('#xny').show();myPlayer.pause()">
+                        <img src="images/sy_lz_left.png" class="fl" /></a> <a href="javascript:;" class="aclk rightclk"
+                            onclick="$('.abt_lzvideo').hide();$('#mt').show();myPlayer.pause()">
+                            <img src="images/sy_lz_right.png" class="fr" /></a>
+                </div>
+            </div>
+            <!--视频-->
+            <div class="videobox fl">
+                <div class="video fl">
+                    <video id="my-video" class="video-js  vjs-default-skin vjs-big-play-centered" controls
+                        preload="auto" width="788" height="494" poster="images/video.jpg" data-setup='{"example_option":true}'>
+			<source src="mp4/video.mp4" type="video/mp4">
+		  </video>
+                    <script src="js/video.min.js"></script>
+                    <script type="text/javascript">
+                        var myPlayer = videojs('my-video');
+                        videojs("my-video").ready(function () {
+                            var myPlayer = this;
+                            myPlayer.pause();
+                        });
+                    </script>
+                </div>
+                <div class="posbox">
+                    <img src="images/sy_lzline1.png" class="fr" />
+                    <span class="videotxt videotxt1">火电业务是华润电力的战略发展重点。重点发展沿海大火电、热电联产、煤电一体化等项目，在符合条件的经济发达地区发展燃气分布式能源。华润电力坚持系统成本最优理念，在火电建设及运营领域，不断提高能源利用效率和清洁发电水平，始终保持行业领先。
+                        <br />
+                        <hr style="width: 35px;" size="5" color="#fff" class="fl" />
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="abt_lzvideo" id="mt" style="display: none;">
+            <a href="javascript:;" class="back fr" onclick="$('.abt_liuzhi').show();$('.abt_lzvideo').hide();">
+                <img src="images/fanhui.png" /></a>
+            <div class="title_video fl">
+                <div class="title_fl fl">
+                    <span><b>ABOUT CR Power</b> [ 关于华润 ]</span>
+                </div>
+                <div class="title_fr fr">
+                    <ul>
+                        <li class="li2"><span class="fl"><b>煤炭</b>COAL </span>
+                            <img src="images/sy_lz_shezhi.png" class="fr" />
+                        </li>
+                    </ul>
+                    <a href="javascript:;" class="aclk leftclk" onclick="$('.abt_lzvideo').hide();$('#hd').show();myPlayer2.pause()">
+                        <img src="images/sy_lz_left.png" class="fl" /></a> <a href="javascript:;" class="aclk rightclk"
+                            onclick="$('.abt_lzvideo').hide();$('#xny').show();myPlayer2.pause()">
+                            <img src="images/sy_lz_right.png" class="fr" /></a>
+                </div>
+            </div>
+            <!--视频-->
+            <div class="videobox fl">
+                <div class="video fl">
+                    <video id="my-video2" class="video-js  vjs-default-skin vjs-big-play-centered" controls
+                        preload="auto" width="788" height="494" poster="images/video2.jpg" data-setup='{"example_option":true}'>
+			<source src="mp4/video2.mp4" type="video/mp4">
+		  </video>
+                    <script src="js/video.min.js"></script>
+                    <script type="text/javascript">
+                        var myPlayer2 = videojs('my-video2');
+                        videojs("my-video2").ready(function () {
+                            var myPlayer2 = this;
+                            myPlayer2.pause();
+                        });
+                    </script>
+                </div>
+                <div class="posbox">
+                    <img src="images/sy_lzline2.png" class="fr" />
+                    <span class="videotxt videotxt2">火电业务是华润电力的战略发展重点。重点发展沿海大火电、热电联产、煤电一体化等项目，在符合条件的经济发达地区发展燃气分布式能源。华润电力坚持系统成本最优理念，在火电建设及运营领域，不断提高能源利用效率和清洁发电水平，始终保持行业领先。
+                        <br />
+                        <hr style="width: 35px;" size="5" color="#fff" class="fl" />
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="abt_lzvideo" id="xny" style="display: none;">
+            <a href="javascript:;" class="back fr" onclick="$('.abt_liuzhi').show();$('.abt_lzvideo').hide();">
+                <img src="images/fanhui.png" /></a>
+            <div class="title_video fl">
+                <div class="title_fl fl">
+                    <span><b>ABOUT CR Power</b> [ 关于华润 ]</span>
+                </div>
+                <div class="title_fr fr">
+                    <ul>
+                        <li class="li3"><span class="fl"><b>新能源</b>NEW ENERGY </span>
+                            <img src="images/sy_lz_yezi.png" class="fr" />
+                        </li>
+                    </ul>
+                    <a href="javascript:;" class="aclk leftclk" onclick="$('.abt_lzvideo').hide();$('#mt').show();  myPlayer3.pause()">
+                        <img src="images/sy_lz_left.png" class="fl" /></a> <a href="javascript:;" class="aclk rightclk"
+                            onclick="$('.abt_lzvideo').hide();$('#hd').show();  myPlayer3.pause()">
+                            <img src="images/sy_lz_right.png" class="fr" /></a>
+                </div>
+            </div>
+            <!--视频-->
+            <div class="videobox fl">
+                <div class="video fl">
+                    <video id="my-video3" class="video-js  vjs-default-skin vjs-big-play-centered" controls
+                        preload="auto" width="788" height="494" poster="images/video3.jpg" data-setup='{"example_option":true}'>
+			<source src="mp4/video3.mov" type="video/mp4">
+		  </video>
+                    <script src="js/video.min.js"></script>
+                    <script type="text/javascript">
+                        var myPlayer3 = videojs('my-video3');
+                        videojs("my-video3").ready(function () {
+                            var myPlayer3 = this;
+                            myPlayer3.pause();
+                        });
+                    </script>
+                </div>
+                <div class="posbox">
+                    <img src="images/sy_lzline3.png" class="fr" />
+                    <span class="videotxt videotxt3">火电业务是华润电力的战略发展重点。重点发展沿海大火电、热电联产、煤电一体化等项目，在符合条件的经济发达地区发展燃气分布式能源。华润电力坚持系统成本最优理念，在火电建设及运营领域，不断提高能源利用效率和清洁发电水平，始终保持行业领先。
+                        <br />
+                        <hr style="width: 35px;" size="5" color="#fff" class="fl" />
+                    </span>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+	 <div class="xuanfubox">
+            <a class="a1 hover" onclick="syzoom(1100,920);$('#sy1').show();$('#sy2').hide();$('#sy3').hide();">一级首页&nbsp;<b>PAGE ONE</b></a> <a class="a1" onclick="syzoom(1100,920);$('#sy2').show();$('#sy1').hide();$('#sy3').hide();">
+                二级首页&nbsp;<b>PAGE TWO</b></a> <a class="a1" onclick="syzoom(1100,920);$('#sy3').show();$('#sy1').hide();$('#sy2').hide();">
+                    关于华润&nbsp;<b>ABOUT CR Power</b></a>
+        </div>
+    <script>
+        $(function () {
+            /*关于六枝*/
+            $(".abt_liuzhi ul li").hover(function () {
+                $(this).addClass("hover").siblings().removeClass("hover");
+            })
+			 $(".xuanfubox .a1").click(function () {
+                $(this).addClass("hover").siblings().removeClass("hover");
+            })
+            /*top menu*/
+            function addguang(obj, num) {
+                obj.hover(function () {
+                    $(".headbox .menubox ul.ulbg li").eq(num).toggleClass("hover");
+                })
+                if (obj.hasClass("hover")) {
+                    $(".headbox .menubox ul.ulbg li").eq(num).addClass("hover");
+                }
+            }
+            addguang($(".headbox .menubox ul.ul0 li.li0,.headbox .menubox ul.ul0 li.li5"), 0);
+            addguang($(".headbox .menubox ul.ul0 li.li1,.headbox .menubox ul.ul0 li.li6"), 1);
+            addguang($(".headbox .menubox ul.ul0 li.li2,.headbox .menubox ul.ul0 li.li7"), 2);
+            addguang($(".headbox .menubox ul.ul0 li.li3,.headbox .menubox ul.ul0 li.li8"), 3);
+            addguang($(".headbox .menubox ul.ul0 li.li4,.headbox .menubox ul.ul0 li.li9"), 4);
+
+            var fm = $('#headbox');
+            $("#togshouqi,#quanping").click(function () {
+                if (fm.hasClass("headbox_h")) {
+                    fm.removeClass("headbox_h");
+                    $('#togshouqi').html("收起");
+                    $('#togshouqi').removeClass("shouqi");
+                } else {
+                    fm.addClass("headbox_h");
+                    $('#togshouqi').html("展开");
+                    $('#togshouqi').addClass("shouqi");
+                }
+            });
+
+            /*head menubox width*/
+            /*$('.menubox,.sy-showfr').css({ width: ($(window).width() - 280) + "px" });
+            /*浏览器窗口改变时*/
+            window.onresize = function () {
+                syzoom(1100,920);
+            }    ;
+         
+           
+            /*控制刻度尺的高度 使低下文字与左右文字在一个水平线上*/           
+            //$('.fl-kedu .kedu').css({ height: ($('.fl-zb img').height()-40) + "px" });
+           // window.onresize = function () {
+            //    $('.fl-kedu .kedu').css({ height: ($('.fl-zb img').height()-40) + "px" });
+            //}
+            
+        })
+
+        /*图表*/
+
+    </script>
+</body>
+</html>
