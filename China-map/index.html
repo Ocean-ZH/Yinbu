@@ -1,0 +1,1142 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head lang="zh-CN">
+    <meta charset="utf-8">
+    <title>homepage</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <META HTTP-EQUIV="expires" CONTENT="0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="./css/floatPanel.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.js" type="text/javascript"></script>
+    <script src="js/highcharts.js" type="text/javascript"></script>
+    <!-- art-template模板引擎 -->
+    <script src="./js/template-web.js" type="text/javascript"></script>
+    <!-- 浮动面板 -->
+    <script src="./js/floatPanel.js" type="text/javascript"></script>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Noto Sans CJK SC, WenQuanYi Micro Hei, Arial, sans-serif;
+            color: #FFF;
+        }
+
+        img,
+        input {
+            outline: none;
+        }
+
+        .clearfloat::after {
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            visibility: hidden;
+            background: transparent;
+            clear: both;
+        }
+
+        html,
+        body {
+            min-height: 100%;
+        }
+    </style>
+    <script type="text/javascript">
+        var winW = 0,
+            winH = 0;
+        var winSize = pageSize_Print();
+        console.log(winSize.winW + ' * ' + winSize.winH)
+
+        function pageSize_Print() {
+            winW = document.documentElement.clientWidth;
+            winH = document.documentElement.clientHeight;
+            // console.log(winW + ' * ' + winH);
+            return {
+                'winW': winW,
+                'winH': winH,
+            };
+        }
+
+        window.addEventListener('resize', function (event) {
+            var winSize = pageSize_Print();
+            console.log(winSize.winW + ' * ' + winSize.winH)
+        })
+    </script>
+    <!-- 取数JS START -->
+    <!-- 定义用于china-map浮动框body内容渲染的art-template模板 Start -->
+    <script id="tpl-panel" type="text/html">
+        <div class="china-path-tag">
+            <ul>
+                <li>
+                    <dl><dt>总负荷</dt>
+                        {{ if data }}
+                            <dd>{{ data.value }}</dd>
+                        {{ else }}
+                            <dd>0.00</dd>
+                        {{ /if }}
+                    </dl>
+                </li>
+                {{ if data.companys }}
+                    {{ each data.companys }}
+                        <li>
+                            <dl>
+                                <dt>{{ $value.shortName }}</dt>
+                                <dd>
+                                    {{ $value.totalLoad }}
+                                </dd>
+                                <span style="float:right; font-size:14px; color:#66fff2; margin-right:5px;">{{ $value.LoadUnit }}</span>
+                            </dl>
+                        </li>
+                    {{ /each }}
+                {{ else }}
+                    <li>
+                        <dl>
+                            <dt>电厂</dt>
+                            <dd>0.00</dd>
+                        </dl>
+                    </li>
+                {{ /if }}
+            </ul>
+        </div>
+    </script>
+    <!-- 定义模板 End -->
+    <script>
+        //中国地图浮动框数据格式
+        {
+            /* var chinaJson={
+                guangdong:{
+                    name:'广东',
+                    value: 42.8,
+                    companys:[{
+                        companyName:'东莞中电新能源热电有限公司',
+                        shortName: '东莞第一热电',
+                        serialNumber: '59',
+                        totalLoad: 143.46,
+                        type:'fire',
+                        units:[{
+                            name:1,
+                            value:0,
+                        },{
+                            name:2,
+                            value:0,
+                        },{
+                            name:3,
+                            value:0,
+                        },{
+                            name:4,
+                            value:0,
+                        },]
+                    },{
+                        companyName:'东莞中电第二热电有限公司',
+                        shortName: '东莞第二热电',
+                        serialNumber: '60',
+                        totalLoad:22.5,
+                        type:'fire',
+                        units:[{
+                            name:1,
+                            value:0,
+                        },{
+                            name:2,
+                            value:0,
+                        },]
+                    },{
+                        companyName:'东莞中电九丰新能源热电有限公司',
+                        shortName: '东莞九丰热电',
+                        serialNumber: '61',
+                        totalLoad:0,
+                        type:'fire',
+                        units:[{
+                            name:1,
+                            value:0,
+                        },{
+                            name:2,
+                            value:0,
+                        },]
+                    },{
+                        companyName:'东莞中电综合能源有限公司',
+                        shortName: '东莞综合能源',
+                        serialNumber: '62',
+                        totalLoad:0,
+                        type:'fire',
+                        units:[{
+                            name:1,
+                            value:0,
+                        },{
+                            name:2,
+                            value:0,
+                        },]
+                    },{
+                        companyName:'东莞中电新奥热力有限公司',
+                        shortName: '东莞新奥热力',
+                        serialNumber: '63',
+                        totalLoad:0,
+                        type:'fire',
+                        units:[{
+                            name:1,
+                            value:0,
+                        },{
+                            name:2,
+                            value:0,
+                        },]
+                    },],
+                },
+                jiangsu:{
+                    name:'江苏',
+                    value: '0.00',
+                    companys:[{
+                        companyName:'江苏1',
+                        shortName: '江苏1',
+                        totalLoad:22.5,
+                    },{
+                        companyName:'江苏2',
+                        shortName: '江苏2',
+                        totalLoad:20.3,
+                    },{
+                        companyName:'江苏3',
+                        shortName: '江苏3',
+                        totalLoad:20.3,
+                    },],
+                }
+            }*/
+        }
+        var chinaJson = {};
+
+    </script>
+    <script>
+        var chinaUrl = "http://"+window.location.host.split(':')[0]+":8002/InterfaceHandle/GetSisLoadList.ashx?companyId=China";
+        var chartsUrl = "http://"+window.location.host.split(':')[0]+":8002/InterfaceHandle/GetSisLoadList.ashx?companyId=China-charts"
+        var timer = null;
+        var chart1 = null,
+            chart2 = null;
+        jQuery(document).ready(function($){
+            chart1_create()
+            chart2_create();
+            //AJAX获取chinaSVG数据
+            ChinaSVG_getData();
+            //AJAX获取charts数据
+            charts_getData();
+
+            timer = setInterval(function(){
+                //AJAX获取chinaSVG数据
+                ChinaSVG_getData();
+                //AJAX获取charts数据
+                charts_getData();
+            }, 20000);
+        });
+
+        //生成24个随机正数的数据,保留一位小数
+        function generate24Arr(min,max){
+            var min = min | 0;
+            var max = max | 1;
+            var arr = [];
+            for(var i = 0; i<24; i++){
+                var num = Math.random()*(max-min) + min;
+                num = Math.round(num*10) / 10;
+                arr.push(num);
+            }
+            return arr;
+        }
+    </script>
+    <script type="text/javascript">
+        //AJAX获取chinaSVG数据
+        function ChinaSVG_getData(){
+            $.ajax({
+                type: "GET",
+                url: chinaUrl,
+                dataType: "json",
+                success: function (res) {
+                    console.log(res);
+                    chinaJson = res.data;
+
+                },
+                error:function(res){
+                    console.log(res);
+                }
+            });
+        }
+
+        //AJAX获取charts数据
+        function charts_getData(){
+            $.ajax({
+                type: "GET",
+                url: chartsUrl,
+                dataType: "json",
+                success: function (res) {
+                    // console.log(res);
+                    $.each(res.data,function(i,el){
+                        charts_SetData(el.type,el.capacity)
+                    })
+                },
+                error:function(res){
+                    console.log(res);
+                }
+            });
+        }
+
+
+        //渲染插入china-map的浮动框的省份数据字符串
+        function provinceStr(pName, part){
+            if(part == 'body'){
+                if(chinaJson[pName]){
+                    //调用art-template根据模板渲染
+                    var htmlStr = template('tpl-panel',{
+                        data:chinaJson[pName],
+                    })
+                    return htmlStr;
+                }else{
+                    return '';
+                }
+            }else if(part == 'header'){
+                if(chinaJson[pName]){
+                    return chinaJson[pName].name;
+                }else{
+                    return '';
+                }
+            }else{
+                return '';
+            }
+        }
+
+        //生成province-tag，省份iframe左侧栏目
+        function provinceTag_Write(data) {
+            var ol = $('#province-tag >ol');
+            ol.html('<li><h4 class="province-tag-title"><a href="javascript:(null)">00.电厂名称</a></h4>' +
+                '<table class="province-tag-table"><tbody>' +
+                '<tr><td>总负荷</td><td>0.00</td></tr>' +
+                '<tr><td>机组·MW</td><td><div class="unit-section"><b>#1</b><span>0.00</span></div><div class="unit-section"><b>#2</b><span>0.00</span></div></td></tr></tbody></table></li>');
+            //如果有数据
+            if(chinaJson[data]){
+                ol.html('');
+                var el = null;
+                for(var i =0; i< chinaJson[data]['companys'].length; i++){
+                    el = chinaJson[data]['companys'][i];
+                    var unitStr = '';
+                    if(el.type==='火电' && el.units){
+                        unitStr = '<td>机组·MW</td><td>';
+                        for (var j = 0; j < el.units.length; j++) {
+                            unitStr += '<div class="unit-section">' +
+                                    '<b>'+ el.units[j].name+'</b>' +
+                                    '<span>'+ el.units[j].Load +'</span>' +
+                                '</div>';
+                        }
+                        unitStr +='</td>';
+                    }else if(el.type==='风电' && el.units){
+                        unitStr = '<td>机组·MW</td><td>';
+                        for (var j = 0; j < el.units.length; j++) {
+                            unitStr += '<div class="unit-section">' +
+                                    '<b>'+ el.units[j].name+'</b>' +
+                                    '<span>'+ el.units[j].value +'</span>' +
+                                    // '<p> 状态: '+ el.units[j].status +'</p>' +
+                                '</div>';
+                        }
+                        unitStr +='</td>';
+                    }else if(el.units){
+                        unitStr = '<td>机组·MW</td><td>';
+                        for (var j = 0; j < el.units.length; j++) {
+                            unitStr += '<div class="unit-section">' +
+                                    '<b>'+ el.units[j].name+'</b>' +
+                                    '<span>'+ el.units[j].Load +'</span>' +
+                                '</div>';
+                        }
+                        unitStr +='</td>';
+                    }
+                    $('<li serial="'+ el.serialNumber +'" >'+
+                            '<h4 class="province-tag-title">'+
+                                '<a href="javascript:(null)" onclick="nameClick({serial:'+el.serialNumber+'})" >'+el.serialNumber+'.'+el.companyName+'</a>'+
+                            '</h4>'+
+                            '<table class="province-tag-table">'+
+                                '<tbody>'+
+                                    '<tr>'+
+                                        '<td>总负荷</td>'+
+                                        '<td>'+
+                                            el.totalLoad+
+                                            '<span style="float:right; font-size:14px; color:#66fff2; margin-right:5px;">'+ el.LoadUnit +'</span>'+
+                                        '</td>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        unitStr+
+                                    '</tr>'+
+                                '</tbody>'+
+                            '</table>'+
+                        '</li>').appendTo(ol);
+                }
+            }
+        }
+    
+        //charts匹配赋值
+        function charts_SetData(type,val,Times){
+            switch(type)
+            {
+                case "水电":
+                  chart1.series[0].data[0].update({
+                      y:val
+                  })
+                  /* chart1.xAxis[0].update({
+                      categories:HighchartTimeChange(Times)
+                  }) */
+                  break;
+                case "气电":
+                  chart1.series[0].data[1].update({
+                      y:val
+                  })
+                  break;
+                case "风电":
+                  chart1.series[0].data[2].update({
+                      y:val
+                  })
+                  break;
+                case "太阳能":
+                  chart1.series[0].data[3].update({
+                      y:val
+                  })
+                  break;
+                case "生物质":
+                  chart1.series[0].data[4].update({
+                      y:val
+                  })
+                  break;
+                case "垃圾发电":
+                  chart1.series[0].data[5].update({
+                      y:val
+                  })
+                  break;
+                case "煤电":
+                  chart1.series[0].data[6].update({
+                      y:val
+                  })
+                  break;
+                
+                default:
+                  break;              
+            }
+        }
+
+        //生成chart1
+        function chart1_create(){
+            var chart1Data = [{
+                name:"水电",
+                y:451.60,
+                color:"#18BC9C",
+            },{
+                name:"气电",
+                y:360.00,
+                color:"#F39C12",
+            },{
+                name:"风电",
+                y:820.05,
+                color:"#0097E2",
+            },{
+                name:"太阳能",
+                y:100.00,
+                color:"#E74C3C",
+            },{
+                name:"生物质",
+                y:54.00,
+                color:"#f0e031",
+            },{
+                name:"垃圾发电",
+                y:54.00,
+                color:"#dbc",
+            },{
+                name:"煤电",
+                y:54.00,
+                color:"#adf",
+            },];
+
+            chart1 = new Highcharts.Chart('chart1',{
+                chart: {
+                    type: 'pie',
+                    backgroundColor:null
+                },
+                title: {
+                    text: null,//'装机容量'
+                    align: 'center',
+                    style: {
+                        color: '#FFFFFF',
+                        fontSize: '14px'
+                    }
+                },
+                tooltip: {
+                    headerFormat: null,
+                    pointFormat: '{point.name}: <b>{point.y} MW</b>',
+                    backgroundColor:'rgba(0,0,0,.5)',
+                    style:{
+                        fontSize:'14px',
+                        color:'#FFF',
+                        lineHeight:'24px',
+                    },
+                    useHTML: true,
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            connectorWidth: 2,
+                            connectorPadding:0,
+                            distance:-20,
+                            //format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            format: '{point.percentage:.1f}%',
+                            style: {
+                                color:'#FFF',
+                                fontSize:"14px",
+                            },
+                        },
+                        showInLegend: true
+                    }
+                },
+                legend:{
+                    floating:false,
+                    layout: 'vertical',
+                    align: 'left',
+                    verticalAlign: 'middle',
+                    borderWidth: 0,
+                    symbolHeight:10,
+                    itemStyle:{
+                        color:"#FFF",
+                        fontSize:'12px'
+                    },
+                },
+                series: [{
+                    type: "pie",
+                    name: '装机容量',
+                    data: chart1Data,
+                }]
+            });
+        }
+
+        //生成chart2
+        function chart2_create(){
+            var chart2_data = [{
+                name: '水电',
+                data: [3.8, 3.3, 3.7, 3.1, 4.9, 4.5, 4.9, 6.9, 5.8, 5.7, 5.7, 6.1, 6.3, 6.8,7.1, 7.9, 5, 8.8, 9.1, 8, 8, 9.5, 8.9, 9.9],
+                color: "rgba(93, 225, 255,.8)",
+            },{
+                name: '气电',
+                data: [2.9, 11, 6.3, 1.7, 5.9, 2.8, 6.2, 2.3, 5.4, 10.1, 8, 5.7, 3.9, 2.5, 1.1, 9.6, 6.1, 10.1, 9.5, 1.9, 5.5, 2.6, 10.2, 0.2],
+            },{
+                name: '风电',
+                data: [18.2, 2.5, 20.2, 4.5, 16, 17.4, 3.4, 1.9, 15.2, 13, 6.6, 19.7, 7.1, 16.8, 4.7, 6.7, 20.2, 3.5, 5.6, 18.6, 14.7, 3.8, 11.9, 4.9],
+            },{
+                name: '太阳能',
+                data: [7.4, 2.7, 0.9, 5.5, 4.9, 6.1, 7.1, 9, 4.8, 1.2, 3.7, 8.3, 2.5, 3.8, 2.3, 9.4, 9.9, 1.7, 5.3, 7.2, 2.9, 2.9, 8.5, 6.5],
+            },{
+                name: '生物质',
+                data: [32.3, 38.9, 24.9, 29.4, 29.8, 29.9, 21.8, 42.9, 36, 22.2, 36, 23.7, 27.5, 33.8, 38.3, 47.2, 25, 21.9, 31.9, 50.7, 27.9, 46.2, 21.7, 31.3],
+            },{
+                name: '垃圾发电',
+                data: [19.9, 15.5, 10.4, 16.5, 12, 24.1, 21.5, 10.9, 21.2, 27.6, 14.4, 15.1, 12.2, 17.3, 21.2, 22.3, 18.8, 15.2, 20.3, 22.4, 16.1, 16.1, 12.1, 19.5],
+            },{
+                name: '煤电',
+                data: [47.5, 35.2, 60.6, 80.4, 73.4, 41.6, 38.1, 50.1, 54.8, 64.7, 39.1, 64.3, 60.3, 54.5, 77.7, 75.7, 31.2, 78.9, 44.5, 32.6, 63.1, 61, 72.2, 78.4],
+            },];
+            chart2 = new Highcharts.chart('chart2', {
+                chart: {
+                    backgroundColor: null,
+                    type: 'line',
+                    plotBackgroundImage: './images/bw.png',
+                },
+                title: {
+                    text: null,
+                    align: 'left',
+                    style: {
+                        color: '#FFFFFF',
+                        fontSize: '1.2em'
+                    }
+                },
+                xAxis: {
+                    // categories: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,],
+                    lineColor: '#37fffe',
+                    tickLength: 0,
+                    labels: {
+                        style: {
+                            color: '#35fffd', //颜色
+                            fontSize: '14px',
+                        },
+                        y: 30,
+                    },
+                },
+                yAxis: {
+                    title: null,
+                    labels: {
+                        style: {
+                            color: '#35fffd', //颜色
+                            fontSize: '14px',
+                        }
+                    }
+                },
+                tooltip: {
+                    /* formatter: function () {
+                        return '<b>' + this.x + '</b><br/>' +
+                            this.series.name + ': ' + this.y + '万kWh<br/>';
+                    }, */
+                    backgroundColor: 'rgba(0,0,0,.5)',
+                    style: {
+                        fontSize: '1em',
+                        color: '#FFF',
+                        lineHeight: '1em',
+                    },
+                    useHTML: true,
+                    crosshairs: true,
+                    shared: true,
+                },
+                credits: {
+                    enabled: false
+                },
+                legend: {
+                    floating: false,
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom',
+                    borderWidth: 0,
+                    symbolHeight: 10,
+                    itemStyle: {
+                        color: "#FFF",
+                        fontSize: '12px'
+                    },
+                    itemHoverStyle: {
+                        color: '#ccc'
+                    },
+                },
+                plotOptions: {
+                    series:{
+                        marker:{
+                            enabled:false,
+                        },
+                    },
+                },
+                series: chart2_data,
+            });
+        }
+
+    </script>
+    <!-- 取数JS END -->
+</head>
+
+<body class="a b c" style="background:url('images/bgPic.png') no-repeat center top; background-attachment: fixed; background-size:cover; /*background:none;*/">
+    <!-- background:url('images/bgPic.png') no-repeat center top; -->
+    <div class="container-fluid main-container" id="main-container">
+        <div class="row">
+            <div class="col col-sm-9" style="padding-left: 0px;">
+                <div class="center-box">
+                    <div class="container-fluid map-container" id="map-container" style="padding-left: 0;">
+                        <div class="map-wrap" id="map-wrap">
+                            <div id="map-china" class="map-china">
+                                <iframe src="./svg/china.svg" id="main-frame" class="main-frame" width="100%" height="100%"
+                                    frameborder="0" scrolling="no" style="border: none; width: 100%; height: 670px;">
+                                </iframe>
+                            </div>
+                        </div>
+                        <div class="map-backdrop"></div>
+                        <div class="province-row row" style="margin-left: 0;">
+                            <div class="col col-sm-3" style="padding: 0;">
+                                <div class="province-tag" id="province-tag">
+                                    <ol>
+                                        <li>
+                                            <h4 class="province-tag-title">
+                                                <a href="javascript:(null)">00.电厂名称</a>
+                                            </h4>
+                                            <table class="province-tag-table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>总负荷</td>
+                                                        <td>0.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>机组·MW</td>
+                                                        <td>
+                                                            <div class="unit-section">
+                                                                <b>#1</b>
+                                                                <span>0.00</span>
+                                                            </div>
+                                                            <div class="unit-section">
+                                                                <b>#2</b>
+                                                                <span>0.00</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>发电量</td>
+                                                        <td>0.00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col col-sm-9">
+                                <div class="province-container" id="province-container">
+                                    <div class="province-wrap" id="province-wrap">
+                                        <div class="province-close-btn" id="province-close-btn">
+                                            <button aria-label="关闭" type="button" class="Button close-button Button-plain">
+                                                <svg class="closeIcon" fill="currentColor" viewBox="0 0 24 24" width="24"
+                                                    height="24">
+                                                    <path d="M13.486 12l5.208-5.207a1.048 1.048 0 0 0-.006-1.483 1.046 1.046 0 0 0-1.482-.005L12 10.514 6.793 5.305a1.048 1.048 0 0 0-1.483.005 1.046 1.046 0 0 0-.005 1.483L10.514 12l-5.208 5.207a1.048 1.048 0 0 0 .006 1.483 1.046 1.046 0 0 0 1.482.005L12 13.486l5.207 5.208a1.048 1.048 0 0 0 1.483-.006 1.046 1.046 0 0 0 .005-1.482L13.486 12z"
+                                                        fill-rule="evenodd">
+                                                    </path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div id="map-province" class="map-province">
+                                            <iframe src="" id="province-frame" class="province-frame" width="100%"
+                                                height="100%" frameborder="0" scrolling="no" style="border: none; width: 900px; height: 670px;"></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col col-sm-3">
+                <div class="section-box company-list-outer">
+                    <div class="section-title">
+                        <!-- <h4>负荷曲线</h4> -->
+                    </div>
+                    <div class="section-content curve-outer">
+                        <ul>
+                            <li>
+                                <div class="chart-header">
+                                    <h4>装机总容量: <span>1893.65 MW</span></h4>
+                                </div>
+                                <div id="chart1" class="chart-box" style="height:220px;"></div>
+                            </li>
+                            <li>
+                                <div class="chart-header">
+                                    <h4>负荷曲线</h4>
+                                </div>
+                                <div id="chart2" class="chart-box" style="height:380px;"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        //全局变量
+        //china-map弹出层
+        var panel = null;
+
+        jQuery(document).ready(function ($) {
+            //页面元素布局计算
+            pageLayout_cal();
+
+            //china-map弹出层,创建panel框架
+            chinaMap_floatPanel();
+
+            //postMessage_test
+            // postMessage_test();
+
+            window.addEventListener('resize', function (event) {
+                //页面元素布局计算
+                pageLayout_cal();
+                mapWrap_cal();
+                provinceWrap_cal();
+            });
+        });
+    </script>
+    <script>
+        //postMessage测试
+        /* function postMessage_test(){
+            var iframe = document.querySelector('#main-frame');
+            var a = "a in index.html"
+            //晚点发送，因为svg的js文档加载速度晚于父页的文档
+            setTimeout(function(){
+                iframe.contentWindow.postMessage(a,'*');
+            }, 500);
+            window.addEventListener('message',function(event){
+                console.log(event.data);
+                console.log(event);
+            })
+        } */
+
+        //页面元素布局计算及事件绑定
+        function pageLayout_cal() {
+            var winSize = pageSize_Print();
+
+            //右侧.company-list-outer赋值高度
+            var companyList = document.querySelector('.company-list-outer');
+            companyList.style.height = (winSize.winH - 20) + 'px';
+
+            //给map-container赋值高度
+            var mapContainer = document.querySelector('#map-container');
+            var provinceContainer = document.querySelector('#province-container');
+            mapContainer.style.height = winSize.winH + 'px';
+            provinceContainer.style.height = winSize.winH + 'px';
+
+            //province-tag赋值高度
+            $('#province-tag').height(winSize.winH);
+
+            //province-close-btn事件
+            $('#province-close-btn').off('click');
+            $('#province-close-btn').on('click', function (event) {
+                var mapWrap = document.querySelector('#province-wrap');
+                var provinceContainer = document.querySelector('#province-container');
+                var provinceTag = document.querySelector('#province-tag');
+                var provinceFrame = document.querySelector('#province-frame');
+                mapWrap.style.opacity = '0';
+                mapWrap.style.transform = 'scale(.5)';
+                mapWrap.style['-ms-transform'] = 'scale(.5)';
+                provinceTag.style.opacity = '0';
+                setTimeout(function () {
+                    mapWrap.style.visibility = 'hidden';
+                    mapWrap.style.display = 'none';
+                    //隐藏province-container
+                    provinceContainer.style.display = "none";
+                    //隐藏province-tag
+                    provinceTag.style.display = 'none';
+                    //隐藏map-backdrop
+                    document.querySelector('.map-backdrop').style.display = 'none';
+                    //iframe清除
+                    provinceFrame.src = '';
+                }, 400);
+                //china-map去除半透明
+                $('#map-wrap').removeClass('translucent');
+            });
+
+        }
+
+        //计算map的高度和位置并显示
+        function mapWrap_cal(svgSize) {
+            //获取map-container宽高
+            var mapContainer = document.querySelector('#map-container');
+            var mapContainerW = mapContainer.offsetWidth;
+            var mapContainerH = mapContainer.offsetHeight;
+
+            //获取svg宽高
+            var svgW = 900;
+            var svgH = 670;
+            //获取china的iframe和wrap
+            var iframe = document.querySelector('#main-frame');
+            var mapWrap = document.querySelector('#map-wrap');
+
+            var svg_doc = iframe.contentWindow.document;
+            var svg = svg_doc.querySelector('svg');
+            if (svgSize && svgSize.width && svgSize.height) {
+                svgW = svgSize.width;
+                svgH = svgSize.height;
+            } else if (svg) {
+                svgW = svg.width.baseVal.value;
+                svgH = svg.height.baseVal.value;
+            }
+            //计算zoom
+            var zoom = (mapContainerW - 80) / svgW;
+            if (svgH * zoom > mapContainerH - 80) {
+                zoom = (mapContainerH - 80) / svgH;
+            }
+            //svg赋值zoom
+            // svg.style.zoom = zoom;//IE中不行
+            // svg.style.setProperty('zoom', zoom); //IE9不行
+            svg.style.cssText += 'zoom:'+zoom+';'
+            // console.log(svgH)
+            console.log(zoom)
+            //设置iframe大小和位置
+            iframe.style.height = (svgH * zoom ) + 'px';
+            iframe.style.width = (svgW * zoom ) + 'px';
+            mapWrap.style.width = 'auto';
+            var mapWrapH = mapWrap.offsetHeight;
+            var mapWrapW = mapWrap.offsetWidth;
+            mapWrap.style.top = ((mapContainerH - mapWrapH) / 2) + 'px';
+            mapWrap.style.left = ((mapContainerW - mapWrapW) / 2) + 'px';
+
+            //显示iframe
+            mapWrap.style.visibility = 'visible';
+        }
+
+        //svg内调用,在svg文档载入完全后,获得宽高
+        function svg_size(w, h, type) {
+            var svgSize = {
+                width: w,
+                height: h,
+                type: type,
+            };
+            if (type == 'map-province') {
+                provinceWrap_cal(svgSize)
+            } else {
+                mapWrap_cal(svgSize);
+            }
+        }
+
+        //svg内调用,获得全国地图的省份鼠标事件,包括调用数据展示！
+        function svg_china_province_path_event(event) {
+            //console.log(event);
+            var innerX = event.pageX;
+            var innerY = event.pageY;
+
+            //从iframe直到body层的偏移量
+            var iframe = document.querySelector('#main-frame');
+            var nodeObj = getOffsetToBody({
+                node: iframe
+            });
+            var outerX = nodeObj.offsetLeft;
+            var outerY = nodeObj.offsetTop;
+            // console.log(outerX + ' , ' + outerY)
+            var x = innerX + outerX;
+            var y = innerY + outerY;
+            // console.log(x + ' , ' + y)
+
+            event.pageX = x;
+            event.pageY = y;
+
+            //黑龙江和甘肃数据太多挤下来导致鼠标点不了地图，把浮动框偏移开
+            if(event.data =='heilongjiang'){
+                event.pageX = x - 200;
+            }else if(event.data == 'gansu'){
+                event.pageX = x + 200;
+            }
+
+            if (event.type == "mouseenter") {
+                if(chinaJson[event.data]){
+                    var headerStr = provinceStr(event.data,'header');
+                    var bodyStr = provinceStr(event.data,'body');
+                    var plainStr = '<div class="china-path-tag"><ul><li><dl><dt>总负荷</dt><dd>0.00</dd></dl></li><li><dl><dt>电厂</dt><dd>0.00</dd></dl></li></ul></div>'
+                    panel.set({
+                        header: {
+                            // content: event.target.id,
+                            content: headerStr? headerStr : event.data,
+                        },
+                        body:{
+                            content: bodyStr? bodyStr : plainStr,
+                        },
+                    });
+                    panel.show(event);
+                }else{
+                    return null;
+                }
+            } else if (event.type == "mouseleave") {
+                panel.hide(event);
+            } else if (event.type == "mousemove") {
+                // console.log(event)
+                if(chinaJson[event.data]){
+                    panel.reposition(event);
+                }else{
+                    return 0;
+                }
+            } else if (event.type == 'click') {
+                // console.log(event)
+                 provinceFrame(event.data);
+                 provinceTag_Write(event.data);
+                if(chinaJson[event.data]){
+                    // provinceFrame(event.data);
+                    // provinceTag_Write(event.data);
+                }else{
+                    return null;
+                }
+            }
+        }
+
+        //从内到外获取直到body层的偏移量
+        function getOffsetToBody(nodeObj) {
+            // console.log(nodeObj)
+            if (!nodeObj.offsetTop) {
+                nodeObj.offsetTop = 0;
+            }
+            if (!nodeObj.offsetLeft) {
+                nodeObj.offsetLeft = 0;
+            }
+
+            if (nodeObj.node.tagName == "BODY") {
+                return nodeObj;
+            } else {
+                nodeObj.offsetTop += nodeObj.node.offsetParent.offsetTop;
+                nodeObj.offsetLeft += nodeObj.node.offsetParent.offsetLeft;
+                nodeObj.node = nodeObj.node.offsetParent;
+            }
+            return getOffsetToBody(nodeObj);
+
+            /* 
+            //例:
+            var f = document.querySelector('#main-frame');
+            var a = getOffsetToBody({node:f}); 
+            */
+        }
+
+        //china-map浮动框,创建panel框架
+        function chinaMap_floatPanel() {
+            panel = FloatPanel('panel',{
+                width: 300,
+                header: {
+                    enabled: true,
+                },
+                footer: {
+                    enabled: false,
+                },
+                body: {
+                    content:'<div class="china-path-tag"><ul><li><dl><dt>总负荷</dt><dd>0.00</dd></dl></li><li><dl><dt>电厂</dt><dd>0.00</dd></dl></li></ul></div>',
+                },
+                closeBtn: false,
+                floatHeight: 40,
+            });
+            panel.mouseleave(function (event) {
+                panel.hide();
+            });
+        }
+
+        //计算province-wrap的高度和位置并显示
+        function provinceWrap_cal(svgSize) {
+            //获取map-container宽高
+            var mapContainer = document.querySelector('#province-container');
+            mapContainer.style.display = 'block';
+            var mapContainerW = mapContainer.offsetWidth;
+            var mapContainerH = mapContainer.offsetHeight;
+            //console.log(mapContainerW+' + '+mapContainerH)
+
+            //获取svg宽高
+            var svgW = 900;
+            var svgH = 670;
+            //获取province的iframe和wrap
+            var iframe = document.querySelector('#province-frame');
+            var mapWrap = document.querySelector('#province-wrap');
+
+            var svg_doc = iframe.contentWindow.document;
+            var svg = svg_doc.querySelector('svg');
+            //如果没获取到province的svg,停止
+            if (!svg) {
+                mapContainer.style.display = 'none';
+                return null;
+            }
+            if (svgSize && svgSize.width && svgSize.height) {
+                svgW = svgSize.width;
+                svgH = svgSize.height;
+            } else if (svg) {
+                svgW = svg.width.baseVal.value;
+                svgH = svg.height.baseVal.value;
+            }
+            //计算zoom
+            var zoom = (mapContainerW - 20) / svgW;
+            if (svgH * zoom > mapContainerH - 20) {
+                zoom = (mapContainerH - 20) / svgH;
+            }
+            //svg赋值zoom
+            // svg.style.zoom = zoom;//IE中不行
+            // svg.style.setProperty('zoom', zoom); //IE9不行
+            svg.style.cssText += 'zoom:'+zoom+';'
+            // console.log(svgH)
+            console.log(zoom)
+            //设置iframe大小和位置
+            iframe.style.height = (svgH * zoom ) + 'px';
+            iframe.style.width = (svgW * zoom ) + 'px';
+            mapWrap.style.width = 'auto';
+            //province要先display计算宽高
+            mapWrap.style.display = 'block';
+            var mapWrapH = mapWrap.offsetHeight;
+            var mapWrapW = mapWrap.offsetWidth;
+            mapWrap.style.top = ((mapContainerH - mapWrapH) / 2) + 'px';
+            mapWrap.style.left = 'initial';
+            mapWrap.style.right = ((mapContainerW - mapWrapW) / 2) + 'px';
+
+            //显示iframe
+            document.querySelector('.map-backdrop').style.display = 'block';
+            $('#map-wrap').addClass('translucent');
+            mapWrap.style.visibility = 'visible';
+            mapWrap.style.opacity = '1';
+            mapWrap.style.transform = 'scale(1)';
+            mapWrap.style['-ms-transform'] = 'scale(1)';
+            //显示province-tag
+            var provinceTag = document.querySelector('.province-tag');
+            provinceTag.style.display = 'block';
+            // provinceTag.style.opacity = '1';
+            setTimeout(function () {
+                provinceTag.style.opacity = '1';
+            }, 0);
+        }
+
+        //打开province-frame
+        function provinceFrame(data) {
+            if (data) {
+                var iframe = document.getElementById('province-frame');
+                iframe.src = './svg/' + data + '.svg';
+            }
+        }
+
+        //svg内调用,获得省份地图的电厂鼠标事件,调用页面效果
+        function svg_province_company_event(event) {
+                // console.log(event);
+                // console.log('company mouse enter')
+                if (event.type == "mouseenter") {
+                    var eq = Number(event.data.index);
+                    var serial = event.data.serial;
+                    $('#province-tag >ol >li').removeClass('highlight');
+                    $('#province-tag >ol >li[serial="'+ serial +'"]').addClass('highlight');
+                } else if (event.type == "mouseleave") {
+                    $('#province-tag >ol >li').removeClass('highlight');
+                } else if (event.type == 'click') {
+                    // console.log(event)
+                    nameClick(event.data)
+                }
+            }
+
+        //点击厂级名字模拟点击侧边栏
+        function nameClick(data) {
+            var title = '';
+            if(data.serial){
+                var serial = data.serial;
+                for (p in chinaJson){
+                    chinaJson[p].companys.forEach(function(el,i){
+                        if(el.serialNumber == serial){
+                            title = el.navTitle
+                        }
+                    });
+                }
+            }else{
+                return ;
+            }
+            if (title) {
+                var sidePanel = window.top.document.getElementById('left-panel')
+                var targetA = $(sidePanel).find('a[title=' + title + ']');
+                sidePanelNavClick(targetA[0]);
+                targetA[0].click();
+            }
+        }
+        //左侧菜单循环向上层模拟点击
+        function sidePanelNavClick(el,count){
+            if(!count){
+                var count=0;
+            }
+            count ++;
+            if(count > 20){
+                console.log('count: 20')
+                return ;
+            }
+
+            var li = '';
+            var ul = '';
+            if(el){
+                li = $(el).parent('li');
+                ul = $(el).parent('ul');
+            }
+            // console.log(el)
+            // console.log(li)
+            // console.log(ul)
+
+            if(li[0]){
+                li.addClass('open');
+                return sidePanelNavClick(li[0],count);
+            }else if(ul[0]){
+                console.log()
+                if(ul.attr('id')=='CDNav'){
+                    console.log('ul#CDNav')
+                    return 0;
+                }
+                ul.css('display','block');
+                return sidePanelNavClick(ul[0],count);
+            }
+
+        }
+    </script>
+</body>
+
+</html>
