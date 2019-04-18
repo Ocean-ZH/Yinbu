@@ -111,7 +111,7 @@
     <script>
         //中国地图浮动框数据格式
         {
-            /* var chinaJson={
+            var chinaJson={
                 guangdong:{
                     name:'广东',
                     value: 42.8,
@@ -205,9 +205,9 @@
                         totalLoad:20.3,
                     },],
                 }
-            }*/
+            }
         }
-        var chinaJson = {};
+        // var chinaJson = {};
 
     </script>
     <script>
@@ -220,16 +220,16 @@
             chart1_create()
             chart2_create();
             //AJAX获取chinaSVG数据
-            ChinaSVG_getData();
+            // ChinaSVG_getData();
             //AJAX获取charts数据
-            charts_getData();
+            // charts_getData();
 
-            timer = setInterval(function(){
+            /* timer = setInterval(function(){
                 //AJAX获取chinaSVG数据
                 ChinaSVG_getData();
                 //AJAX获取charts数据
                 charts_getData();
-            }, 20000);
+            }, 20000); */
         });
 
         //生成24个随机正数的数据,保留一位小数
