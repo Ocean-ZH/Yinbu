@@ -15,22 +15,26 @@ svg.map-china{
     opacity: 1;
 }
 /* .province-path-g>path animation */
-.map-china .province-path-g >path{
-    stroke:rgb(145, 215, 255);
-    stroke-width:3px;
+.map-china .province-path-g>path {
+    stroke: rgb(255, 242, 130);
+    stroke-width: 5px;
     stroke-linecap: butt;
     stroke-linejoin: round;
     /* stroke-dasharray:200,2000; */
-    stroke-dasharray:2500;
+    stroke-dasharray: 2800;
     /* stroke-dashoffset:2000; */
-    animation: provincePath 5s linear 0s infinite
+
+}
+.map-china .province-path-g>path:hover {
+    animation: provincePath 5s linear 0s infinite;
 }
 @keyframes provincePath {
-    from{
-        stroke-dashoffset:2500;
+    from {
+        stroke-dashoffset: 2800;
     }
-    to{
-        stroke-dashoffset:0;
+
+    to {
+        stroke-dashoffset: 0;
     }
 }
 /* map-china End */
