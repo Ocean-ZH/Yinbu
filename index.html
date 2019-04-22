@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>生产日报展示</title>
+    <title>记录</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <style type="text/css">
         /* .project-section {
@@ -25,12 +25,20 @@
         .f-list-group{
             display:flex;
             flex-flow: row wrap;
-
+            justify-content: space-between;
+            flex-direction: row;
+            align-items:flex-start;
         }
         .f-list-group >li{
             flex:1 1 auto;
-            width: 50%; 
+            /* width: 50%;  */
+            max-width: 50%;
             margin-right:-1px;
+            margin-bottom: 10px;
+            max-height: 90vh;
+        }
+        .f-list-group >li:last-child{
+            margin-bottom: 10px;
         }
         .f-list-group >li h4{
             padding: 5px 10px;
@@ -98,7 +106,7 @@
                 </li>
             </ol>
         </div>
-        <div class="container-fluid">
+        <div class="container-fluid main-container">
             <div class="row">
                 <div class="col-sm-12">
                     <h2>记录</h2>
@@ -107,62 +115,113 @@
                             <div class="card">
                                 <div class="card-headder">
                                     <h4>
-                                        <a href="report/report_company/report_company.html" target="_blank">
-                                            生产日报展示-项目公司-pc
+                                        <a href="http://dpr.crpower.com.cn:7789/" target="_blank">
+                                            华润电力生产日报系统
                                         </a>
                                     </h4>
                                 </div>
                                 <div class="card-body bg-light">
-                                    <p>华润电力生产日报</p>
+                                    <p>华润电力生产日报系统(运行)</p>
                                 </div>
                             </div>
                         </li>
                         <li class="list-group-item">
-                            <a href="report/report_company/report_company-m.html" target="_blank">
-                                <h4>生产日报展示-项目公司-mobile</h4>
-                            </a>
-                            <p>111</p>
+                            <div class="card">
+                                <div class="card-headder">
+                                    <h4>
+                                        <a href="https://ocean-zh.github.io/Yinbu/OOS/mobile/index.html" target="_blank">
+                                            OOS-mobile
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <p>赤壁OOS系统手机静态页</p>
+                                </div>
+                            </div>
                         </li>
                         <li class="list-group-item">
-                            <a href="report/report_daqu/report_daqu.html" target="_blank">
-                                <h4>生产日报展示-大区-pc</h4>
-                            </a>
-                            <p>111</p>
+                            <div class="card">
+                                <div class="card-headder">
+                                    <h4>
+                                        <a href="https://ocean-zh.github.io/Yinbu/v-web/dist/#/" target="_blank">
+                                            印步软件
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <p>印步软件官网备份</p>
+                                </div>
+                            </div>
                         </li>
                         <li class="list-group-item">
-                            <a href="report/report_daqu/report_daqu-m.html" target="_blank">
-                                <h4>生产日报展示-大区-mobile</h4>
-                            </a>
-                            <p>111</p>
+                            <div class="card">
+                                <div class="card-headder">
+                                    <h4>
+                                        <a href="https://ocean-zh.github.io/Yinbu/China-map/index.html" target="_blank">
+                                            China-map
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <p>中电新能源首页svg地图模块</p>
+                                </div>
+                            </div>
                         </li>
                         <li class="list-group-item">
-                            <a href="report/report_konggu/report_konggu-m.html" target="_blank">
-                                <h4>生产日报展示-控股公司-mobile</h4>
-                            </a>
+                            <div class="card">
+                                <div class="card-headder">
+                                    <h4>
+                                        <a href="https://ocean-zh.github.io/pizza/dist/#/" target="_blank">
+                                            点餐管理系统
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <p>个人项目，Vue+Firebase</p>
+                                </div>
+                            </div>
                         </li>
                         <li class="list-group-item">
-                            <a href="test/index.html" target="_blank">
-                                <h4>input Test</h4>
-                            </a>
-                            <p>111</p>
+                            <div class="card">
+                                <div class="card-headder">
+                                    <h4>
+                                        <a href="https://ocean-zh.github.io/floatPanel/index.html" target="_blank">
+                                            floatPanel
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <p>JS浮动面板插件</p>
+                                </div>
+                            </div>
                         </li>
                         <li class="list-group-item">
-                            <a href="OOS/mobile/index.html" target="_blank">
-                                <h4>OOS mobile</h4>
-                            </a>
-                            <p>111</p>
+                            <div class="card">
+                                <div class="card-headder">
+                                    <h4>
+                                        <a href="http://3e.3system.cn/" target="_blank">
+                                            华标软件
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <p>珠海华标软件官网</p>
+                                </div>
+                            </div>
                         </li>
                         <li class="list-group-item">
-                            <a href="http://www.ybsoftware.com.cn:8881/#/" target="_blank">
-                                <h4>Yinbu website</h4>
-                            </a>
-                            <p>111</p>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="https://ocean-zh.github.io/Yinbu/China-map/index.html" target="_blank">
-                                <h4>China-map</h4>
-                            </a>
-                            <p>111</p>
+                            <div class="card">
+                                <div class="card-headder">
+                                    <h4>
+                                        <a href="design/index.html" target="_blank">
+                                            设计图存稿
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <p>UI，平面，设计存稿</p>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -173,8 +232,8 @@
     <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script>
-        jQuery(docuemnt).ready(function () {
-            console.log(123)
+        jQuery(document).ready(function () {
+            console.log(11)
         });
     </script>
 </body>
