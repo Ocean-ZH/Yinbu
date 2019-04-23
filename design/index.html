@@ -525,7 +525,7 @@
     <div class="ImageView is-active" style="display:none;">
         <div class="ImageView-inner" style="overflow: auto;">
             <img id="popImg"
-                src="https://pic3.zhimg.com/v2-ebc8c6af83f54ff48d808d422520659e_r.jpg" class="ImageView-img"
+                src="" class="ImageView-img"
                 alt="preview"
                 style="width: 100%; transform: translate(0, 0) scale(1, 1); opacity: 1;">
         </div>
@@ -612,17 +612,26 @@
             $('html').css('overflow','hidden');
             
             var img = document.createElement('img');
+            var imgW = '80%';
+            var imgH = 'auto';
+            img.onload = function(){
+                var imgW = img.width;
+                var imgH = img.height;
+                var mt = '';
+                if(imgH+10<winH){mt = (winH-10-imgH)/2}
+                $('#popImg').css({width:imgW,marginTop:mt,}).attr('src',src);
+                $('.ImageView').show();
+                img = null;
+            }
             img.src = src;
-            var imgW = img.width;
-            var imgH = img.height;
-            var mt = '';
-            if(imgH+10<winH){mt = (winH-10-imgH)/2}
-            $('#popImg').css({width:imgW,marginTop:mt,}).attr('src',src);
-            $('.ImageView').show();
-            img = null;
         }
         function imageViewInit(pw){
-            $('#popImg').on('click',function(){
+            /* $('#popImg').on('click',function(){
+                $('.ImageView').hide();
+                pw.play();
+                $('html').css('overflow','');
+            }) */
+            $('.ImageView-inner').on('click',function(){
                 $('.ImageView').hide();
                 pw.play();
                 $('html').css('overflow','');
