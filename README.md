@@ -1,5 +1,4 @@
 # Yinbu
 Works
 
-a gh-page for preview
-Nothing more
+杂项仓库
